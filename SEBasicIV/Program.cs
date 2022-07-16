@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     static class Program
     {

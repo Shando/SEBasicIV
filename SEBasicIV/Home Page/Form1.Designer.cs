@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using MiniTimer_Theme;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     partial class Form1
     {
@@ -47,7 +47,7 @@ namespace GwBasic.Net
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.miniTimer_LinkLabel2 = new MiniTimer_Theme.MiniTimer_LinkLabel();
             this.miniTimer_Label5 = new MiniTimer_Theme.MiniTimer_Label();
-            this.userControl11 = new GwBasic.Net.UserControl1();
+            this.userControl11 = new SEBasicIV.UserControl1();
             this.miniTimer_Label3 = new MiniTimer_Theme.MiniTimer_Label();
             this.status = new MiniTimer_Theme.MiniTimer_Label();
             this.miniTimer_LinkLabel1 = new MiniTimer_Theme.MiniTimer_LinkLabel();
@@ -96,8 +96,8 @@ namespace GwBasic.Net
             // 
             // pictureBox5
             // 
-            this.pictureBox5.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox5.Image = global::GwBasic.Net.Properties.Resources.writenew;
+            this.pictureBox5.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox5.Image = global::SEBasicIV.Properties.Resources.writenew;
             this.pictureBox5.ImageLocation = "";
             this.pictureBox5.Location = new System.Drawing.Point(430, 31);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
@@ -138,8 +138,8 @@ namespace GwBasic.Net
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox3.Image = global::GwBasic.Net.Properties.Resources.writenew;
+            this.pictureBox3.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox3.Image = global::SEBasicIV.Properties.Resources.writenew;
             this.pictureBox3.ImageLocation = "";
             this.pictureBox3.Location = new System.Drawing.Point(65, 28);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
@@ -154,8 +154,8 @@ namespace GwBasic.Net
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox4.Image = global::GwBasic.Net.Properties.Resources.open;
+            this.pictureBox4.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox4.Image = global::SEBasicIV.Properties.Resources.open;
             this.pictureBox4.ImageLocation = "";
             this.pictureBox4.Location = new System.Drawing.Point(796, 28);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
@@ -183,7 +183,7 @@ namespace GwBasic.Net
             // close
             // 
             this.close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.close.Image = global::GwBasic.Net.Properties.Resources.CtrlBtn;
+            this.close.Image = global::SEBasicIV.Properties.Resources.CtrlBtn;
             this.close.Location = new System.Drawing.Point(1117, 28);
             this.close.Margin = new System.Windows.Forms.Padding(4);
             this.close.Name = "close";
@@ -197,7 +197,7 @@ namespace GwBasic.Net
             // max
             // 
             this.max.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.max.Image = global::GwBasic.Net.Properties.Resources.CtrlBtn;
+            this.max.Image = global::SEBasicIV.Properties.Resources.CtrlBtn;
             this.max.Location = new System.Drawing.Point(1091, 28);
             this.max.Margin = new System.Windows.Forms.Padding(4);
             this.max.Name = "max";
@@ -211,7 +211,7 @@ namespace GwBasic.Net
             // min
             // 
             this.min.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.min.Image = global::GwBasic.Net.Properties.Resources.CtrlBtn;
+            this.min.Image = global::SEBasicIV.Properties.Resources.CtrlBtn;
             this.min.Location = new System.Drawing.Point(1063, 28);
             this.min.Margin = new System.Windows.Forms.Padding(4);
             this.min.Name = "min";
@@ -226,7 +226,7 @@ namespace GwBasic.Net
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::GwBasic.Net.Properties.Resources.footer;
+            this.pictureBox2.Image = global::SEBasicIV.Properties.Resources.footer;
             this.pictureBox2.Location = new System.Drawing.Point(4, 622);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
@@ -240,7 +240,7 @@ namespace GwBasic.Net
             this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox9.Image = global::GwBasic.Net.Properties.Resources.info;
+            this.pictureBox9.Image = global::SEBasicIV.Properties.Resources.info;
             this.pictureBox9.Location = new System.Drawing.Point(1089, 635);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox9.Name = "pictureBox9";
@@ -367,7 +367,7 @@ namespace GwBasic.Net
             this.MinimumSize = new System.Drawing.Size(1101, 605);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GwBasic.Net";
+            this.Text = "SEBasicIV";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -1,4 +1,4 @@
-﻿namespace GwBasic.Net
+﻿namespace SEBasicIV
 {
     partial class About
     {
@@ -37,7 +37,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.BackgroundImage = global::GwBasic.Net.Properties.Resources.logo;
+            this.pictureBox1.BackgroundImage = global::SEBasicIV.Properties.Resources.logo;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(0, 53);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -73,7 +73,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(974, 25);
             this.label1.TabIndex = 2;
-            this.label1.Text = "This is a re-write of GwBasic.Net for use with the SE Basic IV Cordelia BASIC dialect and Z80 Assembler.";
+            this.label1.Text = "This is a re-write of SEBasicIV for use with the SE Basic IV Cordelia BASIC dialect and Z80 Assembler.";
             // 
             // About
             // 
@@ -81,7 +81,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::GwBasic.Net.Properties.Resources.back;
+            this.BackgroundImage = global::SEBasicIV.Properties.Resources.back;
             this.ClientSize = new System.Drawing.Size(1156, 678);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.miniTimer_LinkLabel1);

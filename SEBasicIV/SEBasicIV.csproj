@@ -7,8 +7,8 @@
     <ProjectGuid>{283A45D6-9B97-4D2B-BBD6-85458ECE4B9F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GwBasic.Net</RootNamespace>
-    <AssemblyName>GwBasic.Net</AssemblyName>
+    <RootNamespace>SEBasicIV</RootNamespace>
+    <AssemblyName>SEBasicIV</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon256x256.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FastColoredTextBox, Version=2.16.26.100, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
@@ -351,6 +351,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.ico" />
     <Content Include="icon256x256.ico" />
     <Content Include="PcBasic\a.BAS">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

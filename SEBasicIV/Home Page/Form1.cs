@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
 
     public partial class Form1 : Form

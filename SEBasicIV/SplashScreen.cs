@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using GwBasic.Net.Properties;
+using SEBasicIV.Properties;
 using Timer = System.Windows.Forms.Timer;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     public partial class SplashScreen : Form
     {

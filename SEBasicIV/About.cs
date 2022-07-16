@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     public partial class About : Form
     {

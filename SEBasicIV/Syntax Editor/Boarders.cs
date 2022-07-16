@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     partial class SyntaxEditor
     {

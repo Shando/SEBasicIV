@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using FastColoredTextBoxNS;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     partial class SyntaxEditor
     {

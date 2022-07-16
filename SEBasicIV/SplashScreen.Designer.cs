@@ -1,4 +1,4 @@
-﻿namespace GwBasic.Net
+﻿namespace SEBasicIV
 {
     partial class SplashScreen
     {
@@ -36,7 +36,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::GwBasic.Net.Properties.Resources.load;
+            this.pictureBox1.Image = global::SEBasicIV.Properties.Resources.load;
             this.pictureBox1.Location = new System.Drawing.Point(16, 229);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";

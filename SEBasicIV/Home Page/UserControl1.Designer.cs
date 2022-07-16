@@ -1,4 +1,4 @@
-﻿namespace GwBasic.Net
+﻿namespace SEBasicIV
 {
     partial class UserControl1
     {
@@ -461,8 +461,8 @@
             // 
             // pictureBox22
             // 
-            this.pictureBox22.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox22.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox22.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox22.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox22.ImageLocation = "";
             this.pictureBox22.Location = new System.Drawing.Point(553, 1028);
             this.pictureBox22.Margin = new System.Windows.Forms.Padding(4);
@@ -477,8 +477,8 @@
             // 
             // pictureBox23
             // 
-            this.pictureBox23.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox23.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox23.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox23.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox23.ImageLocation = "";
             this.pictureBox23.Location = new System.Drawing.Point(309, 1028);
             this.pictureBox23.Margin = new System.Windows.Forms.Padding(4);
@@ -493,8 +493,8 @@
             // 
             // pictureBox25
             // 
-            this.pictureBox25.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox25.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox25.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox25.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox25.ImageLocation = "";
             this.pictureBox25.Location = new System.Drawing.Point(64, 1028);
             this.pictureBox25.Margin = new System.Windows.Forms.Padding(4);
@@ -509,8 +509,8 @@
             // 
             // pictureBox21
             // 
-            this.pictureBox21.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox21.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox21.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox21.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox21.ImageLocation = "";
             this.pictureBox21.Location = new System.Drawing.Point(791, 873);
             this.pictureBox21.Margin = new System.Windows.Forms.Padding(4);
@@ -525,8 +525,8 @@
             // 
             // pictureBox13
             // 
-            this.pictureBox13.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox13.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox13.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox13.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox13.ImageLocation = "";
             this.pictureBox13.Location = new System.Drawing.Point(553, 873);
             this.pictureBox13.Margin = new System.Windows.Forms.Padding(4);
@@ -541,8 +541,8 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox4.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox4.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox4.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox4.ImageLocation = "";
             this.pictureBox4.Location = new System.Drawing.Point(309, 873);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
@@ -557,8 +557,8 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox3.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox3.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox3.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox3.ImageLocation = "";
             this.pictureBox3.Location = new System.Drawing.Point(64, 873);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
@@ -573,8 +573,8 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox2.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox2.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox2.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox2.ImageLocation = "";
             this.pictureBox2.Location = new System.Drawing.Point(791, 719);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
@@ -589,8 +589,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox1.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox1.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox1.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox1.ImageLocation = "";
             this.pictureBox1.Location = new System.Drawing.Point(553, 719);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -605,8 +605,8 @@
             // 
             // pictureBox20
             // 
-            this.pictureBox20.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox20.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox20.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox20.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox20.ImageLocation = "";
             this.pictureBox20.Location = new System.Drawing.Point(309, 719);
             this.pictureBox20.Margin = new System.Windows.Forms.Padding(4);
@@ -621,8 +621,8 @@
             // 
             // pictureBox19
             // 
-            this.pictureBox19.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox19.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox19.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox19.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox19.ImageLocation = "";
             this.pictureBox19.Location = new System.Drawing.Point(64, 719);
             this.pictureBox19.Margin = new System.Windows.Forms.Padding(4);
@@ -637,8 +637,8 @@
             // 
             // pictureBox18
             // 
-            this.pictureBox18.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox18.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox18.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox18.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox18.ImageLocation = "";
             this.pictureBox18.Location = new System.Drawing.Point(309, 524);
             this.pictureBox18.Margin = new System.Windows.Forms.Padding(4);
@@ -653,8 +653,8 @@
             // 
             // pictureBox17
             // 
-            this.pictureBox17.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox17.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox17.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox17.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox17.ImageLocation = "";
             this.pictureBox17.Location = new System.Drawing.Point(65, 524);
             this.pictureBox17.Margin = new System.Windows.Forms.Padding(4);
@@ -669,8 +669,8 @@
             // 
             // pictureBox16
             // 
-            this.pictureBox16.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox16.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox16.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox16.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox16.ImageLocation = "";
             this.pictureBox16.Location = new System.Drawing.Point(791, 361);
             this.pictureBox16.Margin = new System.Windows.Forms.Padding(4);
@@ -685,8 +685,8 @@
             // 
             // pictureBox15
             // 
-            this.pictureBox15.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox15.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox15.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox15.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox15.ImageLocation = "";
             this.pictureBox15.Location = new System.Drawing.Point(553, 361);
             this.pictureBox15.Margin = new System.Windows.Forms.Padding(4);
@@ -701,8 +701,8 @@
             // 
             // pictureBox14
             // 
-            this.pictureBox14.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox14.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox14.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox14.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox14.ImageLocation = "";
             this.pictureBox14.Location = new System.Drawing.Point(309, 364);
             this.pictureBox14.Margin = new System.Windows.Forms.Padding(4);
@@ -717,8 +717,8 @@
             // 
             // pictureBox8
             // 
-            this.pictureBox8.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox8.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox8.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox8.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox8.ImageLocation = "";
             this.pictureBox8.Location = new System.Drawing.Point(65, 364);
             this.pictureBox8.Margin = new System.Windows.Forms.Padding(4);
@@ -733,8 +733,8 @@
             // 
             // pictureBox12
             // 
-            this.pictureBox12.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox12.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox12.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox12.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox12.ImageLocation = "";
             this.pictureBox12.Location = new System.Drawing.Point(791, 209);
             this.pictureBox12.Margin = new System.Windows.Forms.Padding(4);
@@ -749,8 +749,8 @@
             // 
             // pictureBox11
             // 
-            this.pictureBox11.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox11.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox11.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox11.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox11.ImageLocation = "";
             this.pictureBox11.Location = new System.Drawing.Point(553, 209);
             this.pictureBox11.Margin = new System.Windows.Forms.Padding(4);
@@ -765,8 +765,8 @@
             // 
             // pictureBox10
             // 
-            this.pictureBox10.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox10.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox10.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox10.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox10.ImageLocation = "";
             this.pictureBox10.Location = new System.Drawing.Point(309, 209);
             this.pictureBox10.Margin = new System.Windows.Forms.Padding(4);
@@ -781,8 +781,8 @@
             // 
             // pictureBox9
             // 
-            this.pictureBox9.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox9.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox9.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox9.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox9.ImageLocation = "";
             this.pictureBox9.Location = new System.Drawing.Point(65, 209);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
@@ -797,8 +797,8 @@
             // 
             // Inclined
             // 
-            this.Inclined.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.Inclined.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.Inclined.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.Inclined.Image = global::SEBasicIV.Properties.Resources.Example;
             this.Inclined.ImageLocation = "";
             this.Inclined.Location = new System.Drawing.Point(791, 47);
             this.Inclined.Margin = new System.Windows.Forms.Padding(4);
@@ -813,8 +813,8 @@
             // 
             // pictureBox7
             // 
-            this.pictureBox7.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox7.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox7.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox7.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox7.ImageLocation = "";
             this.pictureBox7.Location = new System.Drawing.Point(553, 47);
             this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
@@ -829,8 +829,8 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox6.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox6.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox6.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox6.ImageLocation = "";
             this.pictureBox6.Location = new System.Drawing.Point(309, 47);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
@@ -845,8 +845,8 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.BackgroundImage = global::GwBasic.Net.Properties.Resources.tile_frame;
-            this.pictureBox5.Image = global::GwBasic.Net.Properties.Resources.Example;
+            this.pictureBox5.BackgroundImage = global::SEBasicIV.Properties.Resources.tile_frame;
+            this.pictureBox5.Image = global::SEBasicIV.Properties.Resources.Example;
             this.pictureBox5.ImageLocation = "";
             this.pictureBox5.Location = new System.Drawing.Point(65, 47);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);

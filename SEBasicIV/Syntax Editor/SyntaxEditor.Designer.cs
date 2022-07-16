@@ -4,7 +4,7 @@ using System.Drawing;
 using FastColoredTextBoxNS;
 using MiniTimer_Theme;
 
-namespace GwBasic.Net
+namespace SEBasicIV
 {
     partial class SyntaxEditor
     {
@@ -125,8 +125,8 @@ namespace GwBasic.Net
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.miniTimer_LinkLabel1 = new MiniTimer_Theme.MiniTimer_LinkLabel();
             this.status = new MiniTimer_Theme.MiniTimer_Label();
-            this.vMyScrollBar = new GwBasic.Net.MyScrollBar();
-            this.hMyScrollBar = new GwBasic.Net.MyScrollBar();
+            this.vMyScrollBar = new SEBasicIV.MyScrollBar();
+            this.hMyScrollBar = new SEBasicIV.MyScrollBar();
             ((System.ComponentModel.ISupportInitialize)(this.synBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -263,7 +263,7 @@ namespace GwBasic.Net
             // New
             // 
             this.New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.New.Image = global::GwBasic.Net.Properties.Resources.doc;
+            this.New.Image = global::SEBasicIV.Properties.Resources.doc;
             this.New.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.New.Name = "New";
             this.New.Size = new System.Drawing.Size(29, 24);
@@ -275,7 +275,7 @@ namespace GwBasic.Net
             // Open
             // 
             this.Open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Open.Image = global::GwBasic.Net.Properties.Resources.Open1;
+            this.Open.Image = global::SEBasicIV.Properties.Resources.Open1;
             this.Open.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Open.Name = "Open";
             this.Open.Size = new System.Drawing.Size(29, 24);
@@ -287,7 +287,7 @@ namespace GwBasic.Net
             // Save
             // 
             this.Save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Save.Image = global::GwBasic.Net.Properties.Resources.save___Copy;
+            this.Save.Image = global::SEBasicIV.Properties.Resources.save___Copy;
             this.Save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(29, 24);
@@ -299,7 +299,7 @@ namespace GwBasic.Net
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::GwBasic.Net.Properties.Resources.save_as;
+            this.toolStripButton6.Image = global::SEBasicIV.Properties.Resources.save_as;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(29, 24);
@@ -312,7 +312,7 @@ namespace GwBasic.Net
             // Print
             // 
             this.Print.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Print.Image = global::GwBasic.Net.Properties.Resources.fileprint;
+            this.Print.Image = global::SEBasicIV.Properties.Resources.fileprint;
             this.Print.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Print.Name = "Print";
             this.Print.Size = new System.Drawing.Size(29, 24);
@@ -329,7 +329,7 @@ namespace GwBasic.Net
             // Cut
             // 
             this.Cut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Cut.Image = global::GwBasic.Net.Properties.Resources.cut1;
+            this.Cut.Image = global::SEBasicIV.Properties.Resources.cut1;
             this.Cut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Cut.Name = "Cut";
             this.Cut.Size = new System.Drawing.Size(29, 24);
@@ -341,7 +341,7 @@ namespace GwBasic.Net
             // Copy
             // 
             this.Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Copy.Image = global::GwBasic.Net.Properties.Resources.Copy1;
+            this.Copy.Image = global::SEBasicIV.Properties.Resources.Copy1;
             this.Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Copy.Name = "Copy";
             this.Copy.Size = new System.Drawing.Size(29, 24);
@@ -353,7 +353,7 @@ namespace GwBasic.Net
             // Paste
             // 
             this.Paste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Paste.Image = global::GwBasic.Net.Properties.Resources.Paste1;
+            this.Paste.Image = global::SEBasicIV.Properties.Resources.Paste1;
             this.Paste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Paste.Name = "Paste";
             this.Paste.Size = new System.Drawing.Size(29, 24);
@@ -387,7 +387,7 @@ namespace GwBasic.Net
             this.btHighlightCurrentLine.CheckOnClick = true;
             this.btHighlightCurrentLine.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btHighlightCurrentLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btHighlightCurrentLine.Image = global::GwBasic.Net.Properties.Resources.edit_padding_top;
+            this.btHighlightCurrentLine.Image = global::SEBasicIV.Properties.Resources.edit_padding_top;
             this.btHighlightCurrentLine.ImageAlign = System.Drawing.ContentAlignment.TopRight;
             this.btHighlightCurrentLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btHighlightCurrentLine.Name = "btHighlightCurrentLine";
@@ -405,7 +405,7 @@ namespace GwBasic.Net
             // Undo
             // 
             this.Undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Undo.Image = global::GwBasic.Net.Properties.Resources.Undo5;
+            this.Undo.Image = global::SEBasicIV.Properties.Resources.Undo5;
             this.Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Undo.Name = "Undo";
             this.Undo.Size = new System.Drawing.Size(29, 24);
@@ -417,7 +417,7 @@ namespace GwBasic.Net
             // Redo
             // 
             this.Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Redo.Image = global::GwBasic.Net.Properties.Resources.redo3;
+            this.Redo.Image = global::SEBasicIV.Properties.Resources.redo3;
             this.Redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Redo.Name = "Redo";
@@ -435,7 +435,7 @@ namespace GwBasic.Net
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::GwBasic.Net.Properties.Resources.Untitled_2;
+            this.toolStripButton1.Image = global::SEBasicIV.Properties.Resources.Untitled_2;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
@@ -447,7 +447,7 @@ namespace GwBasic.Net
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::GwBasic.Net.Properties.Resources.Untitled_6;
+            this.toolStripButton2.Image = global::SEBasicIV.Properties.Resources.Untitled_6;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(29, 24);
@@ -464,7 +464,7 @@ namespace GwBasic.Net
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::GwBasic.Net.Properties.Resources.Untitled_7;
+            this.toolStripButton3.Image = global::SEBasicIV.Properties.Resources.Untitled_7;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(29, 24);
@@ -476,7 +476,7 @@ namespace GwBasic.Net
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::GwBasic.Net.Properties.Resources.Untitled_8;
+            this.toolStripButton4.Image = global::SEBasicIV.Properties.Resources.Untitled_8;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(29, 24);
@@ -493,7 +493,7 @@ namespace GwBasic.Net
             // toolStripButton5
             // 
             this.toolStripButton5.AutoToolTip = false;
-            this.toolStripButton5.Image = global::GwBasic.Net.Properties.Resources.run___Copy;
+            this.toolStripButton5.Image = global::SEBasicIV.Properties.Resources.run___Copy;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(160, 24);
@@ -542,7 +542,7 @@ namespace GwBasic.Net
             // 
             // newToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.layer__plus;
+            this.newToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.layer__plus;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.newToolStripMenuItem.Text = "New [Ctrl+N]";
@@ -550,7 +550,7 @@ namespace GwBasic.Net
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.Untitled;
+            this.openToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.Untitled;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.openToolStripMenuItem.Text = "Open";
@@ -558,7 +558,7 @@ namespace GwBasic.Net
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.Save;
+            this.saveToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.Save;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.saveToolStripMenuItem.Text = "Save";
@@ -573,7 +573,7 @@ namespace GwBasic.Net
             // 
             // printToolStripMenuItem
             // 
-            this.printToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.fileprint;
+            this.printToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.fileprint;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.printToolStripMenuItem.Text = "Print..";
@@ -620,7 +620,7 @@ namespace GwBasic.Net
             // 
             // undoToolStripMenuItem
             // 
-            this.undoToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.undo_16x16;
+            this.undoToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.undo_16x16;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.undoToolStripMenuItem.Text = "Undo [Ctrl+Z]";
@@ -628,7 +628,7 @@ namespace GwBasic.Net
             // 
             // redoToolStripMenuItem
             // 
-            this.redoToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.redo_16x16;
+            this.redoToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.redo_16x16;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.redoToolStripMenuItem.Text = "Redo [Ctrl+R]";
@@ -648,7 +648,7 @@ namespace GwBasic.Net
             // 
             // copyToolStripMenuItem
             // 
-            this.copyToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.Untitled_3;
+            this.copyToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.Untitled_3;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.copyToolStripMenuItem.Text = "Copy [Ctrl+C]";
@@ -656,7 +656,7 @@ namespace GwBasic.Net
             // 
             // pasteToolStripMenuItem
             // 
-            this.pasteToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.Untitled_4;
+            this.pasteToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.Untitled_4;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.pasteToolStripMenuItem.Text = "Paste [Ctrl+V]";
@@ -700,7 +700,7 @@ namespace GwBasic.Net
             // 
             // findToolStripMenuItem
             // 
-            this.findToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.search_icon;
+            this.findToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.search_icon;
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.findToolStripMenuItem.Text = "Find [Ctrl+F]...";
@@ -708,7 +708,7 @@ namespace GwBasic.Net
             // 
             // replaceToolStripMenuItem
             // 
-            this.replaceToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.Untitled_8;
+            this.replaceToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.Untitled_8;
             this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
             this.replaceToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.replaceToolStripMenuItem.Text = "Replace [Ctrl+H]...";
@@ -721,7 +721,7 @@ namespace GwBasic.Net
             // 
             // commentCurrentLineToolStripMenuItem
             // 
-            this.commentCurrentLineToolStripMenuItem.Image = global::GwBasic.Net.Properties.Resources.Untitled_2;
+            this.commentCurrentLineToolStripMenuItem.Image = global::SEBasicIV.Properties.Resources.Untitled_2;
             this.commentCurrentLineToolStripMenuItem.Name = "commentCurrentLineToolStripMenuItem";
             this.commentCurrentLineToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
             this.commentCurrentLineToolStripMenuItem.Text = "Comment Current Line";
@@ -886,7 +886,7 @@ namespace GwBasic.Net
             this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox9.Image = global::GwBasic.Net.Properties.Resources.Home;
+            this.pictureBox9.Image = global::SEBasicIV.Properties.Resources.Home;
             this.pictureBox9.Location = new System.Drawing.Point(1051, 635);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox9.Name = "pictureBox9";
@@ -902,7 +902,7 @@ namespace GwBasic.Net
             // 
             this.close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.close.BackColor = System.Drawing.Color.Gainsboro;
-            this.close.Image = global::GwBasic.Net.Properties.Resources.CtrlBtn;
+            this.close.Image = global::SEBasicIV.Properties.Resources.CtrlBtn;
             this.close.Location = new System.Drawing.Point(1109, 27);
             this.close.Margin = new System.Windows.Forms.Padding(4);
             this.close.Name = "close";
@@ -916,7 +916,7 @@ namespace GwBasic.Net
             // max
             // 
             this.max.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.max.Image = global::GwBasic.Net.Properties.Resources.CtrlBtn;
+            this.max.Image = global::SEBasicIV.Properties.Resources.CtrlBtn;
             this.max.Location = new System.Drawing.Point(1083, 27);
             this.max.Margin = new System.Windows.Forms.Padding(4);
             this.max.Name = "max";
@@ -930,7 +930,7 @@ namespace GwBasic.Net
             // min
             // 
             this.min.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.min.Image = global::GwBasic.Net.Properties.Resources.CtrlBtn;
+            this.min.Image = global::SEBasicIV.Properties.Resources.CtrlBtn;
             this.min.Location = new System.Drawing.Point(1055, 27);
             this.min.Margin = new System.Windows.Forms.Padding(4);
             this.min.Name = "min";
@@ -958,7 +958,7 @@ namespace GwBasic.Net
             this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox6.BackColor = System.Drawing.Color.White;
             this.pictureBox6.ErrorImage = null;
-            this.pictureBox6.Image = global::GwBasic.Net.Properties.Resources.LT;
+            this.pictureBox6.Image = global::SEBasicIV.Properties.Resources.LT;
             this.pictureBox6.Location = new System.Drawing.Point(149, 603);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox6.Name = "pictureBox6";
@@ -972,7 +972,7 @@ namespace GwBasic.Net
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox5.BackColor = System.Drawing.Color.White;
             this.pictureBox5.ErrorImage = null;
-            this.pictureBox5.Image = global::GwBasic.Net.Properties.Resources.RG;
+            this.pictureBox5.Image = global::SEBasicIV.Properties.Resources.RG;
             this.pictureBox5.Location = new System.Drawing.Point(1060, 603);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
@@ -986,7 +986,7 @@ namespace GwBasic.Net
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox4.BackColor = System.Drawing.Color.White;
             this.pictureBox4.ErrorImage = null;
-            this.pictureBox4.Image = global::GwBasic.Net.Properties.Resources.DN;
+            this.pictureBox4.Image = global::SEBasicIV.Properties.Resources.DN;
             this.pictureBox4.Location = new System.Drawing.Point(1132, 583);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
@@ -1000,7 +1000,7 @@ namespace GwBasic.Net
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.BackColor = System.Drawing.Color.White;
             this.pictureBox3.ErrorImage = null;
-            this.pictureBox3.Image = global::GwBasic.Net.Properties.Resources.UP;
+            this.pictureBox3.Image = global::SEBasicIV.Properties.Resources.UP;
             this.pictureBox3.Location = new System.Drawing.Point(1132, 112);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
@@ -1013,9 +1013,9 @@ namespace GwBasic.Net
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BackgroundImage = global::GwBasic.Net.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112091;
+            this.pictureBox2.BackgroundImage = global::SEBasicIV.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112091;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Image = global::GwBasic.Net.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112091;
+            this.pictureBox2.Image = global::SEBasicIV.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112091;
             this.pictureBox2.Location = new System.Drawing.Point(1129, 110);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
@@ -1028,9 +1028,9 @@ namespace GwBasic.Net
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::GwBasic.Net.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112092;
+            this.pictureBox1.BackgroundImage = global::SEBasicIV.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112092;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::GwBasic.Net.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112092;
+            this.pictureBox1.Image = global::SEBasicIV.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112092;
             this.pictureBox1.Location = new System.Drawing.Point(4, 601);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
@@ -1043,7 +1043,7 @@ namespace GwBasic.Net
             this.pictureBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox10.Image = global::GwBasic.Net.Properties.Resources.info;
+            this.pictureBox10.Image = global::SEBasicIV.Properties.Resources.info;
             this.pictureBox10.Location = new System.Drawing.Point(1089, 635);
             this.pictureBox10.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox10.Name = "pictureBox10";
@@ -1059,7 +1059,7 @@ namespace GwBasic.Net
             // 
             this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.Image = global::GwBasic.Net.Properties.Resources.footer;
+            this.pictureBox7.Image = global::SEBasicIV.Properties.Resources.footer;
             this.pictureBox7.Location = new System.Drawing.Point(4, 622);
             this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox7.Name = "pictureBox7";
@@ -1183,7 +1183,7 @@ namespace GwBasic.Net
             this.MinimumSize = new System.Drawing.Size(533, 246);
             this.Name = "SyntaxEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GwBasic.Net Syntax Editor";
+            this.Text = "SEBasicIV Syntax Editor";
             this.Activated += new System.EventHandler(this.SyntaxEditor_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SyntaxEditor_FormClosed_1);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
