@@ -267,7 +267,7 @@ namespace SEBasicIV
             this.miniTimer_LinkLabel2.Size = new System.Drawing.Size(356, 21);
             this.miniTimer_LinkLabel2.TabIndex = 65;
             this.miniTimer_LinkLabel2.TabStop = true;
-            this.miniTimer_LinkLabel2.Text = "https://github.com/Shando/SEBasic-WinForms";
+            this.miniTimer_LinkLabel2.Text = "https://github.com/Shando/SEBasicIV";
             this.miniTimer_LinkLabel2.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.miniTimer_LinkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.miniTimer_LinkLabel2_LinkClicked);
             // 
