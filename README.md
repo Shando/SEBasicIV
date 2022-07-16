@@ -1,8 +1,8 @@
-# GwBasic.Net
+# SEBasicIV
 
 ## This is a re-write of GwBasic.Net for use with the SE BASIC IV Cordelia BASIC dialect and also Z80 Assembler
 
-**An Modern IDE for GwBasic programming language**
+**A Modern IDE for GwBasic programming language**
 
 This project is built using winform c#. the main focus of this project is to introduce the students, that are still taught gwbasic as their first programming language, with modern Styled Syntax Editor. and made the programming GwBasic at more ease.
 
