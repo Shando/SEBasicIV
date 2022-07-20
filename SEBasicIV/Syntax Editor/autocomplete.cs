@@ -30,7 +30,7 @@ namespace SEBasicIV
         readonly string[] Function =
         {
             "ABS ", "ASC ", "ACOS ", "AC.", "ASIN ", "AS. ", "ATAN ", "AT. ", "CHR$ ", "COS ", "DEEK ", "EOF ", "EO. ",
-            "EXP ", "FIX ", "FN", "FRE ", "INKEY$ #", "INK. ", "INKEY$", "INP ", "INPUT$ ", "INSTR ", "INS. ", "INT ",
+            "EXP ", "FIX ", "FN ", "FRE ", "INKEY$ # ", "INK. ", "INKEY$ ", "INP ", "INPUT$ ", "INSTR ", "INS. ", "INT ",
             "LEFT$ ", "LEF. ", "LEN ", "LOC ", "LOF ", "LOG ", "MID$ ", "MOUSE ", "NMI ", "PEEK ", "PE.", "PI ", "PMAP ",
             "POINT ", "POS ", "RIGHT$ ", "RI. ", "RND ", "SGN ", "SIN ", "SPACE$ ", "SPC ", "SQR ", "STICK ", "STR$ ",
             "STRIG ", "STRING$ ", "STR. ", "TAB ", "TAN ", "TIMER ", "USR ", "U. ", "VAL ", "VAL$ ", "V. ", "VARPTR ",
@@ -39,24 +39,24 @@ namespace SEBasicIV
 
         readonly string[] Statement =
         {
-            "BEEP ", "BSAVE ", "B. ", "CALL ", "CA. ", "CHAIN ", "CIRCLE ", "CLOSE ", "CLOSE #", "CLO. ", "CLS ",
+            "BEEP ", "BSAVE ", "B. ", "CALL ", "CA. ", "CHAIN ", "CIRCLE ", "CLOSE ", "CLOSE # ", "CLO. ", "CLS ",
             "COLOR ", "COL. ", "COM ", "COPY ", "C. ", "DATA ", "DA. ", "DATE$ ", "DEF FN ", "DEF. ", "DEF SEG ",
-            "DIM", "DOKE ", "D. ", "DRAW ", "EDIT ", "ED. ", "ELSE ", "EL. ", "END", "ERASE ", "ERROR ", "E. ",
-            "FIELD ", "FOR ", "F. ", "GET ", "GOSUB ", "GOS. ", "GO SUB", "GOTO ", "G. ", "IF ", "INPUT ", "I. ",
-            "INPUT #", "KEY ", "LET ", "LINE ", "LINE INPUT ", "LINE INPUT #", "LIST # ", "LOCATE ", "L. ", "LSET ",
+            "DIM ", "DOKE ", "D. ", "DRAW ", "EDIT ", "ED. ", "ELSE ", "EL. ", "END", "ERASE ", "ERROR ", "E. ",
+            "FIELD ", "FOR ", "F. ", "GET ", "GOSUB ", "GOS. ", "GO SUB ", "GOTO ", "G. ", "IF ", "INPUT ", "I. ",
+            "INPUT # ", "KEY ", "LET ", "LINE ", "LINE INPUT ", "LINE INPUT # ", "LIST # ", "LOCATE ", "L. ", "LSET ",
             "MID$ ", "MI. ", "NEXT ", "NOISE ", "ON ", "OPEN ", "OP. ", "OPTION BASE ", "OUT ", "O. ", "PAINT ",
             "PALETTE ", "PA. ", "PALETTE USING ", "PEN ", "PLAY ", "POKE ", "PO.", "PRESET ", "PRINT ", "PR. ",
-            "PRINT #", "PSET ", "PUT ", "RANDOMIZE ", "RA. ", "READ ", "REM ", "R. ", "RESTORE ", "RES. ", "RESUME ",
-            "RETURN ", "RET. ", "RSET ", "SCREEN ", "SC. ", "SEEK #", "SE. ", "SOUND ", "SO. ", "STEP ", "STRIG ",
-            "SWAP ", "THEN ", "TH. ", "TIME$ ", "TIMER ", "TO ", "USING ", "USI. ", "VIEW ", "VIEW PRINT ", "WAIT ",
-            "WA. ", "WEND ", "WE. ", "WHILE ", "W. ", "WIDTH ", "WINDOW ", "WRITE "
+            "PRINT # ", "PRINT USING ", "PSET ", "PUT ", "RANDOMIZE ", "RA. ", "READ ", "REM ", "R. ", "RESTORE ",
+            "RES. ", "RESUME ", "RETURN ", "RET. ", "RSET ", "SCREEN ", "SC. ", "SEEK # ", "SE. ", "SOUND ", "SO. ",
+            "STEP ", "STRIG ", "SWAP ", "THEN ", "TH. ", "TIME$ ", "TIMER ", "TO ", "USING ", "USI. ", "VIEW ",
+            "VIEW PRINT ", "WAIT ", "WA. ", "WEND ", "WE. ", "WHILE ", "W. ", "WIDTH ", "WINDOW ", "WRITE ", "WRITE #"
         };
 
         readonly string[] Command =
         {
-            "AUTO ", "BLOAD ", "BL. ", "CHDIR ", "CH. ", "CLEAR ", "CLE. ", "CONT", "DELETE ", "DE. ", "FILES ", "FI. ",
-            "KILL ", "K. ", "LIST ", "LI. ", "LOAD ", "LOCK ", "MERGE ", "ME.", "MKDIR ", "M. ", "NAME ", "NA. ", "NEW",
-            "N. ", "OLD", "PCOPY", "RENUM ", "REN. ", "RESET ", "RMDIR ", "RM. ", "RUN ", "SAVE ", "SA. ", "STOP", "S. ",
+            "AUTO ", "BLOAD ", "BL. ", "CHDIR ", "CH. ", "CLEAR ", "CLE. ", "CONT ", "DELETE ", "DE. ", "FILES ", "FI. ",
+            "KILL ", "K. ", "LIST ", "LI. ", "LOAD ", "LOCK ", "MERGE ", "ME.", "MKDIR ", "M. ", "NAME ", "NA. ", "NEW ",
+            "N. ", "OLD ", "PCOPY", "RENUM ", "REN. ", "RESET ", "RMDIR ", "RM. ", "RUN ", "SAVE ", "SA. ", "STOP ", "S. ",
             "TERM ", "TRACE ", "T. ", "UNLOCK "
         };
 
@@ -67,7 +67,7 @@ namespace SEBasicIV
 
         new readonly string[] Events = 
         {
-            "ON TIMER ", "ON STRIG ", "ON PLAY ", "ON PEN ", "ON KEY ", "ON COM ", "ON ERROR GOTO " 
+            "ON TIMER ", "ON STRIG ", "ON PLAY ", "ON PEN ", "ON KEY ", "ON COM ", "ON ERROR " 
         };
 
         public void BuildAutocompleteMenu(bool inBas)
@@ -133,7 +133,8 @@ namespace SEBasicIV
                     {
                         case "BEEP":
                             return
-                                "TODO: To sound the speaker at 800 Hz(800 cycles per second) for one - quarter of a second.\n\nSyntax:\nBEEP";
+                                // TODO:
+                                "To sound the speaker at 800 Hz(800 cycles per second) for one - quarter of a second.\n\nSyntax:\nBEEP";
                         case "BSAVE":
                         case "B.":
                             return
@@ -164,10 +165,13 @@ namespace SEBasicIV
                                 + "\t'address_var' is a literal: Syntax error.";
                         case "CHAIN":
                             return
-                                "TODO: To transfer control to the specified program and pass (chain) variables to it from the current program.\n\nSyntax:\nCHAIN[MERGE] filename[,[line][,[ALL][,DELETE range]]]";
+                                // TODO:
+                                "To transfer control to the specified program and pass (chain) variables to it from the current program.\n\nSyntax:\nCHAIN[MERGE] filename[,[line][,[ALL][,DELETE range]]]";
                         case "CIRCLE":
                             return
-                                "TODO: To draw a circle, ellipse, and angles on the screen during use of the Graphics mode.\n\nSyntax:\nCIRCLE(xcenter, ycenter), radius[,[color][,[start],[end][,aspect]]]";
+                                // TODO:
+                                "To draw a circle, ellipse, and angles on the screen during use of the Graphics mode.\n\nSyntax:\nCIRCLE(xcenter, ycenter), radius[,[color][,[start],[end][,aspect]]]";
+                        case "CLOSE #":
                         case "CLOSE":
                         case "CLO.":
                             return
@@ -219,7 +223,8 @@ namespace SEBasicIV
                                 + "\tStatement is used in SCREEN 2: Illegal function call.";
                         case "COM":
                             return
-                                "TODO: To enable or disable trapping of communications activity to the specified communications adapter.\n\nSyntax:\nCOM(n) ON\nCOM(n) OFF\nCOM(n)STOP";
+                                // TODO:
+                                "To enable or disable trapping of communications activity to the specified communications adapter.\n\nSyntax:\nCOM(n) ON\nCOM(n) OFF\nCOM(n)STOP";
                         case "COPY":
                         case "C.":
                             return
@@ -247,10 +252,16 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\tIf the type of the literal does not match that of the corresponding READ statement, a Syntax error occurs on the DATA statement.";
                         case "DATE$":
+                        case "DATE":
                             return
-                                "TODO: To set or retrieve the current date.\n\nSyntax:\nDATE$=variable$";
+                                // TODO:
+                                "To set or retrieve the current date.\n\nSyntax:\nDATE$=variable$";
                         case "DEF FN":
                         case "DEF.":
+                        case "DEF":
+                        case "SEG":
+                        case "FN":
+                            // TODO: INCLUDE "FN" & "SEG" in here as well!
                             return
                                 "Syntax:\n"
                                 + "\tDEF FN[ ]name [( arg_0 [, arg_1] ...)] = expression\n\n"
@@ -277,9 +288,6 @@ namespace SEBasicIV
                                 + "\tThe statement is executed directly instead of in a program line: Illegal direct.\n"
                                 + "\tIf the type of the return value is incompatible with the type of 'name', no error is raised at the DEF FN statement;\n"
                                 + "\t\thowever, a Type mismatch will be raised at the first call of 'FNname'.";
-                        case "DEF SEG":
-                            return
-                                "TODO: To assign the current segment address to be referenced by a subsequent BLOAD, BSAVE, CALL, PEEK, POKE, or USR.\n\nSyntax:\nDEF SEG [=address]";
                         case "DIM":
                             return
                                 "Syntax:\n"
@@ -324,7 +332,8 @@ namespace SEBasicIV
                                 + "\t'value' is not in [0 to 65535]: Illegal function call.";
                         case "DRAW":
                             return
-                                "TODO: To draw a figure.\n\nSyntax:\nDRAW string expression\n\nString commands are\nUp\tup\nDn\tdown\nLn\tleft\nRn\tright\nEn\tdiagonally up and right\nFn\tdiagonally down and right\nGn\tdiagonally down and left\nHn\tdiagonally up and left";
+                                // TODO:
+                                "To draw a figure.\n\nSyntax:\nDRAW string expression\n\nString commands are\nUp\tup\nDn\tdown\nLn\tleft\nRn\tright\nEn\tdiagonally up and right\nFn\tdiagonally down and right\nGn\tdiagonally down and left\nHn\tdiagonally up and left";
                         case "EDIT":
                         case "ED.":
                             return
@@ -345,7 +354,8 @@ namespace SEBasicIV
                                 + "No message is printed. It is possible to resume execution at the next statement using CONT.";
                         case "ERASE":
                             return
-                                "TODO: To eliminate arrays from a program.\n\nSyntax:\nERASE list of array variables";
+                                // TODO:
+                                "To eliminate arrays from a program.\n\nSyntax:\nERASE list of array variables";
                         case "ERROR":
                         case "E.":
                             return
@@ -360,7 +370,8 @@ namespace SEBasicIV
                                 + "\t'error_number' is not in 1 to 255]: Illegal function call.";
                         case "FIELD":
                             return
-                                "TODO: To allocate space for variables in a random file buffer.\n\nSyntax:\nFIELD [#] filenum, width AS stringvar [,width AS stringvar]...";
+                                // TODO:
+                                "To allocate space for variables in a random file buffer.\n\nSyntax:\nFIELD [#] filenum, width AS stringvar [,width AS stringvar]...";
                         case "FOR":
                         case "F.":
                         case "TO":
@@ -385,25 +396,11 @@ namespace SEBasicIV
                                 + "\t'loop_var' is an integer variable and 'start', 'stop' or 'step' is outside the range [-32768, 32767]: Overflow.";
                         case "GET":
                             return
-                                "TODO: To transfer graphics images from the screen.\nOR\nTo read a record from a random disk file into a random buffer.\n\nSyntax:\nGET (x1,y1)-(x2,y2),array name\nOR\nGET [#]file number[,record number]";
-                        case "GOSUB":
-                        case "G.":
-                            return
-                                "Syntax:\n"
-                                + "\tGO[ ]SUB line_number [anything]\n\n"
-                                + "Jumps to a subroutine at line_number. The next RETURN statement jumps back to the statement after GOSUB.\n"
-                                + "Anything after line_number until the end of the statement is ignored.\n"
-                                + "If executed from a direct line, GOSUB runs the subroutine and the following RETURN returns execution to the direct line.\n\n"
-                                + "Parameters:\n"
-                                + "\t'line_number' is an existing line number literal.\n"
-                                + "Notes:\n"
-                                + "\tFurther characters on the line are ignored until end of statement.\n"
-                                + "\tIf no RETURN is encountered, no problem.\n"
-                                + "\tOne optional space is allowed between GO and SUB; it will not be retained in the program.\n\n"
-                                + "Errors:\n"
-                                + "\tIf 'line_number' does not exist: Undefined line number.\n"
-                                + "\tIf 'line_number' is greater than 65529, only the first 4 characters are read (for example, 6553)";
+                                // TODO:
+                                "To transfer graphics images from the screen.\nOR\nTo read a record from a random disk file into a random buffer.\n\nSyntax:\nGET (x1,y1)-(x2,y2),array name\nOR\nGET [#]file number[,record number]";
                         case "GO SUB":
+                        case "GOSUB":
+                        case "GOS.":
                             return
                                 "Syntax:\n"
                                 + "\tGO[ ]SUB line_number [anything]\n\n"
@@ -420,6 +417,7 @@ namespace SEBasicIV
                                 + "\tIf 'line_number' does not exist: Undefined line number.\n"
                                 + "\tIf 'line_number' is greater than 65529, only the first 4 characters are read (for example, 6553)";
                         case "GOTO":
+                        case "G":
                             return
                                 "Syntax:\n"
                                 + "\tGOTO line_number [anything]\n\n"
@@ -488,9 +486,10 @@ namespace SEBasicIV
                                 + "\t\t?Redo from start is printed and all values must be entered again.\n"
                                 + "\tA Syntax error that is caused after the prompt is printed is only raised after the values have been entered.\n"
                                 + "\t\tNo values are stored.";
-                        case "INPUT#":
+                        case "INPUT #":
                             return
-                                "TODO: To read data items from a sequential file and assign them to program variables.\n\nSyntax:\nINPUT# file number, variable list";
+                                // TODO:
+                                "To read data items from a sequential file and assign them to program variables.\n\nSyntax:\nINPUT# file number, variable list";
                         case "KEY":
                             return
                                 "Syntax:\n"
@@ -526,23 +525,29 @@ namespace SEBasicIV
                                 + "\t'name' and 'expression' are not of matching types: Type mismatch.";
                         case "LINE":
                             return
-                                "TODO: To draw lines and boxes on the screen.\n\nSyntax:\nLINE [(x1,y1)]-(x2,y2) [,[attribute][,B[F]][,style]]";
+                                // TODO:
+                                "To draw lines and boxes on the screen.\n\nSyntax:\nLINE [(x1,y1)]-(x2,y2) [,[attribute][,B[F]][,style]]";
                         case "LINE INPUT":
                             return
-                                "TODO: To input an entire line (up to 255 characters) from the keyboard into a string variable, ignoring delimiters.\n\nSyntax:\nLINE INPUT [;][prompt string;]string variable";
-                        case "LINE INPUT#":
+                                // TODO:
+                                "NEEDS TO BE IN BOTH LINE & INPUT - To input an entire line (up to 255 characters) from the keyboard into a string variable, ignoring delimiters.\n\nSyntax:\nLINE INPUT [;][prompt string;]string variable";
+                        case "LINE INPUT #":
                             return
-                                "TODO: To read an entire line (up to 255 characters), without delimiters, from a sequential disk file to a string variable.\n\nSyntax:\nLINE INPUT# file number, string variable";
+                                // TODO:
+                                "NEEDS TO BE IN BOTH LINE & INPUT - To read an entire line (up to 255 characters), without delimiters, from a sequential disk file to a string variable.\n\nSyntax:\nLINE INPUT# file number, string variable";
                         case "LOCATE":
                         case "L.":
                             return
-                                "TODO: To move the cursor to the specified position on the active screen.\n\nSyntax:\nLOCATE [row][,[col][,[cursor][,[start] [,stop]]]]";
+                                // TODO:
+                                "To move the cursor to the specified position on the active screen.\n\nSyntax:\nLOCATE [row][,[col][,[cursor][,[start] [,stop]]]]";
                         case "RSET":
                             return
-                                "TODO: To move data from memory to a random-file buffer and right-justify it in preparation for a PUT statement.\n\nSyntax:\nRSET string variable=string expression";
+                                // TODO:
+                                "To move data from memory to a random-file buffer and right-justify it in preparation for a PUT statement.\n\nSyntax:\nRSET string variable=string expression";
                         case "LSET":
                             return
-                                "TODO: To move data from memory to a random-file buffer and left-justify it in preparation for a PUT statement.\n\nSyntax:\nLSET string variable=string expression";
+                                // TODO:
+                                "To move data from memory to a random-file buffer and left-justify it in preparation for a PUT statement.\n\nSyntax:\nLSET string variable=string expression";
                         case "NEXT":
                             return
                                 "Syntax:\n"
@@ -560,7 +565,8 @@ namespace SEBasicIV
                                 + "\t\twhen incremented after the final iteration: Overflow.";
                         case "NOISE":
                             return
-                                "TODO: Syntax:\n";
+                                // TODO:
+                                "Syntax:\n";
                         case "ON":
                             return
                                 "Syntax:\n"
@@ -622,7 +628,8 @@ namespace SEBasicIV
                                 + "\t'file_spec' is non-existent in input or append mode: File not found.";
                         case "OPTION BASE":
                             return
-                                "TODO: To declare the minimum value for array subscripts.\n\nSyntax:\nOPTION BASE n";
+                                // TODO:
+                                "To declare the minimum value for array subscripts.\n\nSyntax:\nOPTION BASE n";
                         case "OUT":
                         case "O.":
                             return
@@ -639,7 +646,8 @@ namespace SEBasicIV
                                 + "\t'value' is not in [0 to 255]: Illegal function call.";
                         case "PAINT":
                             return
-                                "TODO: To fill in a graphics figure with the selected attribute.\n\nSyntax:\nPAINT (x start,y start)[,paint attribute[,border attribute][,bckgrnd attribute]]";
+                                // TODO:
+                                "To fill in a graphics figure with the selected attribute.\n\nSyntax:\nPAINT (x start,y start)[,paint attribute[,border attribute][,bckgrnd attribute]]";
                         case "PALETTE":
                         case "PA.":
                             return
@@ -660,13 +668,16 @@ namespace SEBasicIV
                                 + "\t'attrib' or 'colour' is not in range: Illegal function call";
                         case "PALETTE USING":
                             return
-                                "TODO: Changes one or more of the colors in the palette\n\nSyntax:\nPALETTE USING integer-array-name (arrayindex)";
+                                // TODO:
+                                "Changes one or more of the colors in the palette\n\nSyntax:\nPALETTE USING integer-array-name (arrayindex)";
                         case "PEN":
                             return
-                                "TODO: To read the light pen.\n\nSyntax:\nPEN ON\nPEN OFF\nPEN STOP";
+                                // TODO:
+                                "To read the light pen.\n\nSyntax:\nPEN ON\nPEN OFF\nPEN STOP";
                         case "PLAY":
                             return
-                                "TODO: To play music by embedding a music macro language into the string data type.\n\nSyntax:\nPLAY string expression";
+                                // TODO:
+                                "To play music by embedding a music macro language into the string data type.\n\nSyntax:\nPLAY string expression";
                         case "POKE":
                         case "PO.":
                             return
@@ -685,10 +696,12 @@ namespace SEBasicIV
                                 + "\t'value' is not in [0 to 255]: Illegal function call.";
                         case "PRESET":
                             return
-                                "TODO: To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPRESET(x,y)[,color]";
+                                // TODO:
+                                "To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPRESET(x,y)[,color]";
                         case "PSET":
                             return
-                                "TODO: To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPSET(x,y)[,color]";
+                                // TODO:
+                                "To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPSET(x,y)[,color]";
                         case "PRINT":
                         case "PR.":
                             return
@@ -726,7 +739,7 @@ namespace SEBasicIV
                                 + "\t\t\tIf the current column is greater than 'n', TAB moves to column 'n' on the next line.\n\n"
                                 + "If the print statement does not end in one of these four separation tokens, a newline is printed after the last expression.\n"
                                 + "String expressions can be separated by one or more spaces, which has the same effect as separating by semicolons.";
-                        case "PRINT#":
+                        case "PRINT #":
                             return
                                 "Syntax:\n"
                                 + "\tPRINT [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]]\n\n"
@@ -800,7 +813,8 @@ namespace SEBasicIV
                                 + "String expressions can be separated by one or more spaces, which has the same effect as separating by semicolons.";
                         case "PUT":
                             return
-                                "TODO: To write a record from a random buffer to a random disk file.\n\tOR\nTo transfer graphics images to the screen.\n\nSyntax:\nPUT[#]file number[,record number]\n\tOR\nPUT(x,y),array,[,action verb]";
+                                // TODO:
+                                "To write a record from a random buffer to a random disk file.\n\tOR\nTo transfer graphics images to the screen.\n\nSyntax:\nPUT[#]file number[,record number]\n\tOR\nPUT(x,y),array,[,action verb]";
                         case "RANDOMIZE":
                         case "RA.":
                             return
@@ -852,7 +866,8 @@ namespace SEBasicIV
                                 + "\t'line' is not an existing line number: Undefined line number.";
                         case "RESUME":
                             return
-                                "TODO: To continue program execution after an error-recovery procedure has been  performed.\n\nSyntax:\nRESUME\nRESUME 0\nRESUME NEXT\nRESUME line number";
+                                // TODO:
+                                "To continue program execution after an error-recovery procedure has been  performed.\n\nSyntax:\nRESUME\nRESUME 0\nRESUME NEXT\nRESUME line number";
                         case "RETURN":
                         case "RET.":
                             return
@@ -898,26 +913,34 @@ namespace SEBasicIV
                         case "SOUND":
                         case "SO.":
                             return
-                                "TODO: To generate sound through the speaker.\n\nSyntax:\nSOUND freq,duration";
+                                // TODO:
+                                "To generate sound through the speaker.\n\nSyntax:\nSOUND freq,duration";
                         case "STRIG":
                             return
-                                "TODO: To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
+                                // TODO:
+                                "To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
                         case "SWAP":
                             return
-                                "TODO: To exchange the values of two variables.\n\nSyntax:\nSWAP variable1,variable2";
+                                // TODO:
+                                "To exchange the values of two variables.\n\nSyntax:\nSWAP variable1,variable2";
                         case "TIME$":
+                        case "TIME":
                             return
-                                "TODO: To set or retrieve the current time.\n\nSyntax:\nTIME$ = string exp";
+                                // TODO:
+                                "To set or retrieve the current time.\n\nSyntax:\nTIME$ = string exp";
                         case "USING":
                         case "USI.":
                             return
-                                "TODO:";
+                                // TODO:
+                                "";
                         case "VIEW":
                             return
-                                "TODO: To define a physical viewport limit from x1,y1 (upper-left x,y coordinates) to x2,y2 (lower-right x,y coordinates).\n\nSyntax:\nVIEW [[SCREEN][(x1,y1)-(x2,y2) [,[fill][,[border]]]]";
+                                // TODO:
+                                "To define a physical viewport limit from x1,y1 (upper-left x,y coordinates) to x2,y2 (lower-right x,y coordinates).\n\nSyntax:\nVIEW [[SCREEN][(x1,y1)-(x2,y2) [,[fill][,[border]]]]";
                         case "VIEW PRINT":
                             return
-                                "TODO: To set the boundaries of the screen text window.\n\nSyntax:\nVIEW PRINT [topline TO bottomline]";
+                                // TODO:
+                                "To set the boundaries of the screen text window.\n\nSyntax:\nVIEW PRINT [topline TO bottomline]";
                         case "WAIT":
                         case "WA.":
                             return
@@ -954,16 +977,20 @@ namespace SEBasicIV
                                 + "\t'expr' has a string value: Type mismatch.";
                         case "WIDTH":
                             return
-                                "TODO: To set the printed line width in number of characters for the screen and line printer.\n\nSyntax:\nWIDTH size\nWIDTH file number, size\nWIDTH \"dev\", size";
+                                // TODO:
+                                "To set the printed line width in number of characters for the screen and line printer.\n\nSyntax:\nWIDTH size\nWIDTH file number, size\nWIDTH \"dev\", size";
                         case "WINDOW":
                             return
-                                "TODO: To draw lines, graphics, and objects in space not bounded by the physical  limits of the screen.\n\nSyntax:\nWINDOW[[SCREEN](x1,y1)-(x2,y2)]";
+                                // TODO:
+                                "To draw lines, graphics, and objects in space not bounded by the physical  limits of the screen.\n\nSyntax:\nWINDOW[[SCREEN](x1,y1)-(x2,y2)]";
                         case "WRITE":
                             return
-                                "TODO: To output data to the screen.\n\nSyntax:\nWRITE[list of expressions]";
-                        case "WRITE#":
+                                // TODO:
+                                "To output data to the screen.\n\nSyntax:\nWRITE[list of expressions]";
+                        case "WRITE #":
                             return
-                                "TODO: To write data to a sequential file.\n\nSyntax:\nWRITE #filenum, list of expressions";
+                                // TODO:
+                                "To write data to a sequential file.\n\nSyntax:\nWRITE #filenum, list of expressions";
                         default:
                             return
                                 "TooltTip Not Found";
@@ -1055,6 +1082,7 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'x' has a string value: Type mismatch.";
                         case "CHR$":
+                        case "CHR":
                             return
                                 "Syntax:\n"
                                 + "\tchar = CHR$(x)\n\n"
@@ -1084,7 +1112,8 @@ namespace SEBasicIV
                         case "EOF":
                         case "EO.":
                             return
-                                "TODO: To return -1 (true) when the end of a sequential or a communications file has been reached, or to return 0 if end of file (EOF) has not been found.\n\nSyntax:\nEOF(file number)";
+                                // TODO:
+                                "To return -1 (true) when the end of a sequential or a communications file has been reached, or to return 0 if end of file (EOF) has not been found.\n\nSyntax:\nEOF(file number)";
                         case "EXP":
                             return
                                 "Syntax:\n"
@@ -1124,8 +1153,11 @@ namespace SEBasicIV
                                 + "\tThe return type is incompatible with the function name's sigil: Type mismatch.";
                         case "FRE":
                             return
-                                "TODO: To return the number of available bytes in allocated string memory.\n\nSyntax:\nFRE(x$)\nFRE(x)";
+                                // TODO:
+                                "To return the number of available bytes in allocated string memory.\n\nSyntax:\nFRE(x$)\nFRE(x)";
+                        case "INKEY$ #":
                         case "INKEY$":
+                        case "INKEY":
                         case "INK.":
                             return
                                 "Syntax:\n"
@@ -1144,8 +1176,10 @@ namespace SEBasicIV
                                 + "Parameters:\n"
                                 + "\t'port' is a numeric expression in [0 to 65535].";
                         case "INPUT$":
+                        case "INPUT":
                             return
-                                "TODO: INP(n)\n\nSyntax:\nINPUT$(x[,[#]file number)]";
+                                // TODO:
+                                "INP(n)\n\nSyntax:\nINPUT$(x[,[#]file number)]";
                         case "INSTR":
                         case "INS.":
                             return
@@ -1177,6 +1211,7 @@ namespace SEBasicIV
                                 + "\t'number' is a string expression, Type mismatch.";
                         case "LEFT$":
                         case "LEF.":
+                        case "LEFT":
                             return
                                 "Syntax:\n"
                                 + "\tchild = LEFT$(parent, num_chars)"
@@ -1195,10 +1230,12 @@ namespace SEBasicIV
                                 + "\t'string' has a number value: Type mismatch.";
                         case "LOC":
                             return
-                                "TODO: To return the current position in the file.\n\nSyntax:\nLOC(file number)";
+                                // TODO:
+                                "To return the current position in the file.\n\nSyntax:\nLOC(file number)";
                         case "LOF":
                             return
-                                "TODO: To return the length (number of bytes) allocated to the file.\n\nSyntax:\nLOF(file number)";
+                                // TODO:
+                                "To return the length (number of bytes) allocated to the file.\n\nSyntax:\nLOF(file number)";
                         case "LOG":
                             return
                                 "Syntax:\n"
@@ -1211,6 +1248,7 @@ namespace SEBasicIV
                                 + "\t'x' is zero or negative: Illegal function call.";
                         case "MID$":
                         case "MI.":
+                        case "MID":
                             return
                                 "Syntax:\n"
                                 + "\tsubstring = MID$(string, position [, length])"
@@ -1221,10 +1259,12 @@ namespace SEBasicIV
                                 + "\t'length' is a numeric expression.";
                         case "MOUSE":
                             return
-                                "TODO: MOUSE function";
+                                // TODO:
+                                "MOUSE function";
                         case "NMI":
                             return
-                                "TODO: NMI function";
+                                // TODO:
+                                "NMI function";
                         case "PEEK":
                         case "PE.":
                             return
@@ -1240,18 +1280,23 @@ namespace SEBasicIV
                                 + "\t'address' is not in [-32768 to 65535]: Overflow.";
                         case "PI":
                             return
-                                "TODO: PI function";
+                                // TODO:
+                                "PI function";
                         case "PMAP":
                             return
-                                "TODO: To map expressions to logical or physical coordinates.\n\nSyntax:\nPMAP (exp,function)";
+                                // TODO:
+                                "To map expressions to logical or physical coordinates.\n\nSyntax:\nPMAP (exp,function)";
                         case "POINT":
                             return
-                                "TODO: To read the color or attribute value of a pixel from the screen.\n\nSyntax:\nPOINT(x,y)\nPOINT(function)";
+                                // TODO:
+                                "To read the color or attribute value of a pixel from the screen.\n\nSyntax:\nPOINT(x,y)\nPOINT(function)";
                         case "POS":
                             return
-                                "TODO: To return the current cursor position.\n\nSyntax:\nPOS(c)";
+                                // TODO:
+                                "To return the current cursor position.\n\nSyntax:\nPOS(c)";
                         case "RIGHT$":
                         case "RI.":
+                        case "RIGHT":
                             return
                                 "Syntax:\n"
                                 + "\tchild = RIGHT$(parent, num_chars)"
@@ -1296,11 +1341,14 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'angle' has a string value: Type mismatch.";
                         case "SPACE$":
+                        case "SPACE":
                             return
-                                "TODO: To return a string of x spaces.\n\nSyntax:\nSPACE$(x)";
+                                // TODO:
+                                "To return a string of x spaces.\n\nSyntax:\nSPACE$(x)";
                         case "SPC":
                             return
-                                "TODO: To skip a specified number of spaces in a PRINT or an LPRINT statement.\n\nSyntax:\nSPC(n)";
+                                // TODO:
+                                "To skip a specified number of spaces in a PRINT or an LPRINT statement.\n\nSyntax:\nSPC(n)";
                         case "SQR":
                             return
                                 "Syntax:\n"
@@ -1312,21 +1360,15 @@ namespace SEBasicIV
                                 + "\t'number' has a string value: Type mismatch.";
                         case "STICK":
                             return
-                                "TODO: To return the x and y coordinates of two joysticks.\n\nSyntax:\nSTICK(n)";
+                                // TODO:
+                                "To return the x and y coordinates of two joysticks.\n\nSyntax:\nSTICK(n)";
                         case "STRIG":
                             return
-                                "TODO: To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
-                        case "STR$":
-                            return
-                                "Syntax:\n"
-                                + "\trepr = STR$(number)\n\n"
-                                + "Returns the string representation of 'number'.\n\n"
-                                + "Parameters:\n"
-                                + "\t'number' is a numeric expression.\n\n"
-                                + "Errors:\n"
-                                + "\t'number' has a string value: Type mismatch.";
+                                // TODO:
+                                "To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
                         case "STRING$":
                         case "STR.":
+                        case "STRING":
                             return
                                 "Syntax:\n"
                                 + "\tstring = STRING$(length, char)\n\n"
@@ -1339,9 +1381,20 @@ namespace SEBasicIV
                                 + "\t'char' is the empty string: Illegal function call.\n"
                                 + "\t'char' or 'length' is not in [-32768 to 32767]: Overflow.\n"
                                 + "\t'char' or 'length' is not in [0 to 255]: Illegal function call.";
+                        case "STR$":
+                        case "STR":
+                            return
+                                "Syntax:\n"
+                                + "\trepr = STR$(number)\n\n"
+                                + "Returns the string representation of 'number'.\n\n"
+                                + "Parameters:\n"
+                                + "\t'number' is a numeric expression.\n\n"
+                                + "Errors:\n"
+                                + "\t'number' has a string value: Type mismatch.";
                         case "TAB":
                             return
-                                "TODO: Spaces to position n on the screen.\n\nSyntax:\nTAB(n)";
+                                // TODO:
+                                "Spaces to position n on the screen.\n\nSyntax:\nTAB(n)";
                         case "TAN":
                             return
                                 "Syntax:\n"
@@ -1353,7 +1406,8 @@ namespace SEBasicIV
                                 + "\t'angle' has a string value: Type mismatch.";
                         case "TIMER":
                             return
-                                "TODO: To return single-precision floating-point numbers representing the elapsed number of seconds since midnight or system reset.\n\nSyntax:\nTIMER";
+                                // TODO:
+                                "To return single-precision floating-point numbers representing the elapsed number of seconds since midnight or system reset.\n\nSyntax:\nTIMER";
                         case "USR":
                         case "U.":
                             return
@@ -1365,11 +1419,14 @@ namespace SEBasicIV
                                 + "\t'expr' is an expression.\n\n"
                                 + "Errors:\n"
                                 + "\t'n' is not a digit [0 to 9]: Syntax error.";
+                        case "VAL$":
+                        case "V.":
                         case "VAL":
                             return
                                 "Syntax:\n"
-                                + "\tvalue = VAL(string)\n\n"
-                                + "Returns the numeric value of the string expression 'string'.\n\n"
+                                + "\t1) value = VAL(string)\n"
+                                + "\t2) value = VAL$(string)\n\n"
+                                + "1) Returns the numeric value of the string expression 'string'.\n\n"
                                 + "Notes:\n"
                                 + "\tSpaces before a number are ignored: VAL(\" 10\") returns 10. But unlike Microsoft BASIC, spaces inside a number are not ignored.\n"
                                 + "\tUnlike Microsoft BASIC, expressions inside the string expression are also evaluated.\n"
@@ -1377,13 +1434,8 @@ namespace SEBasicIV
                                 + "\tExpressions between curly braces { and } are not evaluated, but their syntax is checked upon entering.\n"
                                 + "\t\tThey are interpreted as strings that can be passed to VAL for actual evaluation.\n\n"
                                 + "Errors:\n"
-                                + "\t'string' has a number value: Type mismatch.";
-                        case "VAL$":
-                        case "V.":
-                            return
-                                "Syntax:\n"
-                                + "\trepr = VAL$(string)\n\n"
-                                + "Evaluates a 'string' as a string expression. For example:\n\n"
+                                + "\t'string' has a number value: Type mismatch.\n\n"
+                                + "2) Evaluates a 'string' as a string expression. For example:\n\n"
                                 + "\t10 INPUT a$, x$\n"
                                 + "\t20 PRINT VAL$ a$\n\n"
                                 + "The string value assigned to 'a$' should be an expression using 'x$'.\n"
@@ -1394,12 +1446,12 @@ namespace SEBasicIV
                                 + "\t\tif used together with AND applied to string arguments, allowing for selective evaluation.\n"
                                 + "\tExpressions between curly braces { and } are not evaluated, but their syntax is checked upon entering.\n"
                                 + "\t\tThey are interpreted as strings that can be passed to VAL$ for actual evaluation.";
+                        case "VARPTR$":
                         case "VARPTR":
                             return
-                                "TODO: To return the address in memory of the variable or file control block (FCB).\n\nSyntax:\nVARPTR(variable name)\nVARPTR(#file number)";
-                        case "VARPTR$":
-                            return
-                                "TODO: To return a character form of the offset of a variable in memory.\n\nSyntax:\nVARPTR$(variable)";
+                                // TODO:
+                                "To return the address in memory of the variable or file control block (FCB).\n\nSyntax:\nVARPTR(variable name)\nVARPTR(#file number)"
+                                + "To return a character form of the offset of a variable in memory.\n\nSyntax:\nVARPTR$(variable)";
                         default:
                             return "Tooltip Not Found";
                     }
@@ -1444,7 +1496,8 @@ namespace SEBasicIV
                     {
                         case "AUTO":
                             return
-                                "TODO: To generate and increment line numbers automatically each time you press the RETURN key.\n\nSyntax:\nAUTO [line number][,[increment]]\nAUTO .[,[increment]]";
+                                // TODO:
+                                "To generate and increment line numbers automatically each time you press the RETURN key.\n\nSyntax:\nAUTO [line number][,[increment]]\nAUTO .[,[increment]]";
                         case "BLOAD":
                         case "BL.":
                             return
@@ -1548,27 +1601,9 @@ namespace SEBasicIV
                                 + "\tThe file or path 'file_spec' does not exist: File not found\n"
                                 + "\tThe user has no write permission: Permission denied\n"
                                 + "\tIf a syntax error occurs after the closing quote, the file is removed anyway.";
+                        case "LIST #":
                         case "LIST":
                         case "LI.":
-                            return
-                                "Syntax:\n"
-                                + "\tLIST [# file_num;] [line_number_0][, ][line_number_1]\n\n"
-                                + "Prints the program to the screen or a file, starting with 'line_number_0' up to and including 'line_number_1'.\n"
-                                + "Also stops program execution and returns control to the user.\n"
-                                + "In all cases, any further statements in a compound after LIST will be ignored, both in a program and in direct mode.\n"
-                                + "When listing to the screen, the same control characters are recognised as in the PRINT statement.\n\n"
-                                + "Notes:\n"
-                                + "\tIn Microsoft BASIC, LIST will not show line numbers 65531 to 65535 inclusive.\n"
-                                + "\tSE Basic IV's line range is currently [0 to 16383].\n"
-                                + "\tThere is no LLIST command. Instead, LIST can be directed to the printer stream using LIST #.\n\n"
-                                + "Parameters:\n"
-                                + "\t'line_number_0' and 'line_number_1' are line numbers in the range [0 to 65529] or a '.' to indicate the last line edited.\n"
-                                + "\t\tThe line numbers do not need to exist; they specify a range. If the range is empty, nothing is printed.\n"
-                                + "\tThe string expression 'file_num' is a valid stream indicating the file to list to.\n\n"
-                                + "Errors:\n"
-                                + "\tA line number is greater than 65529: Syntax error.\n"
-                                + "\t'file_num' has a string value: Type mismatch.";
-                        case "LIST#":
                             return
                                 "Syntax:\n"
                                 + "\tLIST [# file_num;] [line_number_0][, ][line_number_1]\n\n"
@@ -1609,7 +1644,8 @@ namespace SEBasicIV
                                 + "\t\tAttempting to load a text file that has LF rather than CR LF line endings may cause this error.";
                         case "LOCK":
                             return
-                                "TODO: \n\nSyntax:\nLOCK ???";
+                                // TODO:
+                                "\n\nSyntax:\nLOCK ???";
                         case "MERGE":
                         case "ME.":
                             return
@@ -1668,9 +1704,10 @@ namespace SEBasicIV
                                 + "\tOLD\n\n"
                                 + "Loads a backup from disk of the program that was in memory the last time\n"
                                 + "a NEW command was issued and returns control to the user.";
-                                case "PCOPY":
+                        case "PCOPY":
                             return
-                                "TODO: To copy one screen page to another in all screen modes.\n\nSyntax:\nPCOPY sourcepage, destinationpage";
+                                // TODO:
+                                "To copy one screen page to another in all screen modes.\n\nSyntax:\nPCOPY sourcepage, destinationpage";
                         case "RENUM":
                         case "REN.":
                             return
@@ -1691,7 +1728,8 @@ namespace SEBasicIV
                                 + "\t'old' is specified and 'new' is less than or equal to an existing line number less than 'old': Illegal function call.";
                         case "RESET":
                             return
-                                "TODO: To close all disk files and write the directory information to a diskette before it is removed from a disk drive.\n\nSyntax:\nRESET";
+                                // TODO:
+                                "To close all disk files and write the directory information to a diskette before it is removed from a disk drive.\n\nSyntax:\nRESET";
                         case "RMDIR":
                         case "RM.":
                             return
@@ -1744,7 +1782,8 @@ namespace SEBasicIV
                                 + "Files are not closed. It is possible to resume program execution at the next statement using CONT.";
                         case "TERM":
                             return
-                                "TODO";
+                                // TODO:
+                                "";
                         case "TRACE":
                         case "T.":
                             return
@@ -1756,7 +1795,8 @@ namespace SEBasicIV
                                 + "\tTracing is turned off by the NEW and LOAD statements.";
                         case "UNLOCK":
                             return
-                                "TODO: \n\nSyntax:\nLOCK ???";
+                                // TODO:
+                                "\n\nSyntax:\nLOCK ???";
                         default:
                             return "ToolTip Not Found";
                     }
@@ -1800,29 +1840,39 @@ namespace SEBasicIV
                         case "AND":
                         case "A.":
                             return 
-                                "TODO: \n\nSyntax:\nAND";
+                                // TODO:
+                                "\n\nSyntax:\nAND";
                         case "CSRLIN":
                             return 
-                                "TODO: To return the current line (row) position of the cursor.\n\nSyntax:\nCSRLIN";
+                                // TODO:
+                                "To return the current line (row) position of the cursor.\n\nSyntax:\nCSRLIN";
                         case "DATE$":
-                            return 
-                                "TODO: To set or retrieve the current date.\n\nSyntax:\nDATE$";
+                        case "DATE":
+                            return
+                                // TODO:
+                                "To set or retrieve the current date.\n\nSyntax:\nDATE$";
                         case "ERL":
-                            return 
-                                "TODO: To return the error code.\n\nSyntax:\nERR";
+                            return
+                                // TODO:
+                                "To return the error code.\n\nSyntax:\nERR";
                         case "ERR":
-                            return 
-                                "TODO: To return the line number associated with an error.\n\nSyntax:\nERR";
+                            return
+                                // TODO:
+                                "To return the line number associated with an error.\n\nSyntax:\nERR";
                         case "OR":
                             return
-                                "TODO: \n\nSyntax:\nOR";
+                                // TODO:
+                                "\n\nSyntax:\nOR";
                         case "TIME$":
-                            return 
-                                "TODO: To retrieve the current time.\n\nSyntax:\nTIME$";
+                        case "TIME":
+                            return
+                                // TODO:
+                                "To retrieve the current time.\n\nSyntax:\nTIME$";
                         case "XOR":
                         case "X.":
                             return
-                                "TODO: \n\nSyntax:\nXOR";
+                                // TODO:
+                                "\n\nSyntax:\nXOR";
                         default:
                             return "Tootlip Not Found";
                     }
@@ -1913,23 +1963,29 @@ namespace SEBasicIV
                     {
                         case ("ON TIMER"):
                             return
-                                "TODO: To create an event trap line number for a specified Time.\n\nSyntax:\nON TIMER$(n) event specifier GOSUB line number";
+                                // TODO:
+                                "To create an event trap line number for a specified Time.\n\nSyntax:\nON TIMER$(n) event specifier GOSUB line number";
                         case ("ON STRIG"):
                             return
-                                "TODO: To create an event trap line number for an interrupted routine that checks the trigger status.\n\nSyntax:\nON STRIG(n) event specifier GOSUB line number";
+                                // TODO:
+                                "To create an event trap line number for an interrupted routine that checks the trigger status.\n\nSyntax:\nON STRIG(n) event specifier GOSUB line number";
                         case ("ON PLAY"):
                             return
-                                "TODO: To create an event trap which is issued only when playing background music.\n\nSyntax:\nON PLAY(n) event specifier GOSUB line number";
+                                // TODO:
+                                "To create an event trap which is issued only when playing background music.\n\nSyntax:\nON PLAY(n) event specifier GOSUB line number";
                         case ("ON PEN"):
                             return
-                                "TODO: To create an event trap which is issued only when using the light pen.\n\nSyntax:\nON PEN(n) event specifier GOSUB line number";
+                                // TODO:
+                                "To create an event trap which is issued only when using the light pen.\n\nSyntax:\nON PEN(n) event specifier GOSUB line number";
                         case ("ON KEY"):
                             return
-                                "TODO: To create an event trap which is issued only when specified key is pressed.\n\nSyntax:\nON KEY(n) event specifier GOSUB line number";
+                                // TODO:
+                                "To create an event trap which is issued only when specified key is pressed.\n\nSyntax:\nON KEY(n) event specifier GOSUB line number";
                         case ("ON COM"):
                             return
-                                "TODO: Typically, the COM trap routine will read an entire message from the COM port before returning.\n\nSyntax:\nON COM(n) event specifier GOSUB line number";
-                        case ("ON ERROR GOTO"):
+                                // TODO:
+                                "Typically, the COM trap routine will read an entire message from the COM port before returning.\n\nSyntax:\nON COM(n) event specifier GOSUB line number";
+                        case ("ON ERROR"):
                             return
                                 "Syntax:\n"
                                 + "\tON ERROR GOTO { line_number | 0}\n\n"

@@ -114,9 +114,10 @@ namespace SEBasicIV
             pictureBox3.BackgroundImage = Properties.Resources.tile_frame;
             status.Text = "";
         }
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            SyntaxEditor syntaxEditor = new SyntaxEditor(true);
+            SyntaxEditor syntaxEditor = new SyntaxEditor(true, true);
             syntaxEditor.synBox1.Text= "10 REM Start Writing your SE BASIC Code Here: \n20 ";
             syntaxEditor.Show();
             this.Hide();
@@ -226,10 +227,8 @@ namespace SEBasicIV
 
         private void pictureBox5_Click_1(object sender, EventArgs e)
         {
-            SyntaxEditor syntaxEditor = new SyntaxEditor(false);
-            syntaxEditor.synBox1.Text = "org 32768\n" +
-                "start: \n" +
-                "    ld a, 2;        ; Load Register a with 2 \n";
+            SyntaxEditor syntaxEditor = new SyntaxEditor(false, true);
+            syntaxEditor.synBox1.Text = "; Start writing your Z80 assembly language here:\n\nstart: ";
             syntaxEditor.Show();
             this.Hide();
         }

@@ -31,6 +31,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.miniTimer_LinkLabel1 = new MiniTimer_Theme.MiniTimer_LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,20 +70,34 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(184, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(974, 25);
+            this.label1.Size = new System.Drawing.Size(762, 25);
             this.label1.TabIndex = 2;
-            this.label1.Text = "This is a re-write of SEBasicIV for use with the SE Basic IV Cordelia BASIC dialect and Z80 Assembler.";
+            this.label1.Text = "This is a re-write of GwBasic.Net for use with SE Basic IV Cordelia and Z80 Assem" +
+    "bler.";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(184, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(756, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "The colour scheme is based on Bluloco (https://github.com/uloco/theme-bluloco-lig" +
+    "ht).";
             // 
             // About
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.BackgroundImage = global::SEBasicIV.Properties.Resources.back;
             this.ClientSize = new System.Drawing.Size(1156, 678);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.miniTimer_LinkLabel1);
             this.Controls.Add(this.pictureBox1);
@@ -102,5 +117,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private MiniTimer_Theme.MiniTimer_LinkLabel miniTimer_LinkLabel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

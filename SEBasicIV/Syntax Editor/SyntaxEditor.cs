@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Tree;
 using FastColoredTextBoxNS;
 
 namespace SEBasicIV
@@ -12,55 +15,91 @@ namespace SEBasicIV
     {
         public bool InfoShown = false;
         private string _path = "";
-        private About about = new About();
+        private readonly About about = new About();
         private bool _isFullScreen = true;
         public bool bBasic = true;
+        public bool bLightTheme = true;
 
-        Regex basicLineNumRegex = new Regex(@"^[0-9]*[\s]*", RegexOptions.Multiline | RegexOptions.Compiled);
-        Regex basicStringRegex = new Regex(@"""[^""]*""", RegexOptions.Singleline | RegexOptions.Compiled);
-        Regex basicCommentRegex = new Regex(@"('|REM)(\s+)?.*", RegexOptions.Compiled);
-        Regex basicOperatorRegex = new Regex(@"\*|-|\/|=|<=|>=|<|>|<>", RegexOptions.Compiled);
-        Regex basicKeywordsRegex = new Regex(@"\b(BEEP|BSAVE|CALL|CHAIN|CIRCLE|CLOSE|CLOSE#|CLO\.|CLS|COLOR|COL\.|COM|COPY|C\.|DATA|DA\.|DATE\$|DEF FN|DEF SEG|DEF\.|DIM|DOKE|D\.|DRAW|EDIT|ED\.|ELSE|EL\.|END|ERASE|FIELD|FOR|F\.|GET|GOSUB|GOS\.|GO SUB|GOTO|G\.|IF|INPUT|I\.|KEY|LET|LINE INPUT|LINE|LIST|LOCATE|L\.|LSET|NEXT|NOISE|OLD|ON ERROR|ERROR|E\.|ON|OPEN|OP\.|OPTION BASE|OUT|O\.|PAINT|PALETTE USING|PALETTE|PA\.|PEN|PLAY|POKE|PO\.|PRESET|PSET|PUT|RANDOMIZE|RA\.|READ|RESTORE|RES\.|RESUME|RETURN|RET\.|RSET|SCREEN|SC\.|SEEK|SE\.|SOUND|SO\.|STEP|STRIG|SWAP|THEN|TH\.|TIME\$|TIMER|TO|VIEW PRINT|PRINT|PR\.|VIEW|WAIT|WA\.|WEND|WE\.|WHILE|W\.|WIDTH|WINDOW|WRITE)", RegexOptions.Compiled);
-        Regex basicFunctionsRegex = new Regex(@"\b(ABS|ASC|ACOS|AC\.|ASIN|AS\.|ATAN|AT.|CHR\$|COS|DEEK|EOF|EO\.|EXP|FIX|FN|FRE|INKEY\$|INK\.|INPUT\$|INP|INSTR|INS\.|INT|LEFT\$|LEF.|LEN|LOC|LOF|LOG|MID\$|MI\.|MOUSE|NMI|PEEK|PEN|PE\.|PI|PMAP|POINT|POS|RIGHT$|RI\.|RND|SGN|SIN|SPACE\$|SPC|SQR|STICK|STRING\$|STRIG|STR\$|STR\.|TAB|TAN|TIMER|USR|U\.|VAL|VAL$|V\.|VARPTR\$|VARPTR)", RegexOptions.Compiled);
-        Regex basicCommandsRegex = new Regex(@"\b(AUTO|BLOAD|BL\.|CHDIR|CH\.|CLEAR|CLE\.|CONT|DELETE|DE\.|FILES|FO\.|KILL|K\.|LIST|LI\.|LOAD|LOCK|MERGE|ME\.|MKDIR|M\.|NAME|NA\.|NEW|N\.|OLD|PCOPY|RENUM|REN\.|RESET|RMDIR|RM\.|RUN|SAVE|SA\.|STOP|S\.|TERM|TRACE|T\.|UNLOCK)\b", RegexOptions.Compiled);
-        Regex basicVariablesRegex = new Regex(@"\b(AND|A\.|CSRLIN|ERL|ERR|OR|XOR|X\.|[A-Z][0-9A-Z]*\$?)", RegexOptions.Compiled);
-        Regex basicNumbersRegex = new Regex(@"\b[\d+]?[\.]?\d*([eE]\-?\d+)?\b|$[a-fA-F\d]+\b|\b\@[0-7]+\b|\b\%[0|1]+", RegexOptions.Compiled);
+        private readonly Regex basicLineNumRegex = new Regex(@"^[0-9]*[\s]*", RegexOptions.Multiline | RegexOptions.Compiled);
+        private readonly Regex basicStringRegex = new Regex(@"""[^""]*\""", RegexOptions.Singleline | RegexOptions.Compiled);
+        private readonly Regex basicCommentRegex = new Regex(@"('|REM)(\s+)?.*", RegexOptions.Compiled);
+        private readonly Regex basicOperatorRegex = new Regex(@"\*|-|\/|=|<=|>=|<|>|<>", RegexOptions.Compiled);
+        private readonly Regex basicKeywordsRegex = new Regex(@"\b(BEEP|BSAVE|CALL|CHAIN|CIRCLE|CLOSE|CLOSE#|CLO\.|CLS|COLOR|COL\.|COM|COPY|C\.|DATA|DA\.|DATE\$|DEF SEG|DEF\.|DIM|DOKE|D\.|DRAW|EDIT|ED\.|ELSE|EL\.|END|ERASE|FIELD|FOR|F\.|GET|GOSUB|GOS\.|GO SUB|GOTO|G\.|IF|INPUT|I\.|KEY|LET|LINE INPUT|LINE|LIST|LOCATE|L\.|LSET|NEXT|NOISE|OLD|ON ERROR|ERROR|E\.|ON|OPEN|OP\.|OPTION BASE|OUT|O\.|PAINT|PALETTE USING|PALETTE|PA\.|PEN|PLAY|POKE|PO\.|PRESET|PSET|PUT|RANDOMIZE|RA\.|READ|RESTORE|RES\.|RESUME|RETURN|RET\.|RSET|SCREEN|SC\.|SEEK|SE\.|SOUND|SO\.|STEP|STRIG|SWAP|THEN|TH\.|TIME\$|TIMER|TO|VIEW PRINT|PRINT|PR\.|VIEW|WAIT|WA\.|WEND|WE\.|WHILE|W\.|WIDTH|WINDOW|WRITE)\b", RegexOptions.Compiled);
+        private readonly Regex basicDefFnRegex = new Regex(@"\b(DEF FN)", RegexOptions.Compiled);
+        private readonly Regex basicFunctionsRegex = new Regex(@"\b(ABS|ASC|ACOS|AC\.|ASIN|AS\.|ATAN|AT.|CHR\$|COS|DEEK|EOF|EO\.|EXP|FIX|FN|FRE|INKEY\$|INK\.|INPUT\$|INP|INSTR|INS\.|INT|LEFT\$|LEF.|LEN|LOC|LOF|LOG|MID\$|MI\.|MOUSE|NMI|PEEK|PEN|PE\.|PI|PMAP|POINT|POS|RIGHT$|RI\.|RND|SGN|SIN|SPACE\$|SPC|SQR|STICK|STRING\$|STRIG|STR\$|STR\.|TAB|TAN|TIMER|USR|U\.|VAL|VAL$|V\.|VARPTR\$|VARPTR)\b", RegexOptions.Compiled);
+        private readonly Regex basicCommandsRegex = new Regex(@"\b(AUTO|BLOAD|BL\.|CHDIR|CH\.|CLEAR|CLE\.|CONT|DELETE|DE\.|FILES|FO\.|KILL|K\.|LIST|LI\.|LOAD|LOCK|MERGE|ME\.|MKDIR|M\.|NAME|NA\.|NEW|N\.|OLD|PCOPY|RENUM|REN\.|RESET|RMDIR|RM\.|RUN|SAVE|SA\.|STOP|S\.|TERM|TRACE|T\.|UNLOCK)\b", RegexOptions.Compiled);
+        private readonly Regex basicVariablesRegex = new Regex(@"\b(AND|A\.|CSRLIN|ERL|ERR|OR|XOR|X\.|[A-Z][0-9A-Z]*\$?)\b", RegexOptions.Compiled);
+        private readonly Regex basicNumbersRegex = new Regex(@"\b[\d+]?[\.]?\d*([eE]\-?\d+)?\b|$[a-fA-F\d]+\b|\b\@[0-7]+\b|\b\%[0|1]+", RegexOptions.Compiled);
 
-        Regex assemblyStringRegex = new Regex(@"""""|@""""|''|@"".*?""|(?<!@)(?<range>"".*?[^\\]"")|'.*?[^\\]'");
-        Regex assemblyCommentRegex = new Regex(@"(;.*)", RegexOptions.Multiline);
-        Regex assemblyKeywordsRegex = new Regex(@"\b(org|endm|defb|defm|defs|defw|db|dm|ds|dw|else|endif|if|endm|end|seek|incbin|macro)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        Regex assemblyInstructionsRegex = new Regex(@"\b(ADC|ADD|AND|BIT|CALL C|CALL M|CALL NC|CALL NZ|CALL PE|CALL PO|CALL P|CALL Z|CALL|CCF|CPDR|CPD|CPIR|CPI|CPL|CP|DAA|DEC|DI|DJNZ|EI|EXX|EX|HALT|IM|INC|INDR|IND|INIR|INI|IN|JP C|JP M|JP NC|JP NZ|JP PE|JP PO|JP P|JP Z|JP|JR C|JR NC|JR NZ|JR Z|JR|LDDR|LDD|LDIR|LDI|LD|LD|NEG|NOP|OR|OTDR|OTIR|OUTD|OUTI|OUT|POP|PUSH|RES|RET C|RET M|RET NC|RET NZ|RET PE|RET PO|RET P|RET Z|RETI|RETN|RET|RLA|RLCA|RLD|RLC|RL|RRA|RRCA|RRC|RRD|RR|RST|SBC|SCF|SET|SLA|SLL|SL1|SRA|SRL|SUB|XOR)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        Regex assemblyRegisterRegex = new Regex(@"\b(ixh|ixl|iyh|iyl|pc|sp|ix|iy|af|bc|de|hl|a|b|c|d|e|f|h|l|i|r)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        Regex assemblyNumberRegex = new Regex(@"\$?\b[a-fA-F\d]+('H'|'h')?\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        Regex assemblyAttributeRegex = new Regex(@"^\s*(?<range>\[.+?\])\s*$", RegexOptions.Multiline | RegexOptions.Compiled);
-
-        Style keywordsStyle = new TextStyle(Brushes.CornflowerBlue, null, FontStyle.Regular);
-        Style registersStyle = new TextStyle(Brushes.CornflowerBlue, null, FontStyle.Regular);
-        Style functionsStyle = new TextStyle(Brushes.DarkOrange, null, FontStyle.Regular);
-        Style opcodesStyle = new TextStyle(Brushes.DarkOrange, null, FontStyle.Regular);
-        Style stringsStyle = new TextStyle(Brushes.Green, null, FontStyle.Italic | FontStyle.Bold);
-        Style commandsStyle = new TextStyle(Brushes.Violet, null, FontStyle.Regular);
-        Style directivesStyle = new TextStyle(Brushes.Violet, null, FontStyle.Regular);
-        Style variablesStyle = new TextStyle(Brushes.IndianRed, null, FontStyle.Regular);
-        Style commentsStyle = new TextStyle(Brushes.Gray, null, FontStyle.Italic);
-        Style lineNumsStyle = new TextStyle(Brushes.Blue, null, FontStyle.Regular);
-        Style numbersStyle = new TextStyle(Brushes.Purple, null, FontStyle.Regular);
-        Style invisibleCharsStyle = new SyntaxEditor.InvisibleCharsRenderer(Pens.BurlyWood);
-        Style operatorsStyle = new TextStyle(Brushes.Black, null, FontStyle.Regular);
-        Color currentLineColor = Color.FromArgb(100, 210, 210, 255);
+        private readonly Regex assemblyStringRegex = new Regex(@"""""|@""""|''|@"".*?""|(?<!@)(?<range>"".*?[^\\]"")|'.*?[^\\]'");
+        private readonly Regex assemblyCommentRegex = new Regex(@"(;.*)", RegexOptions.Multiline);
+        private readonly Regex assemblyKeywordsRegex = new Regex(@"\b(org|endm|defb|defm|defs|defw|db|dm|ds|dw|else|endif|if|endm|end|seek|incbin|macro)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private readonly Regex assemblyInstructionsRegex = new Regex(@"\b(ADC|ADD|AND|BIT|CALL C|CALL M|CALL NC|CALL NZ|CALL PE|CALL PO|CALL P|CALL Z|CALL|CCF|CPDR|CPD|CPIR|CPI|CPL|CP|DAA|DEC|DI|DJNZ|EI|EXX|EX|HALT|IM|INC|INDR|IND|INIR|INI|IN|JP C|JP M|JP NC|JP NZ|JP PE|JP PO|JP P|JP Z|JP|JR C|JR NC|JR NZ|JR Z|JR|LDDR|LDD|LDIR|LDI|LD|LD|NEG|NOP|OR|OTDR|OTIR|OUTD|OUTI|OUT|POP|PUSH|RES|RET C|RET M|RET NC|RET NZ|RET PE|RET PO|RET P|RET Z|RETI|RETN|RET|RLA|RLCA|RLD|RLC|RL|RRA|RRCA|RRC|RRD|RR|RST|SBC|SCF|SET|SLA|SLL|SL1|SRA|SRL|SUB|XOR)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private readonly Regex assemblyRegisterRegex = new Regex(@"\b(ixh|ixl|iyh|iyl|pc|sp|ix|iy|af|bc|de|hl|a|b|c|d|e|f|h|l|i|r)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private readonly Regex assemblyNumberRegex = new Regex(@"\$?\b[a-fA-F\d]+('H'|'h')?\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private readonly Regex assemblyAttributeRegex = new Regex(@"^\s*(?<range>\[.+?\])\s*$", RegexOptions.Multiline | RegexOptions.Compiled);
+        
+        private static readonly Brush keywordsBrushL = new SolidBrush(ColorTranslator.FromHtml("#0098dd"));
+        private readonly Style keywordsStyleL = new TextStyle(keywordsBrushL, null, FontStyle.Regular);
+        private static readonly Brush opcodesBrushL = new SolidBrush(ColorTranslator.FromHtml("#0098dd"));
+        private readonly Style opcodesStyleL = new TextStyle(opcodesBrushL, null, FontStyle.Regular);
+        private static readonly Brush registersBrushL = new SolidBrush(ColorTranslator.FromHtml("#23974a"));
+        private readonly Style registersStyleL = new TextStyle(registersBrushL, null, FontStyle.Regular);
+        private static readonly Brush functionsBrushL = new SolidBrush(ColorTranslator.FromHtml("#23974a"));
+        private readonly Style functionsStyleL = new TextStyle(functionsBrushL, null, FontStyle.Regular);
+        private static readonly Brush stringBrushL = new SolidBrush(ColorTranslator.FromHtml("#c5a332"));
+        private readonly Style stringsStyleL = new TextStyle(stringBrushL, null, FontStyle.Italic | FontStyle.Bold);
+        private static readonly Brush commandsBrushL = new SolidBrush(ColorTranslator.FromHtml("#275fe4"));
+        private readonly Style commandsStyleL = new TextStyle(commandsBrushL, null, FontStyle.Regular);
+        private static readonly Brush directivesBrushL = new SolidBrush(ColorTranslator.FromHtml("#d52753"));
+        private readonly Style directivesStyleL = new TextStyle(directivesBrushL, null, FontStyle.Regular);
+        private static readonly Brush variablesBrushL = new SolidBrush(ColorTranslator.FromHtml("#823ff1"));
+        private readonly Style variablesStyleL = new TextStyle(variablesBrushL, null, FontStyle.Regular);
+        private static readonly Brush commentBrushL = new SolidBrush(ColorTranslator.FromHtml("#a0a1a7"));
+        private readonly Style commentsStyleL = new TextStyle(commentBrushL, null, FontStyle.Italic);
+        private static readonly Brush lineNumsBrushL = new SolidBrush(ColorTranslator.FromHtml("#0000ff"));
+        private readonly Style lineNumsStyleL = new TextStyle(lineNumsBrushL, null, FontStyle.Regular);
+        private static readonly Brush numberBrushL = new SolidBrush(ColorTranslator.FromHtml("#ce33c0"));
+        private readonly Style numbersStyleL = new TextStyle(numberBrushL, null, FontStyle.Regular);
+        private readonly Style invisibleCharsStyleL = new SyntaxEditor.invisibleCharsRenderer(Pens.BurlyWood);
+        private static readonly Brush operatorsBrushL = new SolidBrush(ColorTranslator.FromHtml("#7a82da"));
+        private readonly Style operatorsStyleL = new TextStyle(operatorsBrushL, null, FontStyle.Regular);
+        private readonly Color currentLineColorL = ColorTranslator.FromHtml("#64d2d2");
         //private Style ReadOnlyText = new TextStyle(null, Brushes., FontStyle.Regular);
-
-        private static string CreateKeywordRegex(string[] keywords)
-        {
-            return "(" + string.Join(")|(", keywords) + ")";
-        }
+        private static readonly Brush keywordsBrushD = new SolidBrush(ColorTranslator.FromHtml("#10b1fe"));
+        private readonly Style keywordsStyleD = new TextStyle(keywordsBrushD, null, FontStyle.Regular);
+        private static readonly Brush opcodesBrushD = new SolidBrush(ColorTranslator.FromHtml("#10b1fe"));
+        private readonly Style opcodesStyleD = new TextStyle(opcodesBrushD, null, FontStyle.Regular);
+        private static readonly Brush registersBrushD = new SolidBrush(ColorTranslator.FromHtml("#3fc56b"));
+        private readonly Style registersStyleD = new TextStyle(registersBrushD, null, FontStyle.Regular);
+        private static readonly Brush functionsBrushD = new SolidBrush(ColorTranslator.FromHtml("#3fc56b"));
+        private readonly Style functionsStyleD = new TextStyle(functionsBrushD, null, FontStyle.Regular);
+        private static readonly Brush stringBrushD = new SolidBrush(ColorTranslator.FromHtml("#f9c859"));
+        private readonly Style stringsStyleD = new TextStyle(stringBrushD, null, FontStyle.Italic | FontStyle.Bold);
+        private static readonly Brush commandsBrushD = new SolidBrush(ColorTranslator.FromHtml("#3691ff"));
+        private readonly Style commandsStyleD = new TextStyle(commandsBrushD, null, FontStyle.Regular);
+        private static readonly Brush directivesBrushD = new SolidBrush(ColorTranslator.FromHtml("#ff6480"));
+        private readonly Style directivesStyleD = new TextStyle(directivesBrushD, null, FontStyle.Regular);
+        private static readonly Brush variablesBrushD = new SolidBrush(ColorTranslator.FromHtml("#9f7efe"));
+        private readonly Style variablesStyleD = new TextStyle(variablesBrushD, null, FontStyle.Regular);
+        private static readonly Brush commentBrushD = new SolidBrush(ColorTranslator.FromHtml("#efefef"));
+        private readonly Style commentsStyleD = new TextStyle(commentBrushD, null, FontStyle.Italic);
+        private static readonly Brush lineNumsBrushD = new SolidBrush(ColorTranslator.FromHtml("#b200ff"));
+        private readonly Style lineNumsStyleD = new TextStyle(lineNumsBrushD, null, FontStyle.Regular);
+        private static readonly Brush numberBrushD = new SolidBrush(ColorTranslator.FromHtml("#ce33c0"));
+        private readonly Style numbersStyleD = new TextStyle(numberBrushD, null, FontStyle.Regular);
+        private readonly Style invisibleCharsStyleD = new SyntaxEditor.invisibleCharsRenderer(Pens.WhiteSmoke);
+        private static readonly Brush operatorsBrushD = new SolidBrush(ColorTranslator.FromHtml("#7a82da"));
+        private readonly Style operatorsStyleD = new TextStyle(operatorsBrushD, null, FontStyle.Regular);
+        private readonly Color currentLineColorD = ColorTranslator.FromHtml("#ffffff");
 
         public SyntaxEditor()
         {
             InitializeComponent();
 
-            synBox1.CurrentLineColor = currentLineColor;
+            synBox1.CurrentLineColor = currentLineColorL;
             toolStripButton5.ToolTipText = "";
+            toolStripButton7.ToolTipText = "";
             btInvisibleChars.ToolTipText = "";
             btInvisibleChars_Click(synBox1, null);
             synBox1.Refresh();
@@ -77,8 +116,9 @@ namespace SEBasicIV
         public SyntaxEditor(string text, string path)
         {
             InitializeComponent();
-            synBox1.CurrentLineColor = currentLineColor;
+            synBox1.CurrentLineColor = currentLineColorL;
             toolStripButton5.ToolTipText = "";
+            toolStripButton7.ToolTipText = "";
             btInvisibleChars.ToolTipText = "";
             btInvisibleChars_Click(synBox1, null);
             synBox1.Refresh();
@@ -94,21 +134,33 @@ namespace SEBasicIV
             _path = path;
         }
 
-        public SyntaxEditor(bool inBas)
+        public SyntaxEditor(bool inBas, bool inTheme)
         {
             InitializeComponent();
 
             bBasic = inBas;
+            bLightTheme = inTheme;
 
-            synBox1.CurrentLineColor = currentLineColor;
-            toolStripButton5.Text = "Swap to Z80 Editor";
-
-            if (!bBasic)
+            if (bBasic)
             {
-                toolStripButton5.Text = "Swap to SE BASIC Editor";
+                toolStripButton5.Text = "Swap to Z80 Editor";
+            }
+            else { 
+                toolStripButton5.Text = "Swap to SE BASIC IV Editor";
+            }
+
+            if (bLightTheme)
+            {
+                toolStripButton7.Text = "Swap to Dark Theme";
+                synBox1.CurrentLineColor = currentLineColorL;
+            }
+            else {
+                toolStripButton7.Text = "Swap to Light Theme";
+                synBox1.CurrentLineColor = currentLineColorD;
             }
 
             toolStripButton5.ToolTipText = "";
+            toolStripButton7.ToolTipText = "";
             btInvisibleChars.ToolTipText = "";
             btInvisibleChars_Click(synBox1, null);
             synBox1.Refresh();
@@ -127,7 +179,7 @@ namespace SEBasicIV
             Application.Exit();
         }
 
-        private void OpenFile(string sFile)
+        private void openFile(string sFile)
         {
             try
             {
@@ -153,7 +205,7 @@ namespace SEBasicIV
 
         private void fctb_TextChangedDelayed(object sender, TextChangedEventArgs e)
         {
-            HighlightVisibleRange();
+            highlightVisibleRange();
 
             if (bBasic)
             {
@@ -204,7 +256,7 @@ namespace SEBasicIV
                 {
                     string s = a.GetValue(0).ToString();
                     this.Activate();
-                    OpenFile(s);
+                    openFile(s);
                 }
             }
             catch (Exception ex)
@@ -326,14 +378,16 @@ namespace SEBasicIV
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            DialogResult result = new DialogResult();
             string sTmp;
+
+            DialogResult result;
 
             if (bBasic)
             {
                 result = MessageBox.Show(@"Do you want to save changes?", @"SE BASIC Syntax Highlighter",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            } else
+            }
+            else
             {
                 result = MessageBox.Show(@"Do you want to save changes?", @"Z80 Syntax Highlighter",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -346,12 +400,11 @@ namespace SEBasicIV
 
             if (bBasic)
             {
-                sTmp = "10 REM Start Writing your SE BASIC Code Here: \n20 ";
+                sTmp = "10 REM Start writing your SE BASIC IV code here:\n20 ";
             }
             else
             {
-                sTmp = "; Z80 assembly language\n\n"
-                    + "start: ";
+                sTmp = "; Start writing your Z80 assembly language here:\n\nstart: ";
             }
 
             synBox1.Text = "";
@@ -419,22 +472,38 @@ namespace SEBasicIV
 
         private void btInvisibleChars_Click(object sender, EventArgs e)
         {
-            HighlightInvisibleChars(synBox1.Range);
+            highlightInvisibleChars(synBox1.Range);
         }
 
-        private void HighlightInvisibleChars(Range range)
+        private void highlightInvisibleChars(Range range)
         {
-            range.ClearStyle(invisibleCharsStyle);
+            if (bLightTheme)
+            {
+                range.ClearStyle(invisibleCharsStyleL);
 
-            if (btInvisibleChars.Checked)
-                range.SetStyle(invisibleCharsStyle, @".$|.\r\n|\s");
+                if (btInvisibleChars.Checked)
+                    range.SetStyle(invisibleCharsStyleL, @".$|.\r\n|\s");
+            }
+            else
+            {
+                range.ClearStyle(invisibleCharsStyleD);
+
+                if (btInvisibleChars.Checked)
+                    range.SetStyle(invisibleCharsStyleD, @".$|.\r\n|\s");
+            }
         }
 
         private void btHighlightCurrentLine_Click(object sender, EventArgs e)
         {
             if (btHighlightCurrentLine.Checked)
             {
-                synBox1.CurrentLineColor = currentLineColor;
+                if (bLightTheme)
+                {
+                    synBox1.CurrentLineColor = currentLineColorL;
+                } else
+                {
+                    synBox1.CurrentLineColor = currentLineColorD;
+                }
             }
             else
             {
@@ -586,44 +655,84 @@ namespace SEBasicIV
 
         #region Highlight
 
-        public void HighlightVisibleRange()
+        public void highlightVisibleRange()
         {
-            synBox1.Range.ClearStyle(keywordsStyle, functionsStyle, commandsStyle, variablesStyle, stringsStyle,
-                lineNumsStyle, numbersStyle, commentsStyle, operatorsStyle, registersStyle, opcodesStyle, directivesStyle);
+            synBox1.Range.ClearStyle(keywordsStyleL, functionsStyleL, commandsStyleL, variablesStyleL, stringsStyleL,
+                lineNumsStyleL, numbersStyleL, commentsStyleL, operatorsStyleL, registersStyleL, opcodesStyleL,
+                directivesStyleL, keywordsStyleD, functionsStyleD, commandsStyleD, variablesStyleD, stringsStyleD,
+                lineNumsStyleD, numbersStyleD, commentsStyleD, operatorsStyleD, registersStyleD, opcodesStyleD,
+                directivesStyleD);
 
-            synBox1.BackColor = ColorTranslator.FromHtml("#F9F9F9");
-
-            if (bBasic)
+            if (bLightTheme)
             {
-                synBox1.Range.SetStyle(lineNumsStyle, basicLineNumRegex);
-                synBox1.Range.SetStyle(stringsStyle, basicStringRegex);
-                synBox1.Range.SetStyle(commentsStyle, basicCommentRegex);
-                synBox1.Range.SetStyle(operatorsStyle, basicOperatorRegex);
-                synBox1.Range.SetStyle(numbersStyle, basicNumbersRegex);
-                synBox1.Range.SetStyle(keywordsStyle, basicKeywordsRegex);
-                synBox1.Range.SetStyle(functionsStyle, basicFunctionsRegex);
-                synBox1.Range.SetStyle(commandsStyle, basicCommandsRegex);
-                synBox1.Range.SetStyle(variablesStyle, basicVariablesRegex);
+                synBox1.BackColor = ColorTranslator.FromHtml("#F9F9F9");
+                synBox1.ForeColor = ColorTranslator.FromHtml("#383a42");
             }
             else
             {
-                synBox1.Range.SetStyle(stringsStyle, assemblyStringRegex);
-                synBox1.Range.SetStyle(commentsStyle, assemblyCommentRegex);
-                synBox1.Range.SetStyle(variablesStyle, assemblyAttributeRegex);
-                synBox1.Range.SetStyle(directivesStyle, assemblyKeywordsRegex);
-                synBox1.Range.SetStyle(opcodesStyle, assemblyInstructionsRegex);
-                synBox1.Range.SetStyle(registersStyle, assemblyRegisterRegex);
-                synBox1.Range.SetStyle(numbersStyle, assemblyNumberRegex);
+                synBox1.BackColor = ColorTranslator.FromHtml("#282c34");
+                synBox1.ForeColor = ColorTranslator.FromHtml("#abb2bf");
+            }
+
+            if (bBasic)
+            {
+                if (bLightTheme)
+                {
+                    synBox1.Range.SetStyle(lineNumsStyleL, basicLineNumRegex);
+                    synBox1.Range.SetStyle(stringsStyleL, basicStringRegex);
+                    synBox1.Range.SetStyle(commentsStyleL, basicCommentRegex);
+                    synBox1.Range.SetStyle(operatorsStyleL, basicOperatorRegex);
+                    synBox1.Range.SetStyle(numbersStyleL, basicNumbersRegex);
+                    synBox1.Range.SetStyle(keywordsStyleL, basicKeywordsRegex);
+                    synBox1.Range.SetStyle(keywordsStyleL, basicDefFnRegex);
+                    synBox1.Range.SetStyle(functionsStyleL, basicFunctionsRegex);
+                    synBox1.Range.SetStyle(commandsStyleL, basicCommandsRegex);
+                    synBox1.Range.SetStyle(variablesStyleL, basicVariablesRegex);
+                } else
+                {
+                    synBox1.Range.SetStyle(lineNumsStyleD, basicLineNumRegex);
+                    synBox1.Range.SetStyle(stringsStyleD, basicStringRegex);
+                    synBox1.Range.SetStyle(commentsStyleD, basicCommentRegex);
+                    synBox1.Range.SetStyle(operatorsStyleD, basicOperatorRegex);
+                    synBox1.Range.SetStyle(numbersStyleD, basicNumbersRegex);
+                    synBox1.Range.SetStyle(keywordsStyleD, basicKeywordsRegex);
+                    synBox1.Range.SetStyle(keywordsStyleD, basicDefFnRegex);
+                    synBox1.Range.SetStyle(functionsStyleD, basicFunctionsRegex);
+                    synBox1.Range.SetStyle(commandsStyleD, basicCommandsRegex);
+                    synBox1.Range.SetStyle(variablesStyleD, basicVariablesRegex);
+                }
+            }
+            else
+            {
+                if (bLightTheme)
+                {
+                    synBox1.Range.SetStyle(commentsStyleL, assemblyCommentRegex);
+                    synBox1.Range.SetStyle(stringsStyleL, assemblyStringRegex);
+                    synBox1.Range.SetStyle(variablesStyleL, assemblyAttributeRegex);
+                    synBox1.Range.SetStyle(directivesStyleL, assemblyKeywordsRegex);
+                    synBox1.Range.SetStyle(opcodesStyleL, assemblyInstructionsRegex);
+                    synBox1.Range.SetStyle(registersStyleL, assemblyRegisterRegex);
+                    synBox1.Range.SetStyle(numbersStyleL, assemblyNumberRegex);
+                } else
+                {
+                    synBox1.Range.SetStyle(commentsStyleD, assemblyCommentRegex);
+                    synBox1.Range.SetStyle(stringsStyleD, assemblyStringRegex);
+                    synBox1.Range.SetStyle(variablesStyleD, assemblyAttributeRegex);
+                    synBox1.Range.SetStyle(directivesStyleD, assemblyKeywordsRegex);
+                    synBox1.Range.SetStyle(opcodesStyleD, assemblyInstructionsRegex);
+                    synBox1.Range.SetStyle(registersStyleD, assemblyRegisterRegex);
+                    synBox1.Range.SetStyle(numbersStyleD, assemblyNumberRegex);
+                }
             }
         }
         #endregion Highlight
 
         #region InvisibleCharsRenderer
-        public class InvisibleCharsRenderer : Style
+        public class invisibleCharsRenderer : Style
         {
-            Pen pen;
+            readonly Pen pen;
 
-            public InvisibleCharsRenderer(Pen pen)
+            public invisibleCharsRenderer(Pen pen)
             {
                 this.pen = pen;
             }
@@ -759,7 +868,7 @@ namespace SEBasicIV
         {
             status.ForeColor = Color.FromArgb(255, 136, 136, 136);
             status.Text = "Zoom In";
-            ZoomIn.BackColor = Color.LightGray;
+            ZoomIn.BackColor = ColorTranslator.FromHtml("#F9F9F9");
         }
 
         private void ZoomIn_MouseLeave(object sender, EventArgs e)
@@ -786,7 +895,7 @@ namespace SEBasicIV
         {
             status.ForeColor = Color.FromArgb(255, 136, 136, 136);
             status.Text = "Zoom Out";
-            ZoomOut.BackColor = Color.LightGray;
+            ZoomOut.BackColor = ColorTranslator.FromHtml("#F9F9F9");
         }
 
         private void ZoomOut_MouseLeave(object sender, EventArgs e)
@@ -1012,7 +1121,7 @@ namespace SEBasicIV
         #region Execute
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            DialogResult result = new DialogResult();
+            DialogResult result;
 
             if (bBasic)
             {
@@ -1029,15 +1138,19 @@ namespace SEBasicIV
             {
                 if (bBasic)
                 {
-                    SyntaxEditor syntaxEditor = new SyntaxEditor(false);
-                    syntaxEditor.synBox1.Text = "; Z80 assembly language\n\n" +
-                        "start: \n";
+                    this.Hide();
+
+                    SyntaxEditor syntaxEditor = new SyntaxEditor(!bBasic, bLightTheme);
+                    syntaxEditor.synBox1.ShowLineNumbers = true;
+                    syntaxEditor.synBox1.Text = "; Start writing your Z80 assembly language here:\n\nstart: ";
                     syntaxEditor.Show();
-                }
-                else
+                } else
                 {
-                    SyntaxEditor syntaxEditor = new SyntaxEditor(true);
-                    syntaxEditor.synBox1.Text = "10 REM Start Writing your SE BASIC Code Here: \n20 ";
+                    this.Hide();
+
+                    SyntaxEditor syntaxEditor = new SyntaxEditor(!bBasic, bLightTheme);
+                    syntaxEditor.synBox1.ShowLineNumbers = false;
+                    syntaxEditor.synBox1.Text = "10 REM Start writing your SE BASIC IV code here:\n20 ";
                     syntaxEditor.Show();
                 }
             }
@@ -1051,8 +1164,8 @@ namespace SEBasicIV
                 toolStripButton5.ToolTipText = "Swap to Z80 Editor";
             } else
             {
-                status.Text = "Swap to SE BASIC Editor";
-                toolStripButton5.ToolTipText = "Swap to SE BASIC Editor";
+                status.Text = "Swap to SE BASIC IV Editor";
+                toolStripButton5.ToolTipText = "Swap to SE BASIC IV Editor";
             }
         }
 
@@ -1065,12 +1178,12 @@ namespace SEBasicIV
 
         private void aboutSyntaxEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowAbout();
+            showAbout();
         }
 
         private void pictureBox10_Click(object sender, EventArgs e)
         {
-            ShowAbout();
+            showAbout();
         }
 
         private void pictureBox9_Click(object sender, EventArgs e)
@@ -1112,7 +1225,7 @@ namespace SEBasicIV
             }
         }
 
-        private void ShowAbout()
+        private void showAbout()
         {
             var pstate = this.WindowState;
             this.Size = new Size(867, 551);
@@ -1360,6 +1473,7 @@ namespace SEBasicIV
                             + "Errors:\n"
                             + "\tIf the type of the literal does not match that of the corresponding READ statement, a Syntax error occurs on the DATA statement.";
                     case "DATE$":
+                    case "DATE":
                         return
                             "TODO: To set or retrieve the current date.\n\nSyntax:\nDATE$ = variable$\nvariable = DATE$";
                     case "DIM":
@@ -1521,36 +1635,6 @@ namespace SEBasicIV
                             + "\tIf 'truth_value' has a string value: Type mismatch.\n"
                             + "\t'truth_value' equals 0 and 'line_number_false' is a non-existing line number,\n"
                             + "\t\tor 'truth_value' is nonzero and 'line_number_true' is a non-existing line number: Undefined line number.";
-                    case "INPUT":
-                        return
-                            "Syntax:\n"
-                            + "\tINPUT [;] [prompt {;|,}] var_0 [, var_1] ...\n\n"
-                            + "Prints prompt to the screen and waits for the user to input values for the specified variables.\n"
-                            + "The semicolon before the prompt, if present, stops a newline from being printed after the values have been entered.\n"
-                            + "If the prompt is followed by a semicolon, it is printed with a trailing '?'.\n"
-                            + "\tIf the prompt is followed by a comma, no question mark is added.\n\n"
-                            + "Parameters:\n"
-                            + "\t'prompt' is a string literal.\n"
-                            + "\t'var_0', 'var_1', ... are variable names or fully indexed array elements.\n\n"
-                            + "Notes:\n"
-                            + "\tValues entered must be separated by commas. Leading and trailing whitespace is discarded.\n"
-                            + "\tString values can be entered with or without double quotes (\").\n"
-                            + "\tIf a string with a comma, leading or trailing whitespace is needed, quotes are the only way to enter it.\n"
-                            + "\tBetween a closing quote and the comma at the end of the entry, only white-space is allowed.\n"
-                            + "\tIf quotes are needed in the string itself, the first character must be neither a quote nor whitespace.\n"
-                            + "\t\tIt is not possible to enter a string that starts with a quote through INPUT.\n"
-                            + "\tIf a given 'var_n' is a numeric variable, the value entered must be number literal.\n"
-                            + "\tCharacters beyond the 255th character of the screen line are discarded.\n"
-                            + "\tIf user input is interrupted by Ctrl+Break, CONT will re-execute the INPUT statement.\n\n"
-                            + "Errors:\n"
-                            + "\tIf the value entered for a numeric variable is not a valid numeric literal,\n"
-                            + "\t\tor the number of values entered does not match the number of variables in the statement,\n"
-                            + "\t\t?Redo from start is printed and all values must be entered again.\n"
-                            + "\tA Syntax error that is caused after the prompt is printed is only raised after the values have been entered.\n"
-                            + "\t\tNo values are stored.";
-                    case "INPUT#":
-                        return
-                            "TODO: To read data items from a sequential file and assign them to program variables.\n\nSyntax:\nINPUT# file number, variable list";
                     case "KEY":
                         return
                             "Syntax:\n"
@@ -1909,6 +1993,7 @@ namespace SEBasicIV
                         return
                             "TODO: To exchange the values of two variables.\n\nSyntax:\nSWAP variable1,variable2";
                     case "TIME$":
+                    case "TIME":
                         return
                             "TODO: To set or retrieve the current time.\n\nSyntax:\nTIME$ = string exp\nstring = TIME$";
                     case "USING":
@@ -2005,6 +2090,7 @@ namespace SEBasicIV
                             + "Errors:\n"
                             + "\t'x' has a string value: Type mismatch.";
                     case "CHR$":
+                    case "CHR":
                         return
                             "Syntax:\n"
                             + "\tchar = CHR$(x)\n\n"
@@ -2075,6 +2161,8 @@ namespace SEBasicIV
                         return
                             "TODO: To return the number of available bytes in allocated string memory.\n\nSyntax:\nFRE(x$)\nFRE(x)";
                     case "INKEY$":
+                    case "INK.":
+                    case "INKEY":
                         return
                             "Syntax:\n"
                             + "\tkey = INKEY$ [ #file_num]\n\n"
@@ -2091,9 +2179,39 @@ namespace SEBasicIV
                             + "Returns the value of a machine port.\n\n"
                             + "Parameters:\n"
                             + "\t'port' is a numeric expression in [0 to 65535].";
+                    case "INPUT#":
                     case "INPUT$":
+                    case "INPUT":
                         return
-                            "TODO: INP(n)\n\nSyntax:\nINPUT$(x[,[#]file number)]";
+                            "Syntax:\n"
+                            + "\t1) INPUT [;] [prompt {;|,}] var_0 [, var_1] ...\n"
+                            + "\t2) TODO: INPUT$ \n"
+                            + "\t3) TODO: INPUT# \n\n"
+                            + "1) Prints prompt to the screen and waits for the user to input values for the specified variables.\n"
+                            + "The semicolon before the prompt, if present, stops a newline from being printed after the values have been entered.\n"
+                            + "If the prompt is followed by a semicolon, it is printed with a trailing '?'.\n"
+                            + "\tIf the prompt is followed by a comma, no question mark is added.\n\n"
+                            + "Parameters:\n"
+                            + "\t'prompt' is a string literal.\n"
+                            + "\t'var_0', 'var_1', ... are variable names or fully indexed array elements.\n\n"
+                            + "Notes:\n"
+                            + "\tValues entered must be separated by commas. Leading and trailing whitespace is discarded.\n"
+                            + "\tString values can be entered with or without double quotes (\").\n"
+                            + "\tIf a string with a comma, leading or trailing whitespace is needed, quotes are the only way to enter it.\n"
+                            + "\tBetween a closing quote and the comma at the end of the entry, only white-space is allowed.\n"
+                            + "\tIf quotes are needed in the string itself, the first character must be neither a quote nor whitespace.\n"
+                            + "\t\tIt is not possible to enter a string that starts with a quote through INPUT.\n"
+                            + "\tIf a given 'var_n' is a numeric variable, the value entered must be number literal.\n"
+                            + "\tCharacters beyond the 255th character of the screen line are discarded.\n"
+                            + "\tIf user input is interrupted by Ctrl+Break, CONT will re-execute the INPUT statement.\n\n"
+                            + "Errors:\n"
+                            + "\tIf the value entered for a numeric variable is not a valid numeric literal,\n"
+                            + "\t\tor the number of values entered does not match the number of variables in the statement,\n"
+                            + "\t\t?Redo from start is printed and all values must be entered again.\n"
+                            + "\tA Syntax error that is caused after the prompt is printed is only raised after the values have been entered.\n"
+                            + "\t\tNo values are stored.\n\n"
+                            + "2) TODO: INP(n)\n\nSyntax:\nINPUT$(x[,[#]file number)]\n\n"
+                            + "3) TODO: To read data items from a sequential file and assign them to program variables.\n\nSyntax:\nINPUT# file number, variable list.";
                     case "INSTR":
                         return
                             "Syntax:\n"
@@ -2123,6 +2241,7 @@ namespace SEBasicIV
                             + "Errors:\n"
                             + "\t'number' is a string expression, Type mismatch.";
                     case "LEFT$":
+                    case "LEFT":
                         return
                             "Syntax:\n"
                             + "\tchild = LEFT$(parent, num_chars)"
@@ -2156,6 +2275,7 @@ namespace SEBasicIV
                             + "\t'x' has a string value: Type mismatch.\n"
                             + "\t'x' is zero or negative: Illegal function call.";
                     case "MID$":
+                    case "MID":
                         return
                             "Syntax:\n"
                             + "\tsubstring = MID$(string, position [, length])"
@@ -2195,6 +2315,7 @@ namespace SEBasicIV
                         return
                             "TODO: To return the current cursor position.\n\nSyntax:\nPOS(c)";
                     case "RIGHT$":
+                    case "RIGHT":
                         return
                             "Syntax:\n"
                             + "\tchild = RIGHT$(parent, num_chars)"
@@ -2239,6 +2360,7 @@ namespace SEBasicIV
                             + "Errors:\n"
                             + "\t'angle' has a string value: Type mismatch.";
                     case "SPACE$":
+                    case "SPACE":
                         return
                             "TODO: To return a string of x spaces.\n\nSyntax:\nSPACE$(x)";
                     case "SPC":
@@ -2256,16 +2378,8 @@ namespace SEBasicIV
                     case "STICK":
                         return
                             "TODO: To return the x and y coordinates of two joysticks.\n\nSyntax:\nSTICK(n)";
-                    case "STR$":
-                        return
-                            "Syntax:\n"
-                            + "\trepr = STR$(number)\n\n"
-                            + "Returns the string representation of 'number'.\n\n"
-                            + "Parameters:\n"
-                            + "\t'number' is a numeric expression.\n\n"
-                            + "Errors:\n"
-                            + "\t'number' has a string value: Type mismatch.";
                     case "STRING$":
+                    case "STRING":
                         return
                             "Syntax:\n"
                             + "\tstring = STRING$(length, char)\n\n"
@@ -2278,6 +2392,16 @@ namespace SEBasicIV
                             + "\t'char' is the empty string: Illegal function call.\n"
                             + "\t'char' or 'length' is not in [-32768 to 32767]: Overflow.\n"
                             + "\t'char' or 'length' is not in [0 to 255]: Illegal function call.";
+                    case "STR$":
+                    case "STR":
+                        return
+                            "Syntax:\n"
+                            + "\trepr = STR$(number)\n\n"
+                            + "Returns the string representation of 'number'.\n\n"
+                            + "Parameters:\n"
+                            + "\t'number' is a numeric expression.\n\n"
+                            + "Errors:\n"
+                            + "\t'number' has a string value: Type mismatch.";
                     case "TAB":
                         return
                             "TODO: Spaces to position n on the screen.\n\nSyntax:\nTAB(n)";
@@ -2303,11 +2427,14 @@ namespace SEBasicIV
                             + "\t'expr' is an expression.\n\n"
                             + "Errors:\n"
                             + "\t'n' is not a digit [0 to 9]: Syntax error.";
+                    case "VAL$":
+                    case "V.":
                     case "VAL":
                         return
                             "Syntax:\n"
-                            + "\tvalue = VAL(string)\n\n"
-                            + "Returns the numeric value of the string expression 'string'.\n\n"
+                            + "\t1) value = VAL(string)\n"
+                            + "\t2) value = VAL$(string)\n\n"
+                            + "1) Returns the numeric value of the string expression 'string'.\n\n"
                             + "Notes:\n"
                             + "\tSpaces before a number are ignored: VAL(\" 10\") returns 10. But unlike Microsoft BASIC, spaces inside a number are not ignored.\n"
                             + "\tUnlike Microsoft BASIC, expressions inside the string expression are also evaluated.\n"
@@ -2315,12 +2442,8 @@ namespace SEBasicIV
                             + "\tExpressions between curly braces { and } are not evaluated, but their syntax is checked upon entering.\n"
                             + "\t\tThey are interpreted as strings that can be passed to VAL for actual evaluation.\n\n"
                             + "Errors:\n"
-                            + "\t'string' has a number value: Type mismatch.";
-                    case "VAL$":
-                        return
-                            "Syntax:\n"
-                            + "\trepr = VAL$(string)\n\n"
-                            + "Evaluates a 'string' as a string expression. For example:\n\n"
+                            + "\t'string' has a number value: Type mismatch.\n\n"
+                            + "2) Evaluates a 'string' as a string expression. For example:\n"
                             + "\t10 INPUT a$, x$\n"
                             + "\t20 PRINT VAL$ a$\n\n"
                             + "The string value assigned to 'a$' should be an expression using 'x$'.\n"
@@ -2331,12 +2454,12 @@ namespace SEBasicIV
                             + "\t\tif used together with AND applied to string arguments, allowing for selective evaluation.\n"
                             + "\tExpressions between curly braces { and } are not evaluated, but their syntax is checked upon entering.\n"
                             + "\t\tThey are interpreted as strings that can be passed to VAL$ for actual evaluation.";
+                    case "VARPTR$":
                     case "VARPTR":
                         return
-                            "TODO: To return the address in memory of the variable or file control block (FCB).\n\nSyntax:\nVARPTR(variable name)\nVARPTR(#file number)";
-                    case "VARPTR$":
-                        return
-                            "TODO: To return a character form of the offset of a variable in memory.\n\nSyntax:\nVARPTR$(variable)";
+                            "Syntax:\n"
+                            + "TODO: To return the address in memory of the variable or file control block (FCB).\n\nSyntax:\nVARPTR(variable name)\nVARPTR(#file number)"
+                            + "TODO: To return a character form of the offset of a variable in memory.\n\nSyntax:\nVARPTR$(variable)";
                     case "AUTO":
                         return
                             "TODO: To generate and increment line numbers automatically each time you press the RETURN key.\n\nSyntax:\nAUTO [line number][,[increment]]\nAUTO .[,[increment]]";
@@ -4603,7 +4726,7 @@ namespace SEBasicIV
 
         private void miniTimer_LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ShowAbout();
+            showAbout();
         }
 
         #region Save as
@@ -4638,6 +4761,175 @@ namespace SEBasicIV
         private void synBox1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton7_Click_1(object sender, EventArgs e)
+        {
+            bLightTheme = !bLightTheme;
+
+            if (!bLightTheme)
+            {
+                toolStripButton7.Text = "Swap to Light Theme";
+            } else
+            {
+                toolStripButton7.Text = "Swap to Dark Theme";
+            }
+
+            highlightVisibleRange();
+        }
+
+        private void toolStripButton7_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            if (bLightTheme)
+            {
+                status.ForeColor = Color.FromArgb(255, 136, 136, 136);
+                status.Text = "Swap to Dark Theme";
+            } else
+            {
+                status.ForeColor = Color.FromArgb(255, 136, 136, 136);
+                status.Text = "Swap to Light Theme";
+            }
+        }
+
+        private void toolStripButton7_MouseLeave_1(object sender, EventArgs e)
+        {
+            status.Text = "";
+        }
+
+        public readonly struct SyntaxError
+        {
+            public readonly IRecognizer Recognizer;
+            public readonly IToken OffendingSymbol;
+            public readonly int Line;
+            public readonly int CharPositionInLine;
+            public readonly string Message;
+            public readonly RecognitionException Exception;
+
+            public SyntaxError(IRecognizer recognizer, IToken offendingSymbol, int line,
+                               int charPositionInLine, string message, RecognitionException exception)
+            {
+                Recognizer = recognizer;
+                OffendingSymbol = offendingSymbol;
+                Line = line;
+                CharPositionInLine = charPositionInLine;
+                Message = message;
+                Exception = exception;
+            }
+        }
+
+        public class SyntaxErrorListener : BaseErrorListener
+        {
+            public readonly List<SyntaxError> Errors = new List<SyntaxError>();
+            public override void SyntaxError(IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg,
+                RecognitionException e)
+            {
+                Errors.Add(new SyntaxError(recognizer, offendingSymbol, line, charPositionInLine, msg, e));
+            }
+        }
+
+        private void toolStripButton8_Click_1(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            ITokenStream tokens;
+            IParseTree tree;
+
+            parserErrorListener parserErrorListener = new parserErrorListener();
+            lexerErrorListener lexerErrorListener = new lexerErrorListener();
+
+            if (bBasic)
+            {
+                Lexer lexer = new SEBASICIVLexer(new AntlrInputStream(synBox1.Text));
+                lexer.RemoveErrorListeners();
+                lexer.AddErrorListener(lexerErrorListener);
+                tokens = new CommonTokenStream(lexer);
+                SEBASICIVParser parser = new SEBASICIVParser(tokens);
+                parser.RemoveErrorListeners();
+                parser.AddErrorListener(parserErrorListener);
+                parser.BuildParseTree = true;
+
+                try
+                {
+                    tree = parser.prog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                Lexer lexer = new asmZ80Lexer(new AntlrInputStream(synBox1.Text));
+                lexer.RemoveErrorListeners();
+                lexer.AddErrorListener(lexerErrorListener);
+                tokens = new CommonTokenStream(lexer);
+                asmZ80Parser parser = new asmZ80Parser(tokens);
+                parser.RemoveErrorListeners();
+                parser.AddErrorListener(parserErrorListener);
+                parser.BuildParseTree = true;
+
+                try
+                {
+                    tree = parser.prog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            List<string> pErrors = parserErrorListener.getSyntaxErrors();
+            List<string> lErrors = lexerErrorListener.getSyntaxErrors();
+
+            for (int i = 0; i < pErrors.Count; i++)
+            {
+                listBox1.Items.Add(pErrors[i]);
+            }
+
+            for (int i = 0; i < lErrors.Count; i++)
+            {
+                listBox1.Items.Add(lErrors[i]);
+            }
+
+            // TODO: Display Error Messages in List & allow User to click on message, which will:
+            // move the Caret to:
+            //      line | charPositionInLine
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selItem = listBox1.SelectedItem.ToString();
+            int selLine = 0;
+            int selPos = 0;
+
+            int firstColon = selItem.IndexOf(":");
+            int firstDash = selItem.IndexOf("-");
+            string Line = selItem.Substring(firstColon + 2, firstDash -  firstColon - 3);
+
+            int middleColon = selItem.IndexOf(":", firstColon + 1);
+            int middleDash = selItem.IndexOf("-", firstDash + 1);
+            string Pos = selItem.Substring(middleColon + 2, middleDash - middleColon - 3);
+
+            selLine = int.Parse(Line);
+            selPos = int.Parse(Pos);
+
+            synBox1.Focus();
+            synBox1.Selection.Start = new Place(selPos, selLine - 1);
+            synBox1.DoSelectionVisible();
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            listBox1_SelectedIndexChanged(sender, e);
+        }
+
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            listBox1_SelectedIndexChanged(sender, e);
         }
     }
 }

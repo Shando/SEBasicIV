@@ -65,6 +65,9 @@ namespace SEBasicIV
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,6 +130,7 @@ namespace SEBasicIV
             this.status = new MiniTimer_Theme.MiniTimer_Label();
             this.vMyScrollBar = new SEBasicIV.MyScrollBar();
             this.hMyScrollBar = new SEBasicIV.MyScrollBar();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.synBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -165,13 +169,13 @@ namespace SEBasicIV
             this.synBox1.AutoIndentCharsPatterns = "";
             this.synBox1.AutoScrollMinSize = new System.Drawing.Size(2, 19);
             this.synBox1.BackBrush = null;
+            this.synBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.synBox1.CharHeight = 19;
             this.synBox1.CharWidth = 9;
             this.synBox1.CommentPrefix = "REM";
-            this.synBox1.CurrentPenSize = 3;
             this.synBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.synBox1.DefaultMarkerSize = 8;
             this.synBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.synBox1.DocumentPath = null;
             this.synBox1.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.synBox1.IsReplaceMode = false;
             this.synBox1.LeftBracket = '(';
@@ -182,12 +186,11 @@ namespace SEBasicIV
             this.synBox1.Paddings = new System.Windows.Forms.Padding(0);
             this.synBox1.RightBracket = ')';
             this.synBox1.RightBracket2 = ']';
-            this.synBox1.SelectionChangedDelayedEnabled = false;
             this.synBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.synBox1.ServiceColors = null;
             this.synBox1.ShowLineNumbers = false;
             this.synBox1.ShowScrollBars = false;
-            this.synBox1.Size = new System.Drawing.Size(1120, 490);
+            this.synBox1.Size = new System.Drawing.Size(1120, 360);
             this.synBox1.TabIndex = 0;
             this.synBox1.Zoom = 100;
             this.synBox1.ToolTipNeeded += new System.EventHandler<FastColoredTextBoxNS.ToolTipNeededEventArgs>(this.synBox1_ToolTipNeeded);
@@ -206,7 +209,7 @@ namespace SEBasicIV
             | System.Windows.Forms.AnchorStyles.Right)));
             this.vScrollBar.Location = new System.Drawing.Point(788, 132);
             this.vScrollBar.Name = "vScrollBar";
-            this.vScrollBar.Size = new System.Drawing.Size(17, 362);
+            this.vScrollBar.Size = new System.Drawing.Size(17, 232);
             this.vScrollBar.TabIndex = 8;
             this.vScrollBar.Visible = false;
             this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollBar_Scroll);
@@ -215,7 +218,7 @@ namespace SEBasicIV
             // 
             this.hScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBar.Location = new System.Drawing.Point(55, 545);
+            this.hScrollBar.Location = new System.Drawing.Point(55, 415);
             this.hScrollBar.Name = "hScrollBar";
             this.hScrollBar.Size = new System.Drawing.Size(609, 17);
             this.hScrollBar.TabIndex = 9;
@@ -224,7 +227,7 @@ namespace SEBasicIV
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.White;
+            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 2, 0);
@@ -254,11 +257,15 @@ namespace SEBasicIV
             this.toolStripButton4,
             this.toolStripSeparator16,
             this.toolStripButton5,
-            this.toolStripSeparator15});
+            this.toolStripSeparator15,
+            this.toolStripButton7,
+            this.toolStripSeparator17,
+            this.toolStripButton8});
             this.toolStrip1.Location = new System.Drawing.Point(12, 76);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(669, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(875, 27);
             this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // New
             // 
@@ -507,6 +514,34 @@ namespace SEBasicIV
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.AutoToolTip = false;
+            this.toolStripButton7.Image = global::SEBasicIV.Properties.Resources.run___Copy;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(171, 24);
+            this.toolStripButton7.Text = "Swap to Dark Theme";
+            this.toolStripButton7.ToolTipText = "Swap to Dark Theme";
+            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click_1);
+            this.toolStripButton7.MouseLeave += new System.EventHandler(this.toolStripButton7_MouseLeave_1);
+            this.toolStripButton7.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStripButton7_MouseMove_1);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = global::SEBasicIV.Properties.Resources.Run;
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton8.Text = "Check Syntax";
+            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click_1);
             // 
             // menuStrip1
             // 
@@ -820,7 +855,7 @@ namespace SEBasicIV
             this.currentCol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.currentCol.AutoSize = true;
             this.currentCol.BackColor = System.Drawing.Color.White;
-            this.currentCol.Location = new System.Drawing.Point(85, 603);
+            this.currentCol.Location = new System.Drawing.Point(85, 473);
             this.currentCol.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.currentCol.Name = "currentCol";
             this.currentCol.Size = new System.Drawing.Size(54, 16);
@@ -832,7 +867,7 @@ namespace SEBasicIV
             this.CurrentLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CurrentLine.AutoSize = true;
             this.CurrentLine.BackColor = System.Drawing.Color.White;
-            this.CurrentLine.Location = new System.Drawing.Point(8, 603);
+            this.CurrentLine.Location = new System.Drawing.Point(8, 473);
             this.CurrentLine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CurrentLine.Name = "CurrentLine";
             this.CurrentLine.Size = new System.Drawing.Size(59, 16);
@@ -845,7 +880,7 @@ namespace SEBasicIV
             this.ZoomIn.AutoSize = true;
             this.ZoomIn.BackColor = System.Drawing.Color.White;
             this.ZoomIn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ZoomIn.Location = new System.Drawing.Point(1084, 603);
+            this.ZoomIn.Location = new System.Drawing.Point(1084, 473);
             this.ZoomIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ZoomIn.Name = "ZoomIn";
             this.ZoomIn.Size = new System.Drawing.Size(14, 16);
@@ -861,7 +896,7 @@ namespace SEBasicIV
             this.ZoomOut.AutoSize = true;
             this.ZoomOut.BackColor = System.Drawing.Color.White;
             this.ZoomOut.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ZoomOut.Location = new System.Drawing.Point(1109, 603);
+            this.ZoomOut.Location = new System.Drawing.Point(1109, 473);
             this.ZoomOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ZoomOut.Name = "ZoomOut";
             this.ZoomOut.Size = new System.Drawing.Size(11, 16);
@@ -887,7 +922,7 @@ namespace SEBasicIV
             this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox9.Image = global::SEBasicIV.Properties.Resources.Home;
-            this.pictureBox9.Location = new System.Drawing.Point(1051, 635);
+            this.pictureBox9.Location = new System.Drawing.Point(1078, 640);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(27, 25);
@@ -959,7 +994,7 @@ namespace SEBasicIV
             this.pictureBox6.BackColor = System.Drawing.Color.White;
             this.pictureBox6.ErrorImage = null;
             this.pictureBox6.Image = global::SEBasicIV.Properties.Resources.LT;
-            this.pictureBox6.Location = new System.Drawing.Point(149, 603);
+            this.pictureBox6.Location = new System.Drawing.Point(149, 473);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(17, 16);
@@ -973,7 +1008,7 @@ namespace SEBasicIV
             this.pictureBox5.BackColor = System.Drawing.Color.White;
             this.pictureBox5.ErrorImage = null;
             this.pictureBox5.Image = global::SEBasicIV.Properties.Resources.RG;
-            this.pictureBox5.Location = new System.Drawing.Point(1060, 603);
+            this.pictureBox5.Location = new System.Drawing.Point(1060, 473);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(17, 16);
@@ -987,7 +1022,7 @@ namespace SEBasicIV
             this.pictureBox4.BackColor = System.Drawing.Color.White;
             this.pictureBox4.ErrorImage = null;
             this.pictureBox4.Image = global::SEBasicIV.Properties.Resources.DN;
-            this.pictureBox4.Location = new System.Drawing.Point(1132, 583);
+            this.pictureBox4.Location = new System.Drawing.Point(1132, 453);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(17, 16);
@@ -1019,7 +1054,7 @@ namespace SEBasicIV
             this.pictureBox2.Location = new System.Drawing.Point(1129, 110);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(23, 490);
+            this.pictureBox2.Size = new System.Drawing.Size(23, 360);
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
             // 
@@ -1031,7 +1066,7 @@ namespace SEBasicIV
             this.pictureBox1.BackgroundImage = global::SEBasicIV.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112092;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Image = global::SEBasicIV.Properties.Resources.sweet_slim_scrollbar_ui_set_psd_54_112092;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 601);
+            this.pictureBox1.Location = new System.Drawing.Point(4, 471);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1127, 21);
@@ -1044,7 +1079,7 @@ namespace SEBasicIV
             this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox10.Image = global::SEBasicIV.Properties.Resources.info;
-            this.pictureBox10.Location = new System.Drawing.Point(1089, 635);
+            this.pictureBox10.Location = new System.Drawing.Point(1116, 640);
             this.pictureBox10.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(27, 25);
@@ -1060,7 +1095,7 @@ namespace SEBasicIV
             this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox7.Image = global::SEBasicIV.Properties.Resources.footer;
-            this.pictureBox7.Location = new System.Drawing.Point(4, 622);
+            this.pictureBox7.Location = new System.Drawing.Point(4, 625);
             this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(1148, 53);
@@ -1073,16 +1108,16 @@ namespace SEBasicIV
             this.miniTimer_LinkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(134)))), ((int)(((byte)(158)))));
             this.miniTimer_LinkLabel1.AutoSize = true;
             this.miniTimer_LinkLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.miniTimer_LinkLabel1.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.miniTimer_LinkLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.miniTimer_LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.miniTimer_LinkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.miniTimer_LinkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.miniTimer_LinkLabel1.Location = new System.Drawing.Point(24, 25);
             this.miniTimer_LinkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.miniTimer_LinkLabel1.Name = "miniTimer_LinkLabel1";
-            this.miniTimer_LinkLabel1.Size = new System.Drawing.Size(236, 21);
+            this.miniTimer_LinkLabel1.Size = new System.Drawing.Size(678, 28);
             this.miniTimer_LinkLabel1.TabIndex = 18;
             this.miniTimer_LinkLabel1.TabStop = true;
-            this.miniTimer_LinkLabel1.Text = "SE BASIC Syntax Editor (Beta)";
+            this.miniTimer_LinkLabel1.Text = "SE Basic IV Cordelia and Z80 Assembler IDE for the Chloe 280se (Beta)";
             this.miniTimer_LinkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.miniTimer_LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.miniTimer_LinkLabel1_LinkClicked);
             // 
@@ -1093,7 +1128,7 @@ namespace SEBasicIV
             this.status.BackColor = System.Drawing.SystemColors.Control;
             this.status.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.status.Location = new System.Drawing.Point(23, 636);
+            this.status.Location = new System.Drawing.Point(23, 506);
             this.status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(0, 21);
@@ -1112,7 +1147,7 @@ namespace SEBasicIV
             this.vMyScrollBar.Maximum = 90;
             this.vMyScrollBar.Name = "vMyScrollBar";
             this.vMyScrollBar.Orientation = System.Windows.Forms.ScrollOrientation.VerticalScroll;
-            this.vMyScrollBar.Size = new System.Drawing.Size(16, 448);
+            this.vMyScrollBar.Size = new System.Drawing.Size(16, 318);
             this.vMyScrollBar.TabIndex = 6;
             this.vMyScrollBar.Text = "myScrollBar1";
             this.vMyScrollBar.ThumbColor = System.Drawing.Color.LightGray;
@@ -1128,7 +1163,7 @@ namespace SEBasicIV
             this.hMyScrollBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.hMyScrollBar.BorderColor = System.Drawing.Color.Transparent;
             this.hMyScrollBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hMyScrollBar.Location = new System.Drawing.Point(169, 604);
+            this.hMyScrollBar.Location = new System.Drawing.Point(169, 474);
             this.hMyScrollBar.Margin = new System.Windows.Forms.Padding(4);
             this.hMyScrollBar.Maximum = 100;
             this.hMyScrollBar.Name = "hMyScrollBar";
@@ -1143,13 +1178,25 @@ namespace SEBasicIV
             this.hMyScrollBar.MouseLeave += new System.EventHandler(this.hMyScrollBar_MouseLeave);
             this.hMyScrollBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.hMyScrollBar_MouseMove);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(5, 493);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(1144, 132);
+            this.listBox1.TabIndex = 28;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            // 
             // SyntaxEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(1156, 678);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.ZoomOut);
             this.Controls.Add(this.ZoomIn);
@@ -1175,6 +1222,7 @@ namespace SEBasicIV
             this.Controls.Add(this.synBox1);
             this.Controls.Add(this.vScrollBar);
             this.Controls.Add(this.hScrollBar);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -1401,6 +1449,10 @@ namespace SEBasicIV
         private ImageList imageList1;
         private ToolStripSeparator toolStripSeparator16;
         private ToolStripButton toolStripButton6;
+        private ToolStripButton toolStripButton7;
+        private ToolStripSeparator toolStripSeparator17;
+        private ToolStripButton toolStripButton8;
+        private ListBox listBox1;
         //private Info info1;
     }
 }

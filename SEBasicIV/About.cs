@@ -22,12 +22,17 @@ namespace SEBasicIV
         
         private void About_Load(object sender, EventArgs e)
         {
-            Opacity = .9;
+            Opacity = .95;
         }
 
         private void miniTimer_LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }
