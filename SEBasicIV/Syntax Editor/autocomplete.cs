@@ -13,7 +13,7 @@ namespace SEBasicIV
             "db ", "defb ", "defm ", "defs ", "defw ", "dm ", "ds ", "dw ", "else ", "end ", "endif ", "endm ", "if ",
             "incbin ", "macro ", "org ", "seek "
         };
-        
+
         readonly string[] Keyword =
         {
             "adc ", "add ", "and ", "bit ", "call ", "call c ", "call m ", "call nc ", "call nz ", "call p ", "call pe ",
@@ -60,22 +60,21 @@ namespace SEBasicIV
             "TERM ", "TRACE ", "T. ", "UNLOCK "
         };
 
-        readonly string[] Variable = 
-        { 
-            "AND ", "A. ", "OR ", "XOR ", "X. ", "CSRLIN ", "DATE$ ", "ERL ", "ERR ", "TIME$ " 
+        readonly string[] Variable =
+        {
+            "AND ", "A. ", "OR ", "XOR ", "X. ", "CSRLIN ", "DATE$ ", "ERL ", "ERR ", "TIME$ "
         };
 
-        new readonly string[] Events = 
+        new readonly string[] Events =
         {
-            "ON TIMER ", "ON STRIG ", "ON PLAY ", "ON PEN ", "ON KEY ", "ON COM ", "ON ERROR " 
+            "ON TIMER ", "ON STRIG ", "ON PLAY ", "ON PEN ", "ON KEY ", "ON COM ", "ON ERROR "
         };
 
         public void BuildAutocompleteMenu(bool inBas)
         {
             List<AutocompleteItem> items = new List<AutocompleteItem>();
 
-            // inBas = True for SE BASIC
-            // inBas = False for Z80 ASM
+            // inBas = True for SE BASIC - False for Z80 ASM
             if (inBas)
             {
                 foreach (var item in Statement)
@@ -90,22 +89,20 @@ namespace SEBasicIV
                     items.Add(new EventSnippet(item) { ImageIndex = 4 });
                 items.Add(new InsertSpaceSnippet());
                 items.Add(new InsertSpaceSnippet(@"^(\w+)([=<>!:]+)(\w+)$"));
-            } else
+            }
+            else
             {
                 foreach (var item in Keyword)
                     items.Add(new KeywordSnippet(item) { ImageIndex = 1 });
                 foreach (var item in Directive)
                     items.Add(new DirectiveSnippet(item) { ImageIndex = 3 });
             }
-            //set as autocomplete source
+
             popupMenu.Items.SetAutocompleteItems(items);
         }
 
         #region StatementSnippet
 
-        /// <summary>
-        /// Auto Complete for Statements
-        /// </summary>
         class StatementSnippet : SnippetAutocompleteItem
         {
             public StatementSnippet(string snippet)
@@ -129,11 +126,11 @@ namespace SEBasicIV
                 {
                     #region Statements
 
-                    switch (Text.Substring(0, Text.Length-1))
+                    switch (Text.Substring(0, Text.Length - 1))
                     {
                         case "BEEP":
                             return
-                                // TODO:
+                                // TODO: BEEP
                                 "To sound the speaker at 800 Hz(800 cycles per second) for one - quarter of a second.\n\nSyntax:\nBEEP";
                         case "BSAVE":
                         case "B.":
@@ -165,11 +162,11 @@ namespace SEBasicIV
                                 + "\t'address_var' is a literal: Syntax error.";
                         case "CHAIN":
                             return
-                                // TODO:
+                                // TODO: CHAIN
                                 "To transfer control to the specified program and pass (chain) variables to it from the current program.\n\nSyntax:\nCHAIN[MERGE] filename[,[line][,[ALL][,DELETE range]]]";
                         case "CIRCLE":
                             return
-                                // TODO:
+                                // TODO: CIRCLE
                                 "To draw a circle, ellipse, and angles on the screen during use of the Graphics mode.\n\nSyntax:\nCIRCLE(xcenter, ycenter), radius[,[color][,[start],[end][,aspect]]]";
                         case "CLOSE #":
                         case "CLOSE":
@@ -223,7 +220,7 @@ namespace SEBasicIV
                                 + "\tStatement is used in SCREEN 2: Illegal function call.";
                         case "COM":
                             return
-                                // TODO:
+                                // TODO: COM
                                 "To enable or disable trapping of communications activity to the specified communications adapter.\n\nSyntax:\nCOM(n) ON\nCOM(n) OFF\nCOM(n)STOP";
                         case "COPY":
                         case "C.":
@@ -254,7 +251,7 @@ namespace SEBasicIV
                         case "DATE$":
                         case "DATE":
                             return
-                                // TODO:
+                                // TODO: DATE$
                                 "To set or retrieve the current date.\n\nSyntax:\nDATE$=variable$";
                         case "DEF FN":
                         case "DEF.":
@@ -332,7 +329,7 @@ namespace SEBasicIV
                                 + "\t'value' is not in [0 to 65535]: Illegal function call.";
                         case "DRAW":
                             return
-                                // TODO:
+                                // TODO: DRAW
                                 "To draw a figure.\n\nSyntax:\nDRAW string expression\n\nString commands are\nUp\tup\nDn\tdown\nLn\tleft\nRn\tright\nEn\tdiagonally up and right\nFn\tdiagonally down and right\nGn\tdiagonally down and left\nHn\tdiagonally up and left";
                         case "EDIT":
                         case "ED.":
@@ -354,7 +351,7 @@ namespace SEBasicIV
                                 + "No message is printed. It is possible to resume execution at the next statement using CONT.";
                         case "ERASE":
                             return
-                                // TODO:
+                                // TODO: ERASE
                                 "To eliminate arrays from a program.\n\nSyntax:\nERASE list of array variables";
                         case "ERROR":
                         case "E.":
@@ -370,7 +367,7 @@ namespace SEBasicIV
                                 + "\t'error_number' is not in 1 to 255]: Illegal function call.";
                         case "FIELD":
                             return
-                                // TODO:
+                                // TODO: FIELD
                                 "To allocate space for variables in a random file buffer.\n\nSyntax:\nFIELD [#] filenum, width AS stringvar [,width AS stringvar]...";
                         case "FOR":
                         case "F.":
@@ -396,7 +393,7 @@ namespace SEBasicIV
                                 + "\t'loop_var' is an integer variable and 'start', 'stop' or 'step' is outside the range [-32768, 32767]: Overflow.";
                         case "GET":
                             return
-                                // TODO:
+                                // TODO: GET
                                 "To transfer graphics images from the screen.\nOR\nTo read a record from a random disk file into a random buffer.\n\nSyntax:\nGET (x1,y1)-(x2,y2),array name\nOR\nGET [#]file number[,record number]";
                         case "GO SUB":
                         case "GOSUB":
@@ -488,7 +485,7 @@ namespace SEBasicIV
                                 + "\t\tNo values are stored.";
                         case "INPUT #":
                             return
-                                // TODO:
+                                // TODO: INPUT #
                                 "To read data items from a sequential file and assign them to program variables.\n\nSyntax:\nINPUT# file number, variable list";
                         case "KEY":
                             return
@@ -525,28 +522,28 @@ namespace SEBasicIV
                                 + "\t'name' and 'expression' are not of matching types: Type mismatch.";
                         case "LINE":
                             return
-                                // TODO:
+                                // TODO: LINE
                                 "To draw lines and boxes on the screen.\n\nSyntax:\nLINE [(x1,y1)]-(x2,y2) [,[attribute][,B[F]][,style]]";
                         case "LINE INPUT":
                             return
-                                // TODO:
+                                // TODO: LINE INPUT
                                 "NEEDS TO BE IN BOTH LINE & INPUT - To input an entire line (up to 255 characters) from the keyboard into a string variable, ignoring delimiters.\n\nSyntax:\nLINE INPUT [;][prompt string;]string variable";
                         case "LINE INPUT #":
                             return
-                                // TODO:
+                                // TODO: LINE INPUT #
                                 "NEEDS TO BE IN BOTH LINE & INPUT - To read an entire line (up to 255 characters), without delimiters, from a sequential disk file to a string variable.\n\nSyntax:\nLINE INPUT# file number, string variable";
                         case "LOCATE":
                         case "L.":
                             return
-                                // TODO:
+                                // TODO: LOCATE
                                 "To move the cursor to the specified position on the active screen.\n\nSyntax:\nLOCATE [row][,[col][,[cursor][,[start] [,stop]]]]";
                         case "RSET":
                             return
-                                // TODO:
+                                // TODO: RSET
                                 "To move data from memory to a random-file buffer and right-justify it in preparation for a PUT statement.\n\nSyntax:\nRSET string variable=string expression";
                         case "LSET":
                             return
-                                // TODO:
+                                // TODO: LSET
                                 "To move data from memory to a random-file buffer and left-justify it in preparation for a PUT statement.\n\nSyntax:\nLSET string variable=string expression";
                         case "NEXT":
                             return
@@ -565,7 +562,7 @@ namespace SEBasicIV
                                 + "\t\twhen incremented after the final iteration: Overflow.";
                         case "NOISE":
                             return
-                                // TODO:
+                                // TODO: NOISE
                                 "Syntax:\n";
                         case "ON":
                             return
@@ -628,7 +625,7 @@ namespace SEBasicIV
                                 + "\t'file_spec' is non-existent in input or append mode: File not found.";
                         case "OPTION BASE":
                             return
-                                // TODO:
+                                // TODO: OPTION BASE
                                 "To declare the minimum value for array subscripts.\n\nSyntax:\nOPTION BASE n";
                         case "OUT":
                         case "O.":
@@ -646,7 +643,7 @@ namespace SEBasicIV
                                 + "\t'value' is not in [0 to 255]: Illegal function call.";
                         case "PAINT":
                             return
-                                // TODO:
+                                // TODO: PAINT
                                 "To fill in a graphics figure with the selected attribute.\n\nSyntax:\nPAINT (x start,y start)[,paint attribute[,border attribute][,bckgrnd attribute]]";
                         case "PALETTE":
                         case "PA.":
@@ -668,15 +665,15 @@ namespace SEBasicIV
                                 + "\t'attrib' or 'colour' is not in range: Illegal function call";
                         case "PALETTE USING":
                             return
-                                // TODO:
+                                // TODO: PALETTE USING
                                 "Changes one or more of the colors in the palette\n\nSyntax:\nPALETTE USING integer-array-name (arrayindex)";
                         case "PEN":
                             return
-                                // TODO:
+                                // TODO: PEN
                                 "To read the light pen.\n\nSyntax:\nPEN ON\nPEN OFF\nPEN STOP";
                         case "PLAY":
                             return
-                                // TODO:
+                                // TODO: PLAY
                                 "To play music by embedding a music macro language into the string data type.\n\nSyntax:\nPLAY string expression";
                         case "POKE":
                         case "PO.":
@@ -696,11 +693,11 @@ namespace SEBasicIV
                                 + "\t'value' is not in [0 to 255]: Illegal function call.";
                         case "PRESET":
                             return
-                                // TODO:
+                                // TODO: PRESET
                                 "To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPRESET(x,y)[,color]";
                         case "PSET":
                             return
-                                // TODO:
+                                // TODO: PSET
                                 "To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPSET(x,y)[,color]";
                         case "PRINT":
                         case "PR.":
@@ -813,7 +810,7 @@ namespace SEBasicIV
                                 + "String expressions can be separated by one or more spaces, which has the same effect as separating by semicolons.";
                         case "PUT":
                             return
-                                // TODO:
+                                // TODO: PUT
                                 "To write a record from a random buffer to a random disk file.\n\tOR\nTo transfer graphics images to the screen.\n\nSyntax:\nPUT[#]file number[,record number]\n\tOR\nPUT(x,y),array,[,action verb]";
                         case "RANDOMIZE":
                         case "RA.":
@@ -866,7 +863,7 @@ namespace SEBasicIV
                                 + "\t'line' is not an existing line number: Undefined line number.";
                         case "RESUME":
                             return
-                                // TODO:
+                                // TODO: RESUME
                                 "To continue program execution after an error-recovery procedure has been  performed.\n\nSyntax:\nRESUME\nRESUME 0\nRESUME NEXT\nRESUME line number";
                         case "RETURN":
                         case "RET.":
@@ -913,33 +910,33 @@ namespace SEBasicIV
                         case "SOUND":
                         case "SO.":
                             return
-                                // TODO:
+                                // TODO: SOUND
                                 "To generate sound through the speaker.\n\nSyntax:\nSOUND freq,duration";
                         case "STRIG":
                             return
-                                // TODO:
+                                // TODO: STRIG
                                 "To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
                         case "SWAP":
                             return
-                                // TODO:
+                                // TODO: SWAP
                                 "To exchange the values of two variables.\n\nSyntax:\nSWAP variable1,variable2";
                         case "TIME$":
                         case "TIME":
                             return
-                                // TODO:
+                                // TODO: TIME$
                                 "To set or retrieve the current time.\n\nSyntax:\nTIME$ = string exp";
                         case "USING":
                         case "USI.":
                             return
-                                // TODO:
+                                // TODO: USING
                                 "";
                         case "VIEW":
                             return
-                                // TODO:
+                                // TODO: VIEW
                                 "To define a physical viewport limit from x1,y1 (upper-left x,y coordinates) to x2,y2 (lower-right x,y coordinates).\n\nSyntax:\nVIEW [[SCREEN][(x1,y1)-(x2,y2) [,[fill][,[border]]]]";
                         case "VIEW PRINT":
                             return
-                                // TODO:
+                                // TODO: VIEW PRINT
                                 "To set the boundaries of the screen text window.\n\nSyntax:\nVIEW PRINT [topline TO bottomline]";
                         case "WAIT":
                         case "WA.":
@@ -977,19 +974,19 @@ namespace SEBasicIV
                                 + "\t'expr' has a string value: Type mismatch.";
                         case "WIDTH":
                             return
-                                // TODO:
+                                // TODO: WIDTH
                                 "To set the printed line width in number of characters for the screen and line printer.\n\nSyntax:\nWIDTH size\nWIDTH file number, size\nWIDTH \"dev\", size";
                         case "WINDOW":
                             return
-                                // TODO:
+                                // TODO: WINDOW
                                 "To draw lines, graphics, and objects in space not bounded by the physical  limits of the screen.\n\nSyntax:\nWINDOW[[SCREEN](x1,y1)-(x2,y2)]";
                         case "WRITE":
                             return
-                                // TODO:
+                                // TODO: WRITE
                                 "To output data to the screen.\n\nSyntax:\nWRITE[list of expressions]";
                         case "WRITE #":
                             return
-                                // TODO:
+                                // TODO: WRITE #
                                 "To write data to a sequential file.\n\nSyntax:\nWRITE #filenum, list of expressions";
                         default:
                             return
@@ -1006,9 +1003,6 @@ namespace SEBasicIV
 
         #region FunctionSnippet
 
-        /// <summary>
-        /// Auto Complete for Function
-        /// </summary>
         class FunctionSnippet : SnippetAutocompleteItem
         {
             public FunctionSnippet(string snippet)
@@ -1112,7 +1106,7 @@ namespace SEBasicIV
                         case "EOF":
                         case "EO.":
                             return
-                                // TODO:
+                                // TODO: EOF
                                 "To return -1 (true) when the end of a sequential or a communications file has been reached, or to return 0 if end of file (EOF) has not been found.\n\nSyntax:\nEOF(file number)";
                         case "EXP":
                             return
@@ -1153,7 +1147,7 @@ namespace SEBasicIV
                                 + "\tThe return type is incompatible with the function name's sigil: Type mismatch.";
                         case "FRE":
                             return
-                                // TODO:
+                                // TODO: FRE
                                 "To return the number of available bytes in allocated string memory.\n\nSyntax:\nFRE(x$)\nFRE(x)";
                         case "INKEY$ #":
                         case "INKEY$":
@@ -1178,7 +1172,7 @@ namespace SEBasicIV
                         case "INPUT$":
                         case "INPUT":
                             return
-                                // TODO:
+                                // TODO: INPUT$
                                 "INP(n)\n\nSyntax:\nINPUT$(x[,[#]file number)]";
                         case "INSTR":
                         case "INS.":
@@ -1230,11 +1224,11 @@ namespace SEBasicIV
                                 + "\t'string' has a number value: Type mismatch.";
                         case "LOC":
                             return
-                                // TODO:
+                                // TODO: LOC
                                 "To return the current position in the file.\n\nSyntax:\nLOC(file number)";
                         case "LOF":
                             return
-                                // TODO:
+                                // TODO: LOF
                                 "To return the length (number of bytes) allocated to the file.\n\nSyntax:\nLOF(file number)";
                         case "LOG":
                             return
@@ -1259,11 +1253,11 @@ namespace SEBasicIV
                                 + "\t'length' is a numeric expression.";
                         case "MOUSE":
                             return
-                                // TODO:
+                                // TODO: MOUSE
                                 "MOUSE function";
                         case "NMI":
                             return
-                                // TODO:
+                                // TODO: NMI
                                 "NMI function";
                         case "PEEK":
                         case "PE.":
@@ -1280,19 +1274,19 @@ namespace SEBasicIV
                                 + "\t'address' is not in [-32768 to 65535]: Overflow.";
                         case "PI":
                             return
-                                // TODO:
+                                // TODO: PI
                                 "PI function";
                         case "PMAP":
                             return
-                                // TODO:
+                                // TODO: PMAP
                                 "To map expressions to logical or physical coordinates.\n\nSyntax:\nPMAP (exp,function)";
                         case "POINT":
                             return
-                                // TODO:
+                                // TODO: POINT
                                 "To read the color or attribute value of a pixel from the screen.\n\nSyntax:\nPOINT(x,y)\nPOINT(function)";
                         case "POS":
                             return
-                                // TODO:
+                                // TODO: POS
                                 "To return the current cursor position.\n\nSyntax:\nPOS(c)";
                         case "RIGHT$":
                         case "RI.":
@@ -1343,11 +1337,11 @@ namespace SEBasicIV
                         case "SPACE$":
                         case "SPACE":
                             return
-                                // TODO:
+                                // TODO: SPACE$
                                 "To return a string of x spaces.\n\nSyntax:\nSPACE$(x)";
                         case "SPC":
                             return
-                                // TODO:
+                                // TODO: SPC
                                 "To skip a specified number of spaces in a PRINT or an LPRINT statement.\n\nSyntax:\nSPC(n)";
                         case "SQR":
                             return
@@ -1360,11 +1354,11 @@ namespace SEBasicIV
                                 + "\t'number' has a string value: Type mismatch.";
                         case "STICK":
                             return
-                                // TODO:
+                                // TODO: STICK
                                 "To return the x and y coordinates of two joysticks.\n\nSyntax:\nSTICK(n)";
                         case "STRIG":
                             return
-                                // TODO:
+                                // TODO: STRIG
                                 "To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
                         case "STRING$":
                         case "STR.":
@@ -1393,7 +1387,7 @@ namespace SEBasicIV
                                 + "\t'number' has a string value: Type mismatch.";
                         case "TAB":
                             return
-                                // TODO:
+                                // TODO: TAB
                                 "Spaces to position n on the screen.\n\nSyntax:\nTAB(n)";
                         case "TAN":
                             return
@@ -1406,7 +1400,7 @@ namespace SEBasicIV
                                 + "\t'angle' has a string value: Type mismatch.";
                         case "TIMER":
                             return
-                                // TODO:
+                                // TODO: TIMER
                                 "To return single-precision floating-point numbers representing the elapsed number of seconds since midnight or system reset.\n\nSyntax:\nTIMER";
                         case "USR":
                         case "U.":
@@ -1449,7 +1443,7 @@ namespace SEBasicIV
                         case "VARPTR$":
                         case "VARPTR":
                             return
-                                // TODO:
+                                // TODO: VARPTR$ & VARPTR
                                 "To return the address in memory of the variable or file control block (FCB).\n\nSyntax:\nVARPTR(variable name)\nVARPTR(#file number)"
                                 + "To return a character form of the offset of a variable in memory.\n\nSyntax:\nVARPTR$(variable)";
                         default:
@@ -1465,9 +1459,6 @@ namespace SEBasicIV
 
         #region CommandSnippet
 
-        /// <summary>
-        /// Auto Complete for Commands
-        /// </summary>
         class CommandSnippet : SnippetAutocompleteItem
         {
             public CommandSnippet(string snippet)
@@ -1496,7 +1487,7 @@ namespace SEBasicIV
                     {
                         case "AUTO":
                             return
-                                // TODO:
+                                // TODO: AUTO
                                 "To generate and increment line numbers automatically each time you press the RETURN key.\n\nSyntax:\nAUTO [line number][,[increment]]\nAUTO .[,[increment]]";
                         case "BLOAD":
                         case "BL.":
@@ -1644,7 +1635,7 @@ namespace SEBasicIV
                                 + "\t\tAttempting to load a text file that has LF rather than CR LF line endings may cause this error.";
                         case "LOCK":
                             return
-                                // TODO:
+                                // TODO: LOCK
                                 "\n\nSyntax:\nLOCK ???";
                         case "MERGE":
                         case "ME.":
@@ -1706,7 +1697,7 @@ namespace SEBasicIV
                                 + "a NEW command was issued and returns control to the user.";
                         case "PCOPY":
                             return
-                                // TODO:
+                                // TODO: PCOPY
                                 "To copy one screen page to another in all screen modes.\n\nSyntax:\nPCOPY sourcepage, destinationpage";
                         case "RENUM":
                         case "REN.":
@@ -1728,7 +1719,7 @@ namespace SEBasicIV
                                 + "\t'old' is specified and 'new' is less than or equal to an existing line number less than 'old': Illegal function call.";
                         case "RESET":
                             return
-                                // TODO:
+                                // TODO: RESET
                                 "To close all disk files and write the directory information to a diskette before it is removed from a disk drive.\n\nSyntax:\nRESET";
                         case "RMDIR":
                         case "RM.":
@@ -1782,7 +1773,7 @@ namespace SEBasicIV
                                 + "Files are not closed. It is possible to resume program execution at the next statement using CONT.";
                         case "TERM":
                             return
-                                // TODO:
+                                // TODO: TERM
                                 "";
                         case "TRACE":
                         case "T.":
@@ -1795,7 +1786,7 @@ namespace SEBasicIV
                                 + "\tTracing is turned off by the NEW and LOAD statements.";
                         case "UNLOCK":
                             return
-                                // TODO:
+                                // TODO: UNLOCK
                                 "\n\nSyntax:\nLOCK ???";
                         default:
                             return "ToolTip Not Found";
@@ -1810,9 +1801,6 @@ namespace SEBasicIV
 
         #region VariablesSnippet
 
-        /// <summary>
-        /// Auto Complete for Variables
-        /// </summary>
         class VariablesSnippet : SnippetAutocompleteItem
         {
             public VariablesSnippet(string snippet)
@@ -1839,39 +1827,39 @@ namespace SEBasicIV
                     {
                         case "AND":
                         case "A.":
-                            return 
-                                // TODO:
+                            return
+                                // TODO: AND
                                 "\n\nSyntax:\nAND";
                         case "CSRLIN":
-                            return 
-                                // TODO:
+                            return
+                                // TODO: CSRLIN
                                 "To return the current line (row) position of the cursor.\n\nSyntax:\nCSRLIN";
                         case "DATE$":
                         case "DATE":
                             return
-                                // TODO:
+                                // TODO: DATE$
                                 "To set or retrieve the current date.\n\nSyntax:\nDATE$";
                         case "ERL":
                             return
-                                // TODO:
+                                // TODO: ERL
                                 "To return the error code.\n\nSyntax:\nERR";
                         case "ERR":
                             return
-                                // TODO:
+                                // TODO: ERR
                                 "To return the line number associated with an error.\n\nSyntax:\nERR";
                         case "OR":
                             return
-                                // TODO:
+                                // TODO: OR
                                 "\n\nSyntax:\nOR";
                         case "TIME$":
                         case "TIME":
                             return
-                                // TODO:
+                                // TODO: TIME$
                                 "To retrieve the current time.\n\nSyntax:\nTIME$";
                         case "XOR":
                         case "X.":
                             return
-                                // TODO:
+                                // TODO: XOR
                                 "\n\nSyntax:\nXOR";
                         default:
                             return "Tootlip Not Found";
@@ -1883,10 +1871,7 @@ namespace SEBasicIV
         #endregion
 
         #region InsertSpaceSnippet
-        /// <summary>
-        /// Divides numbers and words: "123AND456" -> "123 AND 456"
-        /// Or "i=2" -> "i = 2"
-        /// </summary>
+
         class InsertSpaceSnippet : AutocompleteItem
         {
             string pattern;
@@ -1935,9 +1920,6 @@ namespace SEBasicIV
 
         #region EventSnippet
 
-        /// <summary>
-        /// Auto Complete for Statements
-        /// </summary>
         class EventSnippet : SnippetAutocompleteItem
         {
             public EventSnippet(string snippet)
@@ -1963,27 +1945,27 @@ namespace SEBasicIV
                     {
                         case ("ON TIMER"):
                             return
-                                // TODO:
+                                // TODO: ON TIMER
                                 "To create an event trap line number for a specified Time.\n\nSyntax:\nON TIMER$(n) event specifier GOSUB line number";
                         case ("ON STRIG"):
                             return
-                                // TODO:
+                                // TODO: ON STRIG
                                 "To create an event trap line number for an interrupted routine that checks the trigger status.\n\nSyntax:\nON STRIG(n) event specifier GOSUB line number";
                         case ("ON PLAY"):
                             return
-                                // TODO:
+                                // TODO: ON PLAY
                                 "To create an event trap which is issued only when playing background music.\n\nSyntax:\nON PLAY(n) event specifier GOSUB line number";
                         case ("ON PEN"):
                             return
-                                // TODO:
+                                // TODO: ON PEN
                                 "To create an event trap which is issued only when using the light pen.\n\nSyntax:\nON PEN(n) event specifier GOSUB line number";
                         case ("ON KEY"):
                             return
-                                // TODO:
+                                // TODO: ON KEY
                                 "To create an event trap which is issued only when specified key is pressed.\n\nSyntax:\nON KEY(n) event specifier GOSUB line number";
                         case ("ON COM"):
                             return
-                                // TODO:
+                                // TODO: ON COM
                                 "Typically, the COM trap routine will read an entire message from the COM port before returning.\n\nSyntax:\nON COM(n) event specifier GOSUB line number";
                         case ("ON ERROR"):
                             return
@@ -2013,9 +1995,6 @@ namespace SEBasicIV
 
         #region DirectiveSnippet
 
-        /// <summary>
-        /// Auto Complete for Directives
-        /// </summary>
         class DirectiveSnippet : SnippetAutocompleteItem
         {
             public DirectiveSnippet(string snippet)
@@ -2193,9 +2172,6 @@ namespace SEBasicIV
 
         #region KeywordSnippet
 
-        /// <summary>
-        /// Auto Complete for Directives
-        /// </summary>
         class KeywordSnippet : SnippetAutocompleteItem
         {
             public KeywordSnippet(string snippet)
@@ -2244,7 +2220,7 @@ namespace SEBasicIV
                                 + "adc a,(hl)\n"
                                 + "adc a,(ix+n)\n"
                                 + "adc a,(iy+n)\n"
-                                + "adc a,n\t\t;(8-bit number)\n"
+                                + "adc a,n\t\t;8-bit constant\n"
                                 + "\n"
                                 + "adc hl,bc\n"
                                 + "adc hl,de\n"
@@ -2253,19 +2229,19 @@ namespace SEBasicIV
                                 + "\n"
                                 + "Effects:\n"
                                 + "The N flag is reset, P/V is interpreted as overflow.\n"
-                                + "The rest of the flags is modified by definition.\n"
+                                + "The rest of the flags are modified by definition.\n"
                                 + "In the case of 16-bit addition the H flag is undefined.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"
                                 + "rr represents a two byte register pair: BC, DE, HL, SP\n"
                                 + "\n"
-                                + "a, r\t4\n"
-                                + "a, X\t7\n"
+                                + "a,r\t4\n"
+                                + "a,X\t7\n"
                                 + "a,(hl)\t7\n"
                                 + "a,(ix+X)\t19\n"
                                 + "a,(iy+X)\t19\n"
-                                + "hl, rr\t15\n";
+                                + "hl,rr\t15\n";
                         case "ADD":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:add\n"
@@ -2311,11 +2287,11 @@ namespace SEBasicIV
                                 + "Effects:\n"
                                 + "8-bit arithmetic\n"
                                 + "N flag is reset, P/V is interpreted as overflow.\n"
-                                + "Rest of the flags is modified by definition.\n"
+                                + "The rest of the flags are modified by definition.\n"
                                 + "\n"
                                 + "16-bit arithmetic\n"
                                 + "preserves the S, Z and P/V flags, and H is undefined.\n"
-                                + "Rest of flags modified by definition.\n"
+                                + "The rest of the flags are modified by definition.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"
@@ -2393,7 +2369,7 @@ namespace SEBasicIV
                                 + "bit n,(iy+n)\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags are preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"
@@ -2436,7 +2412,7 @@ namespace SEBasicIV
                                 + "call po,label\t;calls if P/V is reset\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags are preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -2514,7 +2490,7 @@ namespace SEBasicIV
                                 + "cpd\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                                + "The carry is preserved, N is set and all other flags are modified by definition.\n"
                                 + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is decreased.\n"
                                 + "\n"
                                 + "T-States:\n"
@@ -2534,7 +2510,7 @@ namespace SEBasicIV
                                 + "cpdr\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                                + "The carry is preserved, N is set and all the other flags are modified by definition.\n"
                                 + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is decreased.\n"
                                 + "\n"
                                 + "T-States:\n"
@@ -2556,7 +2532,7 @@ namespace SEBasicIV
                                 + "cpi\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                                + "The carry is preserved, N is set and all the other flags are modified by definition.\n"
                                 + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is increased.\n"
                                 + "\n"
                                 + "T-States:\n"
@@ -2576,7 +2552,7 @@ namespace SEBasicIV
                                 + "cpir\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                                + "The carry is preserved, N is set and all the other flags are modified by definition.\n"
                                 + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is decreased.\n"
                                 + "\n"
                                 + "T-States:\n"
@@ -2681,7 +2657,7 @@ namespace SEBasicIV
                                 + "di\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags preserved\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
@@ -2698,7 +2674,7 @@ namespace SEBasicIV
                                 + "djnz\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Preserves all flags.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "\tB != 0\tB = 0\n"
@@ -2715,7 +2691,7 @@ namespace SEBasicIV
                                 + "ei\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
@@ -2735,7 +2711,7 @@ namespace SEBasicIV
                                 + "ex (sp),iy\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags are preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "de,hl\t4\n"
@@ -2755,7 +2731,7 @@ namespace SEBasicIV
                                 + "exx\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
@@ -2774,7 +2750,7 @@ namespace SEBasicIV
                                 + "halt\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
@@ -2830,7 +2806,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "Effects:\n"
                                 + "in A,(N)\n"
-                                + "This command alters no flags.\n"
+                                + "All flags are preserved.\n"
                                 + "Others\n"
                                 + "N flag reset, P/V represents parity, C flag preserved, all other flags affected by definition.\n"
                                 + "\n"
@@ -2876,7 +2852,7 @@ namespace SEBasicIV
                                 + "Preserves C flag, N flag is reset, P/V detects overflow and rest are modified by definition.\n"
                                 + "\n"
                                 + "16 Bits\n"
-                                + "No flags altered.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"
@@ -3002,7 +2978,7 @@ namespace SEBasicIV
                                 + "jp (IY)\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -3036,7 +3012,7 @@ namespace SEBasicIV
                                 + "jr NZ,NN\t;jumps if Z is reset\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -3082,7 +3058,7 @@ namespace SEBasicIV
                                 + "ld (nn),X\t\tX = \ta\tbc\tde\thl\tsp\tix\tiy\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "No flags are altered except in the cases of the I or R registers. In those cases, C is preserved, H and N are reset, and alters Z and S.\n"
+                                + "All flags are preserved except in the cases of the I or R registers. In those cases, C is preserved, H and N are reset, and alters Z and S.\n"
                                 + "P/V is set if interrupts are enabled, reset otherwise.\n"
                                 + "\n"
                                 + "T-States:\n"
@@ -3194,7 +3170,7 @@ namespace SEBasicIV
                                 + "nop\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
@@ -3297,7 +3273,7 @@ namespace SEBasicIV
                                 + "out (c),0\t;Zero. Note: Undocumented\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved\n"
+                                + "All flags are preserved\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"
@@ -3355,7 +3331,7 @@ namespace SEBasicIV
                                 + "pop iy\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags are unaffected except when popping AF.\n"
+                                + "All flags are preserved except when popping AF.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "rr represents a two byte register pair: BC, DE, HL, SP\n"
@@ -3380,7 +3356,7 @@ namespace SEBasicIV
                                 + "push iy\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags are unaffected.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "rr represents a two byte register pair: BC, DE, HL, SP\n"
@@ -3409,7 +3385,7 @@ namespace SEBasicIV
                                 + "res n,(iy+n)\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Flags are preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"
@@ -3447,7 +3423,7 @@ namespace SEBasicIV
                                 + "ret po\t\t; P/V is reset\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "Preserves all flags.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -3467,7 +3443,7 @@ namespace SEBasicIV
                                 + "reti\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags unaffected.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "14 t-states\n";
@@ -3483,7 +3459,7 @@ namespace SEBasicIV
                                 + "retn\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags unaffected.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "14 t-states\n";
@@ -3735,7 +3711,7 @@ namespace SEBasicIV
                                 + "rst $38\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags unaffected.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "11 t-states\n";
@@ -3822,7 +3798,7 @@ namespace SEBasicIV
                                 + "set n,(iy+n)\n"
                                 + "\n"
                                 + "Effects:\n"
-                                + "All flags preserved.\n"
+                                + "All flags are preserved.\n"
                                 + "\n"
                                 + "T-States:\n"
                                 + "r denotes 8-bit register.\n"

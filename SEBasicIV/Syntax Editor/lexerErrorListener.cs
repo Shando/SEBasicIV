@@ -12,8 +12,6 @@ namespace SEBasicIV
         public override void SyntaxError([NotNull] IRecognizer recognizer, [Nullable] int offendingSymbol, int line, int charPositionInLine, [NotNull] string msg, [Nullable] RecognitionException e)
         {
             string myMsg = "Lexer Error at Line: " + line + " - Position: " + charPositionInLine + " - " + msg;
-
-//            MessageBox.Show(myMsg, msg);
             syntaxErrors.Add(myMsg);
         }
 

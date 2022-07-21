@@ -36,11 +36,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 grammar asmZ80;
 
 prog
-   : line+ EOF #lblprog
+   : line+ NEWLINE? #lblprog
    ;
 
 line
-   : lbl? (instruction | directive)+ comment? #lblline
+   : (comment|lbl comment?|lbl? (instruction|directive)+ comment?|NEWLINE) #lblline
    ;
 
 instruction
@@ -64,7 +64,7 @@ assemblerdirective
    ;
 
 lbl
-   : label ':'? #lbllbl
+   : label ':' #lbllbl
    ;
 
 expressionlist
@@ -326,7 +326,7 @@ fragment Z
    ;
 
 NAME
-   : [a-zA-Z] [a-zA-Z0-9."]*
+   : [a-zA-Z][a-zA-Z0-9."_]*
    ;
 
 NUMBER
@@ -334,16 +334,16 @@ NUMBER
    ;
 
 COMMENT
-   : ';' ~ [\r\n]* -> skip
+   : ';' ~[\r\n]*
    ;
 
 STRING
    : '\u0027' ~'\u0027'* '\u0027'
    ;
 
-EOL
-   : [\r\n] +
-   ;
+NEWLINE
+    : '\r'? '\n'
+    ;
 
 WS
    : [ \t] -> skip

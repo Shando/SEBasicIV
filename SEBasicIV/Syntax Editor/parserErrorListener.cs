@@ -13,9 +13,6 @@ namespace SEBasicIV
         public void SyntaxError([NotNull] IRecognizer recognizer, [Nullable] IToken offendingSymbol, int line, int charPositionInLine, [NotNull] string msg, [Nullable] RecognitionException e)
         {
             string myMsg = "Parser Error at Line: " + line + " - Position: " + charPositionInLine + " - " + msg;
-
-//            MessageBox.Show(myMsg, msg);
-
             syntaxErrors.Add(myMsg);
         }
 

@@ -65,7 +65,7 @@ namespace SEBasicIV
         private static readonly Brush operatorsBrushL = new SolidBrush(ColorTranslator.FromHtml("#7a82da"));
         private readonly Style operatorsStyleL = new TextStyle(operatorsBrushL, null, FontStyle.Regular);
         private readonly Color currentLineColorL = ColorTranslator.FromHtml("#64d2d2");
-        //private Style ReadOnlyText = new TextStyle(null, Brushes., FontStyle.Regular);
+
         private static readonly Brush keywordsBrushD = new SolidBrush(ColorTranslator.FromHtml("#10b1fe"));
         private readonly Style keywordsStyleD = new TextStyle(keywordsBrushD, null, FontStyle.Regular);
         private static readonly Brush opcodesBrushD = new SolidBrush(ColorTranslator.FromHtml("#10b1fe"));
@@ -104,7 +104,6 @@ namespace SEBasicIV
             btInvisibleChars_Click(synBox1, null);
             synBox1.Refresh();
 
-            //create autocomplete popup menu
             popupMenu = new AutocompleteMenu(synBox1);
             popupMenu.Items.ImageList = imageList1;
             popupMenu.SearchPattern = @"[\w\.:=!<>]";
@@ -123,12 +122,11 @@ namespace SEBasicIV
             btInvisibleChars_Click(synBox1, null);
             synBox1.Refresh();
 
-            //create autocomplete popup menu
             popupMenu = new AutocompleteMenu(synBox1);
             popupMenu.Items.ImageList = imageList1;
             popupMenu.SearchPattern = @"[\w\.:=!<>]";
             popupMenu.AllowTabKey = true;
-            //
+            
             BuildAutocompleteMenu(true);
             synBox1.Text = text;
             _path = path;
@@ -165,7 +163,6 @@ namespace SEBasicIV
             btInvisibleChars_Click(synBox1, null);
             synBox1.Refresh();
 
-            //create autocomplete popup menu
             popupMenu = new AutocompleteMenu(synBox1);
             popupMenu.Items.ImageList = imageList1;
             popupMenu.SearchPattern = @"[\w\.:=!<>]";
@@ -763,16 +760,6 @@ namespace SEBasicIV
         }
         #endregion InvisibleCharsRenderer
 
-        #region For_Loop
-        //20 FOR I = 1 TO 5
-        //30 FOR J = 1 TO I
-        //40 PRINT "*"
-        //50 NEXT J
-        //60 PRINT "\"
-        //70 NEXT I
-        //80 END
-        #endregion For_Loop
-
         #region close
 
         private void close_MouseMove(object sender, MouseEventArgs e)
@@ -1351,7 +1338,6 @@ namespace SEBasicIV
         {
             if (!string.IsNullOrEmpty(e.HoveredWord))
             {
-                //e.ToolTipIcon = ;
                 e.ToolTipTitle = e.HoveredWord.ToUpper();
                 e.ToolTipText = getToolTip(e.HoveredWord);
             }
@@ -2809,7 +2795,7 @@ namespace SEBasicIV
                             + "adc a,(hl)\n"
                             + "adc a,(ix+n)\n"
                             + "adc a,(iy+n)\n"
-                            + "adc a,n\t\t;(8-bit number)\n"
+                            + "adc a,n\t\t;8-bit constant\n"
                             + "\n"
                             + "adc hl,bc\n"
                             + "adc hl,de\n"
@@ -2818,19 +2804,19 @@ namespace SEBasicIV
                             + "\n"
                             + "Effects:\n"
                             + "The N flag is reset, P/V is interpreted as overflow.\n"
-                            + "The rest of the flags is modified by definition.\n"
+                            + "The rest of the flags are modified by definition.\n"
                             + "In the case of 16-bit addition the H flag is undefined.\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
                             + "rr represents a two byte register pair: BC, DE, HL, SP\n"
                             + "\n"
-                            + "a, r\t4\n"
-                            + "a, X\t7\n"
+                            + "a,r\t4\n"
+                            + "a,X\t7\n"
                             + "a,(hl)\t7\n"
                             + "a,(ix+X)\t19\n"
                             + "a,(iy+X)\t19\n"
-                            + "hl, rr\t15\n";
+                            + "hl,rr\t15\n";
                     case "ADD":
                         return
                             "Source: http://z80-heaven.wikidot.com/instructions-set:add\n"
@@ -2876,11 +2862,11 @@ namespace SEBasicIV
                             + "Effects:\n"
                             + "8-bit arithmetic\n"
                             + "N flag is reset, P/V is interpreted as overflow.\n"
-                            + "Rest of the flags is modified by definition.\n"
+                            + "The rest of the flags are modified by definition.\n"
                             + "\n"
                             + "16-bit arithmetic\n"
                             + "preserves the S, Z and P/V flags, and H is undefined.\n"
-                            + "Rest of flags modified by definition.\n"
+                            + "The rest of the flags are modified by definition.\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
@@ -2958,7 +2944,7 @@ namespace SEBasicIV
                             + "bit n,(iy+n)\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags are preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
@@ -2993,7 +2979,7 @@ namespace SEBasicIV
                             + "call po,label\t;calls if P/V is reset\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags are preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -3071,7 +3057,7 @@ namespace SEBasicIV
                             + "cpd\n"
                             + "\n"
                             + "Effects:\n"
-                            + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                            + "The carry is preserved, N is set and all other flags are modified by definition.\n"
                             + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is decreased.\n"
                             + "\n"
                             + "T-States:\n"
@@ -3091,7 +3077,7 @@ namespace SEBasicIV
                             + "cpdr\n"
                             + "\n"
                             + "Effects:\n"
-                            + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                            + "The carry is preserved, N is set and all the other flags are modified by definition.\n"
                             + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is decreased.\n"
                             + "\n"
                             + "T-States:\n"
@@ -3113,7 +3099,7 @@ namespace SEBasicIV
                             + "cpi\n"
                             + "\n"
                             + "Effects:\n"
-                            + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                            + "The carry is preserved, N is set and all the other flags are modified by definition.\n"
                             + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is increased.\n"
                             + "\n"
                             + "T-States:\n"
@@ -3133,7 +3119,7 @@ namespace SEBasicIV
                             + "cpir\n"
                             + "\n"
                             + "Effects:\n"
-                            + "The carry is preserved, N is set and all the other flags are affected as defined.\n"
+                            + "The carry is preserved, N is set and all the other flags are modified by definition.\n"
                             + "P/V denotes the overflowing of BC, while the Z flag is set if A=(HL) before HL is decreased.\n"
                             + "\n"
                             + "T-States:\n"
@@ -3238,7 +3224,7 @@ namespace SEBasicIV
                             + "di\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags preserved\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "4 t-states\n";
@@ -3255,7 +3241,7 @@ namespace SEBasicIV
                             + "djnz\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Preserves all flags.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "\tB != 0\tB = 0\n"
@@ -3272,7 +3258,7 @@ namespace SEBasicIV
                             + "ei\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "4 t-states\n";
@@ -3292,7 +3278,7 @@ namespace SEBasicIV
                             + "ex (sp),iy\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags are preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "de,hl\t4\n"
@@ -3312,7 +3298,7 @@ namespace SEBasicIV
                             + "exx\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "4 t-states\n";
@@ -3331,7 +3317,7 @@ namespace SEBasicIV
                             + "halt\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "4 t-states\n";
@@ -3384,7 +3370,7 @@ namespace SEBasicIV
                             + "\n"
                             + "Effects:\n"
                             + "in A,(N)\n"
-                            + "This command alters no flags.\n"
+                            + "All flags are preserved.\n"
                             + "Others\n"
                             + "N flag reset, P/V represents parity, C flag preserved, all other flags affected by definition.\n"
                             + "\n"
@@ -3430,7 +3416,7 @@ namespace SEBasicIV
                             + "Preserves C flag, N flag is reset, P/V detects overflow and rest are modified by definition.\n"
                             + "\n"
                             + "16 Bits\n"
-                            + "No flags altered.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
@@ -3548,7 +3534,7 @@ namespace SEBasicIV
                             + "jp (IY)\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -3578,7 +3564,7 @@ namespace SEBasicIV
                             + "jr NZ,NN\t;jumps if Z is reset\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -3624,7 +3610,7 @@ namespace SEBasicIV
                             + "ld (nn),X\t\tX = \ta\tbc\tde\thl\tsp\tix\tiy\n"
                             + "\n"
                             + "Effects:\n"
-                            + "No flags are altered except in the cases of the I or R registers. In those cases, C is preserved, H and N are reset, and alters Z and S.\n"
+                            + "All flags are preserved except in the cases of the I or R registers. In those cases, C is preserved, H and N are reset, and alters Z and S.\n"
                             + "P/V is set if interrupts are enabled, reset otherwise.\n"
                             + "\n"
                             + "T-States:\n"
@@ -3736,7 +3722,7 @@ namespace SEBasicIV
                             + "nop\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "4 t-states\n";
@@ -3839,7 +3825,7 @@ namespace SEBasicIV
                             + "out (c),0\t;Zero. Note: Undocumented\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved\n"
+                            + "All flags are preserved\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
@@ -3897,7 +3883,7 @@ namespace SEBasicIV
                             + "pop iy\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags are unaffected except when popping AF.\n"
+                            + "All flags are preserved except when popping AF.\n"
                             + "\n"
                             + "T-States:\n"
                             + "rr represents a two byte register pair: BC, DE, HL, SP\n"
@@ -3922,7 +3908,7 @@ namespace SEBasicIV
                             + "push iy\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags are unaffected.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "rr represents a two byte register pair: BC, DE, HL, SP\n"
@@ -3951,7 +3937,7 @@ namespace SEBasicIV
                             + "res n,(iy+n)\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Flags are preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
@@ -3981,7 +3967,7 @@ namespace SEBasicIV
                             + "ret po\t\t; P/V is reset\n"
                             + "\n"
                             + "Effects:\n"
-                            + "Preserves all flags.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "cc is condition: NZ, Z, NC, C, PO, PE, P, M\n"
@@ -4001,7 +3987,7 @@ namespace SEBasicIV
                             + "reti\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags unaffected.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "14 t-states\n";
@@ -4017,7 +4003,7 @@ namespace SEBasicIV
                             + "retn\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags unaffected.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "14 t-states\n";
@@ -4269,7 +4255,7 @@ namespace SEBasicIV
                             + "rst $38\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags unaffected.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "11 t-states\n";
@@ -4356,7 +4342,7 @@ namespace SEBasicIV
                             + "set n,(iy+n)\n"
                             + "\n"
                             + "Effects:\n"
-                            + "All flags preserved.\n"
+                            + "All flags are preserved.\n"
                             + "\n"
                             + "T-States:\n"
                             + "r denotes 8-bit register.\n"
@@ -4574,150 +4560,6 @@ namespace SEBasicIV
                             + "(hl)\t7\n"
                             + "(ix+X)\t19\n"
                             + "(iy+X)\t19\n";
-                    case "ORG":
-                        return
-                            "Syntax:\n"
-                            + "\torg <val>\n\n"
-                            + "This sets the assembler's idea of the current address.\n"
-                            + "It takes one argument, which must evaluate to a value in the first pass (it may not use labels which are defined later).\n"
-                            + "At the start, the current address is set to 0. Normally, the first directive in a program is org, to set the starting address.\n"
-                            + "Using this directive more than once can be useful to create code which is to be executed at the same address,\n"
-                            + "for example when the memory is mapped. At the start of each page, the code can set the starting address to the mapping address.\n"
-                            + "The previously defined pages are not overwritten.\n"
-                            + "Example:\n"
-                            + "org 16384\n";
-                    case "MACRO":
-                    case "ENDM":
-                        return
-                            "Syntax:\n"
-                            + "\tmacro <name>\n"
-                            + "\tendm\n\n"
-                            + "With these directives it is possible to define new commands, which will output defined code.\n"
-                            + "arguments can be given as well.\n\n"
-                            + "Example:\n"
-                            + "callf: macro slot, address\n"
-                            + "rst 0x30\n"
-                            + "db slot\n"
-                            + "dw address\n"
-                            + "endm\n\n"
-                            + "After this definition, it is possible to use the macro, like this:\n"
-                            + "callf 0x8b, 0x4000";
-                    case "DEFB":
-                    case "DB":
-                        return
-                            "Syntax:\n"
-                            + "defb  <val> [,<val>...]\n"
-                            + "db    <val> [,<val>...]\n\n"
-                            + "'defb' and 'db' stand for \"define byte\"\n"
-                            + "They allow definition of one or more literal bytes.\n"
-                            + "All definitions should be separated by commas.\n\n"
-                            + "Example:\n"
-                            + "defb 1,2,3,4,5,6";
-                    case "DEFM":
-                    case "DM":
-                        return
-                            "Syntax:\n"
-                            + "defm   <text> [,<text>...]\n"
-                            + "dm     <text> [,<text>...]\n\n"
-                            + "'defm' and 'dm' for \"define message\".\n"
-                            + "They allow definition of strings of bytes.\n"
-                            + "All definitions should be separated by commas.\n"
-                            + "Strings of bytes should be between double quotes.\n"
-                            + "Example:\n"
-                            + "defm \"This is text\", \"This is more text\"";
-                    case "DEFS":
-                    case "DS":
-                        return
-                            "Syntax:\n"
-                            + "defs   <num> [,<val>]\n"
-                            + "ds     <num> [,<val>]\n\n"
-                            + "'defs' and 'ds' stand for \"define space\".\n"
-                            + "They can take one or two arguments, 'num' and 'val'.\n"
-                            + "They reserve 'num' bytes of space and initializes them to 'val'.\n"
-                            + "If val is omitted, it defaults to 0.\n\n"
-                            + "Example:\n"
-                            + "buffer: defs 20\n"
-                            + "sevens: defs 10, 7";
-                    case "DEFW":
-                    case "DW":
-                        return
-                            "Syntax:\n"
-                            + "defw   <text> [,<text>...]\n"
-                            + "dw     <text> [,<text>...]\n"
-                            + "'defw' and 'dw' stand for \"define word\".\n"
-                            + "They are convenience directives for defining least significant byte first two byte words, as the Z80 uses them.\n"
-                            + "Multiple expressions, separated by commas, may be specified.\n\n"
-                            + "Example:\n"
-                            + "org 0x8000\n"
-                            + "pointertable: defw sub1, sub2\n"
-                            + "sub1: sub b\n"
-                            + "ret nz\n"
-                            + "sub2: ld h,0\n"
-                            + "ret";
-                    case "ELSE":
-                    case "ENDIF":
-                    case "IF":
-                        return
-                        "Syntax:\n"
-                            + "\tif truth_value [statement] [else [statement]] endif\n\n"
-                            + "Parts of the code can be omitted using these conditional statements.\n"
-                            + "'else' can be repeated as many times as desired.\n\n"
-                            + "Example:\n"
-                            + "org 0x8000\n"
-                            + "include \"math.asm\"\n"
-                            + "if $ < 0x9000 ; Only do the following if math.asm is small enough\n"
-                            + "ld a,3\n"
-                            + "else\n"
-                            + "ld a,6\n"
-                            + "else\n"
-                            + ";this is also only assembled if math.asm is small enough\n"
-                            + "ld h,8\n"
-                            + "endif\n"
-                            + ";this is always assembled\n"
-                            + "call math_init";
-                    case "END":
-                        return
-                            "Syntax:\n"
-                            + "\tend\n\n"
-                            + "At the end of the program, it is allowed to use the 'end' directive.\n"
-                            + "There is no need to do this. Everything after this directive is ignored.\n"
-                            + "This can be useful to put comments at the end of the program.";
-                    case "INCLUDE":
-                        return
-                            "Syntax:\n"
-                            + "\tinclude <file>\n\n"
-                            + "As in C (but without the #), this includes another source file.\n"
-                            + "No substitution at all is done on the filename, which means that ~ cannot be used to refer to the home directory.\n"
-                            + "Almost any name is possible without escape characters, because of the quote rules.\n"
-                            + "The first non-whitespace character after the include directive is considered the starting quote.\n"
-                            + "The filename is then read, until the ending quote, which is the same as the starting quote.\n\n"
-                            + "Example:\n"
-                            + "include 'math.asm'\n"
-                            + "include -file'with\"quotes\".asm\n'"
-                            + "include zletter as quotes and spaces in name.asmz";
-                    case "INCBIN":
-                        return
-                            "Syntax:\n"
-                            + "\tincbin <file>\n\n"
-                            + "'incbin' stands for \"include binary\".\n"
-                            + "It allows any binary data to be included verbatim into the output.\n"
-                            + "No substitution at all is done on the filename, which means that ~ cannot be used to refer to the home directory.\n"
-                            + "Almost any name is possible without escape characters, because of the quote rules.\n"
-                            + "The first non-whitespace character after the include directive is considered the starting quote.\n"
-                            + "The filename is then read, until the ending quote, which is the same as the starting quote.\n\n"
-                            + "Example:\n"
-                            + "incbin 'math.bin'";
-                    case "SEEK":
-                        return
-                            "Syntax:\n"
-                            + "\tseek <offset>\n\n"
-                            + "'seek' is used to overwrite the generated output.\n"
-                            + "It will seek in the output file and start overwriting previous output.\n"
-                            + "This is mostly useful in combination with 'incbin' as it allows the included binary to be \"patched\".\n"
-                            + "If the 'offset' of 'seek' is greater than the current output size, the file is extended with zeros.\n\n"
-                            + "Example:\n"
-                            + "incbin 'math.bin'\n"
-                            + "seek 1024";
                     default:
                         return "ToolTip Not Found";
                 }
@@ -4895,31 +4737,35 @@ namespace SEBasicIV
                 listBox1.Items.Add(lErrors[i]);
             }
 
-            // TODO: Display Error Messages in List & allow User to click on message, which will:
-            // move the Caret to:
-            //      line | charPositionInLine
+            if (pErrors.Count == 0 && lErrors.Count == 0)
+            {
+                listBox1.Items.Add("No Lexer or Parser Errors Found!");
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selItem = listBox1.SelectedItem.ToString();
-            int selLine = 0;
-            int selPos = 0;
+            if (listBox1.SelectedItem != null && listBox1.SelectedItem.ToString() != "No Lexer or Parser Errors Found!")
+            {
+                string selItem = listBox1.SelectedItem.ToString();
+                int selLine = 0;
+                int selPos = 0;
 
-            int firstColon = selItem.IndexOf(":");
-            int firstDash = selItem.IndexOf("-");
-            string Line = selItem.Substring(firstColon + 2, firstDash -  firstColon - 3);
+                int firstColon = selItem.IndexOf(":");
+                int firstDash = selItem.IndexOf("-");
+                string Line = selItem.Substring(firstColon + 2, firstDash - firstColon - 3);
 
-            int middleColon = selItem.IndexOf(":", firstColon + 1);
-            int middleDash = selItem.IndexOf("-", firstDash + 1);
-            string Pos = selItem.Substring(middleColon + 2, middleDash - middleColon - 3);
+                int middleColon = selItem.IndexOf(":", firstColon + 1);
+                int middleDash = selItem.IndexOf("-", firstDash + 1);
+                string Pos = selItem.Substring(middleColon + 2, middleDash - middleColon - 3);
 
-            selLine = int.Parse(Line);
-            selPos = int.Parse(Pos);
+                selLine = int.Parse(Line);
+                selPos = int.Parse(Pos);
 
-            synBox1.Focus();
-            synBox1.Selection.Start = new Place(selPos, selLine - 1);
-            synBox1.DoSelectionVisible();
+                synBox1.Focus();
+                synBox1.Selection.Start = new Place(selPos, selLine - 1);
+                synBox1.DoSelectionVisible();
+            }
         }
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)

@@ -8,10 +8,6 @@ namespace SEBasicIV
 {
     static class Program
     {
-        
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -31,7 +27,6 @@ namespace SEBasicIV
 #if DEBUG
 
                 Application.Run(new SplashScreen());
-                //Application.Run(new Shell());
 #else
                 Application.Run(new SplashScreen());
 
