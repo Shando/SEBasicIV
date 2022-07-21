@@ -126,11 +126,11 @@ namespace SEBasicIV
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.miniTimer_LinkLabel1 = new MiniTimer_Theme.MiniTimer_LinkLabel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.status = new MiniTimer_Theme.MiniTimer_Label();
+            this.miniTimer_LinkLabel1 = new MiniTimer_Theme.MiniTimer_LinkLabel();
             this.vMyScrollBar = new SEBasicIV.MyScrollBar();
             this.hMyScrollBar = new SEBasicIV.MyScrollBar();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.synBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -263,7 +263,7 @@ namespace SEBasicIV
             this.toolStripButton8});
             this.toolStrip1.Location = new System.Drawing.Point(12, 76);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(875, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(914, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
@@ -542,6 +542,8 @@ namespace SEBasicIV
             this.toolStripButton8.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton8.Text = "Check Syntax";
             this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click_1);
+            this.toolStripButton8.MouseLeave += new System.EventHandler(this.toolStripButton8_MouseLeave_1);
+            this.toolStripButton8.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStripButton8_MouseMove_1);
             // 
             // menuStrip1
             // 
@@ -556,7 +558,7 @@ namespace SEBasicIV
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(696, 74);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(216, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(218, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.Visible = false;
@@ -572,7 +574,7 @@ namespace SEBasicIV
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
             this.toolStripMenuItem1.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -650,7 +652,7 @@ namespace SEBasicIV
             this.startStopMacroRecordingCtrlMToolStripMenuItem,
             this.executeMacroCtrlEToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
             this.editToolStripMenuItem.Text = "E&dit";
             // 
             // undoToolStripMenuItem
@@ -795,7 +797,7 @@ namespace SEBasicIV
             this.exportToRTFToolStripMenuItem,
             this.toolStripSeparator3});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 26);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // exportToHTMLToolStripMenuItem
@@ -824,7 +826,7 @@ namespace SEBasicIV
             this.toolStripSeparator7,
             this.aboutSyntaxEditorToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // shortKeysToolStripMenuItem
@@ -1103,6 +1105,31 @@ namespace SEBasicIV
             this.pictureBox7.TabIndex = 16;
             this.pictureBox7.TabStop = false;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(5, 493);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(1144, 132);
+            this.listBox1.TabIndex = 28;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            // 
+            // status
+            // 
+            this.status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.status.AutoSize = true;
+            this.status.BackColor = System.Drawing.SystemColors.Control;
+            this.status.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            this.status.Location = new System.Drawing.Point(7, 640);
+            this.status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(0, 21);
+            this.status.TabIndex = 29;
+            // 
             // miniTimer_LinkLabel1
             // 
             this.miniTimer_LinkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(134)))), ((int)(((byte)(158)))));
@@ -1120,19 +1147,6 @@ namespace SEBasicIV
             this.miniTimer_LinkLabel1.Text = "SE Basic IV Cordelia and Z80 Assembler IDE for the Chloe 280se (Beta)";
             this.miniTimer_LinkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.miniTimer_LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.miniTimer_LinkLabel1_LinkClicked);
-            // 
-            // status
-            // 
-            this.status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.status.AutoSize = true;
-            this.status.BackColor = System.Drawing.SystemColors.Control;
-            this.status.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.status.Location = new System.Drawing.Point(23, 506);
-            this.status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(0, 21);
-            this.status.TabIndex = 2;
             // 
             // vMyScrollBar
             // 
@@ -1178,24 +1192,13 @@ namespace SEBasicIV
             this.hMyScrollBar.MouseLeave += new System.EventHandler(this.hMyScrollBar_MouseLeave);
             this.hMyScrollBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.hMyScrollBar_MouseMove);
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(5, 493);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(1144, 132);
-            this.listBox1.TabIndex = 28;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
-            // 
             // SyntaxEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(1156, 678);
+            this.Controls.Add(this.status);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.ZoomOut);
@@ -1211,7 +1214,6 @@ namespace SEBasicIV
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.status);
             this.Controls.Add(this.vMyScrollBar);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.hMyScrollBar);
@@ -1426,7 +1428,6 @@ namespace SEBasicIV
         private ToolStripMenuItem setSelectedAsReadOnlyToolStripMenuItem;
         private ToolStripMenuItem setSelectedAsWritableToolStripMenuItem;
         private PictureBox pictureBox1;
-        public MiniTimer_Label status;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
@@ -1453,6 +1454,7 @@ namespace SEBasicIV
         private ToolStripSeparator toolStripSeparator17;
         private ToolStripButton toolStripButton8;
         private ListBox listBox1;
+        public MiniTimer_Label status;
         //private Info info1;
     }
 }

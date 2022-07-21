@@ -1002,7 +1002,8 @@ namespace SEBasicIV
         private void btInvisibleChars_MouseMove(object sender, MouseEventArgs e)
         {
             status.ForeColor = Color.FromArgb(255, 136, 136, 136);
-            status.Text = @"Show Invisible Characters";
+            status.Text = "Show Invisible Characters";
+            btInvisibleChars.ToolTipText = "Show Invisible Characters";
         }
         #endregion invisible char
 
@@ -1112,12 +1113,12 @@ namespace SEBasicIV
 
             if (bBasic)
             {
-                result = MessageBox.Show(@"Are you sure? Any unsaved changes will be lost!", @"SE BASIC Syntax Highlighter",
+                result = MessageBox.Show("Are you sure? Any unsaved changes will be lost!", "SE BASIC Syntax Highlighter",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             }
             else
             {
-                result = MessageBox.Show(@"Are you sure? Any unsaved changes will be lost!", @"Z80 Syntax Highlighter",
+                result = MessageBox.Show("Are you sure? Any unsaved changes will be lost!", "Z80 Syntax Highlighter",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             }
 
@@ -4631,10 +4632,12 @@ namespace SEBasicIV
             {
                 status.ForeColor = Color.FromArgb(255, 136, 136, 136);
                 status.Text = "Swap to Dark Theme";
+                toolStripButton7.ToolTipText = "Swap to Dark Theme";
             } else
             {
                 status.ForeColor = Color.FromArgb(255, 136, 136, 136);
                 status.Text = "Swap to Light Theme";
+                toolStripButton7.ToolTipText = "Swap to Light Theme";
             }
         }
 
@@ -4776,6 +4779,18 @@ namespace SEBasicIV
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             listBox1_SelectedIndexChanged(sender, e);
+        }
+
+        private void toolStripButton8_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            status.ForeColor = Color.FromArgb(255, 136, 136, 136);
+            status.Text = "Check Syntax";
+        }
+
+        private void toolStripButton8_MouseLeave_1(object sender, EventArgs e)
+        {
+            status.ForeColor = Color.FromArgb(255, 136, 136, 136);
+            status.Text = "";
         }
     }
 }
