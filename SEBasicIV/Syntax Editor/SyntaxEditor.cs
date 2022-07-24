@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using FastColoredTextBoxNS;
+using Assembly = System.Reflection.Assembly;
 
 namespace SEBasicIV
 {
@@ -323,27 +326,99 @@ namespace SEBasicIV
 
         #endregion scrollbar
 
+        public string getcurpath()
+        {
+            char a = '\\';
+            string[] splitString = _path.Split(a);
+            int iCount = splitString.Count() - 1;
+
+            string destFile = "";
+
+            for (int i = 0; i < iCount; i++)
+            {
+                destFile = destFile + splitString[i] + "\\";
+            }
+
+            return destFile;
+        }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var sfd = new SaveFileDialog())
             {
+                sfd.InitialDirectory = getcurpath();
+
                 if (bBasic)
                 {
-                    sfd.Filter = "SE BASIC File (*.PRG)|*.PRG";
+                    sfd.Filter = "SE BASIC File (*.prg)|*.prg";
                 } else
                 {
-                    sfd.Filter = "Z80 Assembler File (*.ASM)|*.ASM";
+                    sfd.Filter = "Z80 Assembler File (*.asm)|*.asm";
                 }
 
                 sfd.FilterIndex = 2;
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(sfd.FileName, synBox1.Text);
                     _path = sfd.FileName;
+                    File.WriteAllText(_path, synBox1.Text);
                 }
             }
+        }
+
+        private void createLstFile (string sfdFileName)
+        {
+            if (!bBasic)
+            {
+                char a = '\\';
+                string[] splitString = sfdFileName.Split(a);
+                int iCount = splitString.Count() - 1;
+                string fileNam = splitString[iCount];
+                string sdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+                string destFile = Path.Combine(sdir, fileNam);
+                File.Copy(sfdFileName, destFile, true);
+
+                string fileExt = sfdFileName.Substring(sfdFileName.LastIndexOf("."), 4);
+                string filename = fileNam.Replace(fileExt, ".lst");
+                string sparams = "-u --z80 --reqcolon --dotnames --casefold " + splitString[iCount];
+                string fname = Path.Combine(sdir, "zasm.exe");
+                Process.Start(fname, sparams);
+
+                destFile = "";
+
+                for (int i = 0; i < iCount; i++)
+                {
+                    destFile = destFile + splitString[i] + "\\";
+                }
+
+                destFile += filename;
+                string srcFile = Path.Combine(sdir, filename);
+                WaitForFile(srcFile);
+                File.Copy(srcFile, destFile, true);
+                string stmp = filename.Substring(0, filename.LastIndexOf("."));
+                File.Delete(sdir + "\\" + filename);
+                File.Delete(sdir + "\\" + stmp + ".rom");
+                File.Delete(sdir + "\\" + stmp + fileExt);
+            }
+        }
+
+        public static bool IsFileReady(string filename)
+        {
+            try
+            {
+                using (FileStream inputStream = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None))
+                    return inputStream.Length > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static void WaitForFile(string filename)
+        {
+            while (!IsFileReady(filename)) { }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -410,26 +485,37 @@ namespace SEBasicIV
 
         public void toolStripButton2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = "c:\\";
+            if (_path == "")
+            {
+                openFileDialog1.InitialDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            } else
+            {
+                openFileDialog1.InitialDirectory = getcurpath();
+            }
 
             if (bBasic)
             {
-                openFileDialog1.Filter = @"SE BASIC File (*.PRG)|*.PRG|All files (*.*)|*.*";
+                openFileDialog1.Filter = @"SE BASIC File (*.prg)|*.prg|All files (*.*)|*.*";
             } else
             {
-                openFileDialog1.Filter = @"Z80 Assembler File (*.ASM)|*.ASM|All files (*.*)|*.*";
+                openFileDialog1.Filter = @"Z80 Assembler File (*.asm)|*.asm|All files (*.*)|*.*";
             }
 
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 synBox1.OpenBindingFile(openFileDialog1.FileName, Encoding.UTF8);
                 synBox1.IsChanged = false;
                 synBox1.ClearUndo();
+
+                _path = openFileDialog1.FileName;
+
                 GC.Collect();
                 GC.GetTotalMemory(true);
+
+                highlightVisibleRange();
             }
         }
 
@@ -824,7 +910,6 @@ namespace SEBasicIV
 
         #endregion max
 
-
         #region min
 
         private void min_Click(object sender, EventArgs e)
@@ -847,7 +932,6 @@ namespace SEBasicIV
         }
 
         #endregion min
-
 
         #region ZoomIn
 
@@ -4587,17 +4671,7 @@ namespace SEBasicIV
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            using (var sfd = new SaveFileDialog())
-            {
-                sfd.Filter = "SE BASIC File (*.PRG)|*.PRG";
-                sfd.FilterIndex = 2;
-
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    File.WriteAllText(sfd.FileName, synBox1.Text);
-                    _path = sfd.FileName;
-                }
-            }
+            saveAsToolStripMenuItem_Click(sender, e);
         }
         #endregion Save as
 
@@ -4730,19 +4804,25 @@ namespace SEBasicIV
             List<string> pErrors = parserErrorListener.getSyntaxErrors();
             List<string> lErrors = lexerErrorListener.getSyntaxErrors();
 
-            for (int i = 0; i < pErrors.Count; i++)
-            {
-                listBox1.Items.Add(pErrors[i]);
-            }
-
-            for (int i = 0; i < lErrors.Count; i++)
-            {
-                listBox1.Items.Add(lErrors[i]);
-            }
-
             if (pErrors.Count == 0 && lErrors.Count == 0)
             {
                 listBox1.Items.Add("No Lexer or Parser Errors Found!");
+
+                if (_path != "")
+                {
+                    createLstFile(_path);
+                }
+            } else
+            {
+                for (int i = 0; i < pErrors.Count; i++)
+                {
+                    listBox1.Items.Add(pErrors[i]);
+                }
+
+                for (int i = 0; i < lErrors.Count; i++)
+                {
+                    listBox1.Items.Add(lErrors[i]);
+                }
             }
         }
 
@@ -4784,7 +4864,17 @@ namespace SEBasicIV
         private void toolStripButton8_MouseMove_1(object sender, MouseEventArgs e)
         {
             status.ForeColor = Color.FromArgb(255, 136, 136, 136);
-            status.Text = "Check Syntax";
+
+            string stmp = "Check Syntax";
+
+            if (!bBasic)
+            {
+                stmp += " and Generate .lst File if Syntax OK";
+            }
+
+            status.Text = stmp;
+            toolStripButton8.Text = stmp;
+            toolStripButton8.ToolTipText = stmp;
         }
 
         private void toolStripButton8_MouseLeave_1(object sender, EventArgs e)

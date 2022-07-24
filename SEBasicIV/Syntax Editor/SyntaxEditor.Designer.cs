@@ -263,7 +263,7 @@ namespace SEBasicIV
             this.toolStripButton8});
             this.toolStrip1.Location = new System.Drawing.Point(12, 76);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(914, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(914, 31);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
@@ -273,7 +273,7 @@ namespace SEBasicIV
             this.New.Image = global::SEBasicIV.Properties.Resources.doc;
             this.New.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.New.Name = "New";
-            this.New.Size = new System.Drawing.Size(29, 24);
+            this.New.Size = new System.Drawing.Size(29, 28);
             this.New.ToolTipText = "Create New Document";
             this.New.Click += new System.EventHandler(this.toolStripButton1_Click);
             this.New.MouseLeave += new System.EventHandler(this.New_MouseLeave);
@@ -285,7 +285,7 @@ namespace SEBasicIV
             this.Open.Image = global::SEBasicIV.Properties.Resources.Open1;
             this.Open.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Open.Name = "Open";
-            this.Open.Size = new System.Drawing.Size(29, 24);
+            this.Open.Size = new System.Drawing.Size(29, 28);
             this.Open.ToolTipText = "Open New Document";
             this.Open.Click += new System.EventHandler(this.toolStripButton2_Click);
             this.Open.MouseLeave += new System.EventHandler(this.Open_MouseLeave);
@@ -297,7 +297,7 @@ namespace SEBasicIV
             this.Save.Image = global::SEBasicIV.Properties.Resources.save___Copy;
             this.Save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(29, 24);
+            this.Save.Size = new System.Drawing.Size(29, 28);
             this.Save.ToolTipText = "Save Current Document";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             this.Save.MouseLeave += new System.EventHandler(this.Save_MouseLeave);
@@ -309,7 +309,7 @@ namespace SEBasicIV
             this.toolStripButton6.Image = global::SEBasicIV.Properties.Resources.save_as;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton6.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton6.Text = "toolStripButton6";
             this.toolStripButton6.ToolTipText = "Save Document As";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
@@ -322,7 +322,7 @@ namespace SEBasicIV
             this.Print.Image = global::SEBasicIV.Properties.Resources.fileprint;
             this.Print.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Print.Name = "Print";
-            this.Print.Size = new System.Drawing.Size(29, 24);
+            this.Print.Size = new System.Drawing.Size(29, 28);
             this.Print.ToolTipText = "Print Current Document";
             this.Print.Click += new System.EventHandler(this.Print_Click);
             this.Print.MouseLeave += new System.EventHandler(this.Print_MouseLeave);
@@ -331,7 +331,7 @@ namespace SEBasicIV
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
             // 
             // Cut
             // 
@@ -339,7 +339,7 @@ namespace SEBasicIV
             this.Cut.Image = global::SEBasicIV.Properties.Resources.cut1;
             this.Cut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Cut.Name = "Cut";
-            this.Cut.Size = new System.Drawing.Size(29, 24);
+            this.Cut.Size = new System.Drawing.Size(29, 28);
             this.Cut.ToolTipText = "Cut Selected Text";
             this.Cut.Click += new System.EventHandler(this.Cut_Click);
             this.Cut.MouseLeave += new System.EventHandler(this.Cut_MouseLeave);
@@ -351,7 +351,7 @@ namespace SEBasicIV
             this.Copy.Image = global::SEBasicIV.Properties.Resources.Copy1;
             this.Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Copy.Name = "Copy";
-            this.Copy.Size = new System.Drawing.Size(29, 24);
+            this.Copy.Size = new System.Drawing.Size(29, 28);
             this.Copy.ToolTipText = "Copy Selected Text";
             this.Copy.Click += new System.EventHandler(this.Copy_Click);
             this.Copy.MouseLeave += new System.EventHandler(this.Copy_MouseLeave);
@@ -363,7 +363,7 @@ namespace SEBasicIV
             this.Paste.Image = global::SEBasicIV.Properties.Resources.Paste1;
             this.Paste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Paste.Name = "Paste";
-            this.Paste.Size = new System.Drawing.Size(29, 24);
+            this.Paste.Size = new System.Drawing.Size(29, 28);
             this.Paste.ToolTipText = "Paste Copied Text";
             this.Paste.Click += new System.EventHandler(this.Paste_Click);
             this.Paste.MouseLeave += new System.EventHandler(this.Paste_MouseLeave);
@@ -372,7 +372,7 @@ namespace SEBasicIV
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // btInvisibleChars
             // 
@@ -381,7 +381,7 @@ namespace SEBasicIV
             this.btInvisibleChars.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btInvisibleChars.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btInvisibleChars.Name = "btInvisibleChars";
-            this.btInvisibleChars.Size = new System.Drawing.Size(29, 24);
+            this.btInvisibleChars.Size = new System.Drawing.Size(29, 28);
             this.btInvisibleChars.Text = "¶";
             this.btInvisibleChars.ToolTipText = "Show Invisible Characters";
             this.btInvisibleChars.Click += new System.EventHandler(this.btInvisibleChars_Click);
@@ -398,7 +398,7 @@ namespace SEBasicIV
             this.btHighlightCurrentLine.ImageAlign = System.Drawing.ContentAlignment.TopRight;
             this.btHighlightCurrentLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btHighlightCurrentLine.Name = "btHighlightCurrentLine";
-            this.btHighlightCurrentLine.Size = new System.Drawing.Size(29, 24);
+            this.btHighlightCurrentLine.Size = new System.Drawing.Size(29, 28);
             this.btHighlightCurrentLine.ToolTipText = "Highlight Current Line";
             this.btHighlightCurrentLine.Click += new System.EventHandler(this.btHighlightCurrentLine_Click);
             this.btHighlightCurrentLine.MouseLeave += new System.EventHandler(this.btHighlightCurrentLine_MouseLeave);
@@ -407,7 +407,7 @@ namespace SEBasicIV
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
             // 
             // Undo
             // 
@@ -415,7 +415,7 @@ namespace SEBasicIV
             this.Undo.Image = global::SEBasicIV.Properties.Resources.Undo5;
             this.Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Undo.Name = "Undo";
-            this.Undo.Size = new System.Drawing.Size(29, 24);
+            this.Undo.Size = new System.Drawing.Size(29, 28);
             this.Undo.ToolTipText = "Undo Recent Change";
             this.Undo.Click += new System.EventHandler(this.Undo_Click);
             this.Undo.MouseLeave += new System.EventHandler(this.Undo_MouseLeave);
@@ -428,7 +428,7 @@ namespace SEBasicIV
             this.Redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Redo.Name = "Redo";
-            this.Redo.Size = new System.Drawing.Size(29, 24);
+            this.Redo.Size = new System.Drawing.Size(29, 28);
             this.Redo.ToolTipText = "Redo Recent Undo";
             this.Redo.Click += new System.EventHandler(this.Redo_Click);
             this.Redo.MouseLeave += new System.EventHandler(this.Redo_MouseLeave);
@@ -437,7 +437,7 @@ namespace SEBasicIV
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton1
             // 
@@ -445,7 +445,7 @@ namespace SEBasicIV
             this.toolStripButton1.Image = global::SEBasicIV.Properties.Resources.Untitled_2;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton1.ToolTipText = "Comment Out Current Line";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_1);
             this.toolStripButton1.MouseLeave += new System.EventHandler(this.toolStripButton1_MouseLeave);
@@ -457,7 +457,7 @@ namespace SEBasicIV
             this.toolStripButton2.Image = global::SEBasicIV.Properties.Resources.Untitled_6;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton2.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton2.ToolTipText = "Uncomment Current Line";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click_1);
             this.toolStripButton2.MouseLeave += new System.EventHandler(this.toolStripButton2_MouseLeave);
@@ -466,7 +466,7 @@ namespace SEBasicIV
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton3
             // 
@@ -474,7 +474,7 @@ namespace SEBasicIV
             this.toolStripButton3.Image = global::SEBasicIV.Properties.Resources.Untitled_7;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton3.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton3.ToolTipText = "Open Find Dialog";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             this.toolStripButton3.MouseLeave += new System.EventHandler(this.toolStripButton3_MouseLeave);
@@ -486,7 +486,7 @@ namespace SEBasicIV
             this.toolStripButton4.Image = global::SEBasicIV.Properties.Resources.Untitled_8;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton4.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton4.ToolTipText = "Open Replace Dialog";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             this.toolStripButton4.MouseLeave += new System.EventHandler(this.toolStripButton4_MouseLeave);
@@ -495,7 +495,7 @@ namespace SEBasicIV
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton5
             // 
@@ -503,7 +503,7 @@ namespace SEBasicIV
             this.toolStripButton5.Image = global::SEBasicIV.Properties.Resources.run___Copy;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(160, 24);
+            this.toolStripButton5.Size = new System.Drawing.Size(160, 28);
             this.toolStripButton5.Text = "Swap to Z80 Editor";
             this.toolStripButton5.ToolTipText = "Swap to Z80 Editor";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -513,7 +513,7 @@ namespace SEBasicIV
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton7
             // 
@@ -521,7 +521,7 @@ namespace SEBasicIV
             this.toolStripButton7.Image = global::SEBasicIV.Properties.Resources.run___Copy;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(171, 24);
+            this.toolStripButton7.Size = new System.Drawing.Size(171, 28);
             this.toolStripButton7.Text = "Swap to Dark Theme";
             this.toolStripButton7.ToolTipText = "Swap to Dark Theme";
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click_1);
@@ -531,7 +531,7 @@ namespace SEBasicIV
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton8
             // 
@@ -539,8 +539,9 @@ namespace SEBasicIV
             this.toolStripButton8.Image = global::SEBasicIV.Properties.Resources.Run;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(29, 24);
-            this.toolStripButton8.Text = "Check Syntax";
+            this.toolStripButton8.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton8.Text = "Check Syntax & Generate .lst File";
+            this.toolStripButton8.ToolTipText = "Check Syntax and Generate .lst File";
             this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click_1);
             this.toolStripButton8.MouseLeave += new System.EventHandler(this.toolStripButton8_MouseLeave_1);
             this.toolStripButton8.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStripButton8_MouseMove_1);
@@ -558,7 +559,7 @@ namespace SEBasicIV
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(696, 74);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(218, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(216, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.Visible = false;
@@ -574,7 +575,7 @@ namespace SEBasicIV
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
             this.toolStripMenuItem1.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -652,7 +653,7 @@ namespace SEBasicIV
             this.startStopMacroRecordingCtrlMToolStripMenuItem,
             this.executeMacroCtrlEToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "E&dit";
             // 
             // undoToolStripMenuItem
@@ -797,7 +798,7 @@ namespace SEBasicIV
             this.exportToRTFToolStripMenuItem,
             this.toolStripSeparator3});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 26);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // exportToHTMLToolStripMenuItem
@@ -826,7 +827,7 @@ namespace SEBasicIV
             this.toolStripSeparator7,
             this.aboutSyntaxEditorToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // shortKeysToolStripMenuItem
