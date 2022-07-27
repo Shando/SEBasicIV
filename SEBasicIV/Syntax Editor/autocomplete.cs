@@ -10,54 +10,153 @@ namespace SEBasicIV
 
         readonly string[] Directive =
         {
-            "db ", "defb ", "defm ", "defs ", "defw ", "dm ", "ds ", "dw ", "else ", "end ", "endif ", "endm ", "if ",
-            "incbin ", "macro ", "org ", "seek "
+            "db val [, val ...] ", "defb val [, val ...] ", "defm text [, text ...] ", "defs num [, val] ",
+            "defw arg [, arg ...] ", "dm text [, text ...] ", "ds num, [, val] ", "dw arg [, arg ...] ",
+            "else  [statement]]\n[<code>]\nendif ", "end ", "endif ", "endm ",
+            "if truth_value [statement]\n<code>\n[else [statement]]\n[<code>]\nendif ",
+            "incbin file_name ", "include file_name ", "macro name\ncode\n endm ", "org addr ", "seek offset "
         };
 
         readonly string[] Keyword =
         {
-            "adc ", "add ", "and ", "bit ", "call ", "call c ", "call m ", "call nc ", "call nz ", "call p ", "call pe ",
-            "call po ", "call z ", "ccf ", "cp ", "cpd ", "cpdr ", "cpi ", "cpir ", "cpl ", "daa ", "dec ", "di ", "djnz ",
-            "ei ", "ex ", "exx ", "halt ", "im 0 ", "im 1 ", "im 2 ", "in ", "inc ", "ind ", "indr ", "ini ", "inir ",
-            "jp ", "jp c ", "jp m ", "jp nc ", "jp nz ", "jp p ", "jp pe ", "jp po ", "jp z ", "jr ", "jr c ", "jr nc ",
-            "jr nz ", "jr z ", "ld ", "ldd ", "lddr ", "ldi ", "ldir ", "neg ", "nop ", "or ", "otdr ", "otir ", "out ",
-            "outd ", "outi ", "pop ", "push ", "res ", "ret ", "ret c ", "ret m ", "ret nc ", "ret nz ", "ret p ",
-            "ret pe ", "ret po ", "ret z ", "reti ", "retn ", "rl ", "rla ", "rlc ", "rlca ", "rld ", "rr ", "rra ",
-            "rrc ", "rrca ", "rrd ", "rst ", "sbc ", "scf ", "set ", "sla ", "sll ", "sl1 ", "sra ", "srl ", "sub ",
-            "xor "
+            "adc a,a ", "adc a,b ", "adc a,c ", "adc a,d ", "adc a,e ", "adc a,h ", "adc a,l ", "adc a,ixh ", "adc a,ixl ",
+            "adc a,iyh ", "adc a,iyl ", "adc a,(hl) ", "adc a,(ix+n) ", "adc a,(iy+n) ", "adc a,n ", "adc hl,bc ",
+            "adc hl,de ", "adc hl,hl ", "adc hl,sp ", "add a,a ", "add a,b ", "add a,c ", "add a,d ", "add a,e ", "add a,h ",
+            "add a,l ", "add a,ixh ", "add a,ixl ", "add a,iyh ", "add a,iyl ", "add a,(hl) ", "add a,(ix+n) ",
+            "add a,(iy+n) ", "add a,n ", "add hl,bc ", "add hl,de ", "add hl,hl ", "add hl,sp ", "add ix,bc ", "add ix,de ",
+            "add ix,ix ", "add ix,sp ", "add iy,bc ", "add iy,de ", "add iy,iy ", "add iy,sp ", "and a,a ", "and a,b ",
+            "and a,c ", "and a,d ", "and a,e ", "and a,h ", "and a,l ", "and a,ixh ", "and a,ixl ", "and a,iyh ",
+            "and a,iyl ", "and a,(hl) ", "and a,(ix+n) ", "and a,(iy+n) ", "and a,n ", "bit n,a ", "bit n,b ", "bit n,c ",
+            "bit n,d ", "bit n,e ", "bit n,h ", "bit n,l ", "bit n,(hl) ", "bit n,(ix+n) ", "bit n,(iy+n) ", "call label ",
+            "call c label ", "call m label ", "call nc label ", "call nz label ", "call p label ", "call pe label ",
+            "call po label ", "call z label ", "ccf ", "cp a ", "cp b ", "cp c ", "cp d ", "cp e ", "cp h ", "cp l ",
+            "cp ixh ", "cp ixl ", "cp iyh ", "cp iyl ", "cp (hl) ", "cp (ix+n) ", "cp (iy+n) ", "cp n ", "cpd ", "cpdr ",
+            "cpi ", "cpir ", "cpl ", "daa ", "dec a ", "dec b ", "dec c ", "dec d ", "dec e ", "dec h ", "dec l ",
+            "dec ixh ", "dec ixl ", "dec iyh ", "dec iyl ", "dec (hl) ", "dec (ix+n) ", "dec (iy+n) ", "dec bc ",
+            "dec de ", "dec hl ", "dec ix ", "dec iy ", "dec sp ", "di ", "djnz label ", "ei ", "ex af,af' ", "ex de,hl ",
+            "ex (sp),hl ", "ex (sp),ix ", "ex (sp),iy ", "exx ", "halt ", "im 0 ", "im 1 ", "im 2 ", "in a,(n) ", "in a,(c) ",
+            "in b,(c) ", "in c,(c) ", "in d,(c) ", "in e,(c) ", "in h,(c) ", "in l,(c) ", "in (c) ", "inc a ", "inc b ",
+            "inc c ", "inc d ", "inc e ", "inc h ", "inc l ", "inc ixh ", "inc ixl ", "inc iyh ", "inc iyl ", "inc (hl) ",
+            "inc (ix+n) ", "inc (iy+n) ", "inc bc ", "inc de ", "inc hl ", "inc ix ", "inc iy ", "inc sp ", "ind ", "indr ",
+            "ini ", "inir ", "jp nn ", "jp c nn ", "jp m nn ", "jp nc nn ", "jp nz nn ", "jp p nn ", "jp pe nn ", "jp po nn ",
+            "jp z nn ", "jp (hl) ", "jp (ix) ", "jp (iy) ", "jr n ", "jr c n ", "jr nc n ", "jr nz n ", "jr z n ",
+            "ld a,a ", "ld a,b ", "ld a,c ", "ld a,d ", "ld a,e ", "ld a,h ", "ld a,l ", "ld a,i ", "ld a,r ", "ld a,ixh ",
+            "ld a,ixl ", "ld a,iyh ", "ld a,iyl ", "ld a,(bc) ", "ld a,(de) ", "ld a,(hl) ", "ld a,(ix+n) ", "ld a,(iy+n) ",
+            "ld a,n ", "ld a,(nn) ", "ld b,a ", "ld b,b ", "ld b,c ", "ld b,d ", "ld b,e ", "ld b,h ", "ld b,l ",
+            "ld b,ixh ", "ld b,ixl ", "ld b,iyh ", "ld b,iyl ", "ld b,(hl) ", "ld b,(ix+n) ", "ld b,(iy+n) ", "ld b,n ",
+            "ld c,a ", "ld c,b ", "ld c,c ", "ld c,d ", "ld c,e ", "ld c,h ", "ld c,l ", "ld c,ixh ", "ld c,ixl ",
+            "ld c,iyh ", "ld c,iyl ", "ld c,(hl) ", "ld c,(ix+n) ", "ld c,(iy+n) ", "ld c,n ", "ld d,a ", "ld d,b ",
+            "ld d,c ", "ld d,d ", "ld d,e ", "ld d,h ", "ld d,l ", "ld d,ixh ", "ld d,ixl ", "ld d,iyh ", "ld d,iyl ",
+            "ld d,(hl) ", "ld d,(ix+n) ", "ld d,(iy+n) ", "ld d,n ", "ld e,a ", "ld e,b ", "ld e,c ", "ld e,d ", "ld e,e ",
+            "ld e,h ", "ld e,l ", "ld e,ixh ", "ld e,ixl ", "ld e,iyh ", "ld e,iyl ", "ld e,(hl) ", "ld e,(ix+n) ",
+            "ld e,(iy+n) ", "ld e,n ", "ld h,a ", "ld h,b ", "ld h,c ", "ld h,d ", "ld h,e ", "ld h,h ", "ld h,l ",
+            "ld h,(hl) ", "ld h,(ix+n) ", "ld h,(iy+n) ", "ld h,n ", "ld l,a ", "ld l,b ", "ld l,c ", "ld l,d ", "ld l,e ",
+            "ld l,h ", "ld l,l ", "ld l,(hl) ", "ld l,(ix+n) ", "ld l,(iy+n) ", "ld l,n ", "ld i,a ", "ld r,a ", "ld ixh,a ",
+            "ld ixh,b ", "ld ixh, c ", "ld ixh,d ", "ld ixh,e ", "ld ixh,ixh ", "ld ixh,ixl", "ld ixh,n ", "ld ixl,a ",
+            "ld ixl,b ", "ld ixl, c ", "ld ixl,d ", "ld ixl,e ", "ld ixl,ixh ", "ld ixl,ixl", "ld ixl,n ", "ld iyh,a ",
+            "ld iyh,b ", "ld iyh, c ", "ld iyh,d ", "ld iyh,e ", "ld iyh,iyh ", "ld iyh,iyl", "ld iyh,n ", "ld iyl,a ",
+            "ld iyl,b ", "ld iyl, c ", "ld iyl,d ", "ld iyl,e ", "ld iyl,iyh ", "ld iyl,iyl", "ld iyl,n ", "ld bc,nn ",
+            "ld bc,(nn) ", "ld de,nn ", "ld de,(nn) ", "ld hl,nn ", "ld hl,(nn) ", "ld sp,hl ", "ld sp,ix ", "ld sp,iy ",
+            "ld sp,nn ", "ld sp,(nn) ", "ld ix,nn ", "ld ix,(nn) ", "ld iy,nn ", "ld iy,(nn) ", "ld (bc),a ", "ld (de),a ",
+            "ld (hl),a ", "ld (hl),b ", "ld (hl),c ", "ld (hl),d ", "ld (hl),e ", "ld (hl),h ", "ld (hl),l ", "ld (hl),n ",
+            "ld (ix+n),a ", "ld (ix+n),b ", "ld (ix+n),c ", "ld (ix+n),d ", "ld (ix+n),e ", "ld (ix+n),h ", "ld (ix+n),l ",
+            "ld (ix+n),n ", "ld (iy+n),a ", "ld (iy+n),b ", "ld (iy+n),c ", "ld (iy+n),d ", "ld (iy+n),e ", "ld (iy+n),h ",
+            "ld (iy+n),l ", "ld (iy+n),n ", "ld (nn),a ", "ld (nn),bc ", "ld (nn),de ", "ld (nn),hl ", "ld (nn),sp ",
+            "ld (nn),ix ", "ld (nn),iy ", "ldd ", "lddr ", "ldi ", "ldir ", "neg ", "nop ", "or a ", "or b ", "or c ",
+            "or d ", "or e ", "or h ", "or l ", "or ixh ", "or ixl ", "or iyh ", "or iyl ", "or (hl) ", "or (ix+n) ",
+            "or (iy+n) ", "or n ", "otdr ", "otir ", "out (imm8),a ", "out (c),a ", "out (c),b ", "out (c),c ", "out (c),d ",
+            "out (c),e ", "out (c),h ", "out (c),l ", "out (c),0 ", "outd ", "outi ", "pop af ", "pop bc ", "pop de ",
+            "pop hl ", "pop ix ", "pop iy ", "push af ", "push bc ", "push de ", "push hl ", "push ix ", "push iy ",
+            "res n,a ", "res n,b ", "res n,c ", "res n,d ", "res n,e ", "res n,h ", "res n,l ", "res n,(hl) ", "res n,(ix+n) ",
+            "res n,(iy+n) ", "ret ", "ret c ", "ret m ", "ret nc ", "ret nz ", "ret p ", "ret pe ", "ret po ", "ret z ",
+            "reti ", "retn ", "rl a ", "rl b ", "rl c ", "rl d ", "rl e ", "rl h ", "rl l ", "rl (hl) ", "rl (ix+n) ",
+            "rl (iy+n) ", "rla ", "rlc a ", "rlc b ", "rlc c ", "rlc d ", "rlc e ", "rlc h ", "rlc l ", "rlc (hl) ",
+            "rlc (ix+n) ", "rlc (iy+n) ", "rlca ", "rld ", "rr a ", "rr b ", "rr c ", "rr d ", "rr e ", "rr h ", "rr l ",
+            "rr (hl) ", "rr (ix+n) ", "rr (iy+n) ", "rra ", "rrc a ", "rrc b ", "rrc c ", "rrc d ", "rrc e ", "rrc h ",
+            "rrc l ", "rrc (hl) ", "rrc (ix+n) ", "rrc (iy+n) ", "rrca ", "rrd ", "rst $00 ", "rst $08 ", "rst $10 ",
+            "rst $18 ", "rst $20 ", "rst $28 ", "rst $30 ", "rst $38 ", "sbc a,a ", "sbc a,b ", "sbc a,c ", "sbc a,d ",
+            "sbc a,e ", "sbc a,h ", "sbc a,l ", "sbc a,ixh ", "sbc a,ixl ", "sbc a,iyh ", "sbc a,iyl ", "sbc a,(hl) ",
+            "sbc a,(ix+n) ", "sbc a,(iy+n) ", "sbc a,n ", "sbc hl,bc ", "sbc hl,de ", "sbc hl,hl ", "sbc hl,sp ", "scf ",
+            "set n,a ", "set n,b ", "set n,c ", "set n,d ", "set n,e ", "set n,h ", "set n,l ", "set n,(hl) ",
+            "set n,(ix+n) ", "set n,(iy+n) ", "sla a ", "sla b ", "sla c ", "sla d ", "sla e ", "sla h ", "sla l ",
+            "sla (hl) ", "sla (ix+n) ", "sla (iy+n) ", "sll a ", "sll b ", "sll c ", "sll d ", "sll e ", "sll h ",
+            "sll l ", "sll (hl) ", "sll (ix+n) ", "sll (iy+n) ", "sl1 a ", "sl1 b ", "sl1 c ", "sl1 d ", "sl1 e ", "sl1 h ",
+            "sl1 l ", "sl1 (hl) ", "sl1 (ix+n) ", "sl1 (iy+n) ", "sra a ", "sra b ", "sra c ", "sra d ", "sra e ", "sra h ",
+            "sra l ", "sra (hl) ", "sra (ix+n) ", "sra (iy+n) ", "srl a ", "srl b ", "srl c ", "srl d ", "srl e ", "srl h ",
+            "srl l ", "srl (hl) ", "srl (ix+n) ", "srl (iy+n) ", "sub a ", "sub b ", "sub c ", "sub d ", "sub e ", "sub h ",
+            "sub l ", "sub n ", "sub (hl) ", "sub (ix+n) ", "sub (iy+n) ", "xor a ", "xor b ", "xor c ", "xor d ", "xor e ",
+            "xor h ", "xor l ", "xor ixh ", "xor ixl ", "xor iyh ", "xor iyl ", "xor (hl) ", "xor (ix+n) ", "xor (iy+n) ",
+            "xor n "
         };
 
         readonly string[] Function =
         {
-            "ABS ", "ASC ", "ACOS ", "AC.", "ASIN ", "AS. ", "ATAN ", "AT. ", "CHR$ ", "COS ", "DEEK ", "EOF ", "EO. ",
-            "EXP ", "FIX ", "FN ", "FRE ", "INKEY$ # ", "INK. ", "INKEY$ ", "INP ", "INPUT$ ", "INSTR ", "INS. ", "INT ",
-            "LEFT$ ", "LEF. ", "LEN ", "LOC ", "LOF ", "LOG ", "MID$ ", "MOUSE ", "NMI ", "PEEK ", "PE.", "PI ", "PMAP ",
-            "POINT ", "POS ", "RIGHT$ ", "RI. ", "RND ", "SGN ", "SIN ", "SPACE$ ", "SPC ", "SQR ", "STICK ", "STR$ ",
-            "STRIG ", "STRING$ ", "STR. ", "TAB ", "TAN ", "TIMER ", "USR ", "U. ", "VAL ", "VAL$ ", "V. ", "VARPTR ",
+            "y = ABS(x) ", "val = ASC(char) ", "y = ACOS(x) ", "y = AC.(x) ", "y = ASIN(x) ", "y = AS.(x) ",
+            "y = ATAN(x) ", "y = AT.(x) ", "char = CHR$(x) ", "y = COS(x) ", "val = DEEK(addr) ", "EOF ", "EO. ",
+            "y = EXP(x) ", "y = FIX(x) ", "res = FN[ ]name [(arg_0 [, arg_1 ...])] ", "FRE ",
+            "key = INKEY$ [#file_num] ", "key = INK. [#file_num] ", "y = INP(x) ", "INPUT$ ",
+            "y = INSTR([start,] parent, child) ", "y = INS.([start,] parent, child) ", "y = INT(x) ",
+            "child = LEFT$(parent, num_chars) ", "child = LEF.(parent, num_chars) ", "y = LEN(str) ", "LOC ", "LOF ",
+            "y = LOG(x) ", "child = MID$(parent, pos [, len]) ", "MOUSE ", "NMI ", "y = PEEK(addr) ", "y = PE.(addr) ",
+            "PI ", "PMAP ",
+            "POINT ", "POS ", "child = RIGHT$(parent, num_chars) ", "child = RI.(parent, num_chars) ", "y = RND[(x)] ",
+            "y = SGN(x) ", "y = SIN(x) ", "SPACE$ ", "SPC ", "y = SQR(x) ", "STICK ", "str = STR$(x) ",
+            "STRIG ", "str = STRING$(len, char) ", "str = STR.(len, char) ", "TAB ", "y = TAN(x) ", "TIMER ",
+            "y = USR[x](expr) ", "y = U.[x](expr) ", "y = VAL(str) ", "str = VAL$(str) ", "str = V.(str) ", "VARPTR ",
             "VARPTR$ "
         };
 
         readonly string[] Statement =
         {
-            "BEEP ", "BSAVE ", "B. ", "CALL ", "CA. ", "CHAIN ", "CIRCLE ", "CLOSE ", "CLOSE # ", "CLO. ", "CLS ",
-            "COLOR ", "COL. ", "COM ", "COPY ", "C. ", "DATA ", "DA. ", "DATE$ ", "DEF FN ", "DEF. ", "DEF SEG ",
-            "DIM ", "DOKE ", "D. ", "DRAW ", "EDIT ", "ED. ", "ELSE ", "EL. ", "END", "ERASE ", "ERROR ", "E. ",
-            "FIELD ", "FOR ", "F. ", "GET ", "GOSUB ", "GOS. ", "GO SUB ", "GOTO ", "G. ", "IF ", "INPUT ", "I. ",
-            "INPUT # ", "KEY ", "LET ", "LINE ", "LINE INPUT ", "LINE INPUT # ", "LIST # ", "LOCATE ", "L. ", "LSET ",
-            "MID$ ", "MI. ", "NEXT ", "NOISE ", "ON ", "OPEN ", "OP. ", "OPTION BASE ", "OUT ", "O. ", "PAINT ",
-            "PALETTE ", "PA. ", "PALETTE USING ", "PEN ", "PLAY ", "POKE ", "PO.", "PRESET ", "PRINT ", "PR. ",
-            "PRINT # ", "PRINT USING ", "PSET ", "PUT ", "RANDOMIZE ", "RA. ", "READ ", "REM ", "R. ", "RESTORE ",
-            "RES. ", "RESUME ", "RETURN ", "RET. ", "RSET ", "SCREEN ", "SC. ", "SEEK # ", "SE. ", "SOUND ", "SO. ",
-            "STEP ", "STRIG ", "SWAP ", "THEN ", "TH. ", "TIME$ ", "TIMER ", "TO ", "USING ", "USI. ", "VIEW ",
-            "VIEW PRINT ", "WAIT ", "WA. ", "WEND ", "WE. ", "WHILE ", "W. ", "WIDTH ", "WINDOW ", "WRITE ", "WRITE #"
+            "BEEP ", "BSAVE file_spec, offset, length ", "B. file_spec, offset, length ", 
+            "CALL address_var [, p0, p1, ...] ", "CA. address_var [, p0, p1, ...] ",
+            "CHAIN ", "CIRCLE ", "CLOSE [[#] file_0 [, [#] file_1] ...] ", "CLO. [[#] file_0 [, [#] file_1] ...] ",
+            "CLS [x] ",
+            "COLOR [foreground] [, [background] [, border]] ", "COL. [foreground] [, [background] [, border]] ",
+            "COM ", "COPY file_spec_1 TO file_spec_2 ", "C. file_spec_1 TO file_spec_2 ", 
+            "DATA [const_0] [, [const_1]] ... ", "DA. [const_0] [, [const_1]] ... ", "DATE$ ",
+            "DEF FN[ ]name [( arg_0 [, arg_1] ...)] = expr ", "DEF.[ ]name [( arg_0 [, arg_1] ...)] = expr ",
+            "DEF SEG ",
+            "DIM name {(|[} limit_0 [, limit_1] ... {)|]} ", "DOKE addr, val ", "D. addr, val ", "DRAW ",
+            "EDIT {line_number|.} ", "ED. {line_number|.} ", "ELSE [anything] ", "EL. [anything] ", "END ",
+            "ERASE ", "ERROR error_number ", "E. error_number ",
+            "FIELD ", "FOR var = start TO stop [STEP step] ", "F. var = start TO stop [STEP step] ",
+            "GET ", "GO[ ]SUB line_number [anything] ", "GOS. line_number [anything] ", "GOTO line_number [anything] ",
+            "G. line_number [anything] ",
+            "IF truth_val {THEN|GOTO} [statement_true|line_num_true [anything]] [ELSE [statement_false|line_num_false [anything]]] ",
+            "INPUT [;] [prompt {;|,}] var_0 [, var_1] ... ", "I. [;] [prompt {;|,}] var_0 [, var_1] ... ",
+            "INPUT # ", "KEY key_id, string_value ", "KEY LIST ", "KEY {ON|OFF} ", "[LET] name = expr ",
+            "LINE ", "LINE INPUT ", "LINE INPUT # ", "LOCATE [row], [col] ", "L. [row], [col] ",
+            "LSET ",
+            "MID$ ", "MI. ", "NEXT [var_0 [, var_1] ...] ", "NOISE ", "ON num {GOTO|GOSUB} line_num_0 [, line_num_1] ... ",
+            "OPTION BASE ", "OUT port, val ", "O. port, val ", "PAINT ",
+            "PALETTE [attrib, color] ", "PA. [attrib, color] ", "PEN ", "PLAY ", "POKE addr, val ", "PO. addr, val ",
+            "PRESET ", "PRINT [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]] ",
+            "PR. [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]] ",
+            "PSET ", "PUT ", "RANDOMIZE [expr] ", "RA. [expr] ", "{REM|'} [anything] ", "R. [anything] ", "RESTORE [line] ",
+            "RES. [line] ", "RESUME ", "RETURN [line] ", "RET. [line] ", "RSET ", 
+            "SCREEN [mode] [, [colorburst] [, [apage] [, [vpage] [, erase]]]] ",
+            "SC. [mode] [, [colorburst] [, [apage] [, [vpage] [, erase]]]] ", "SEEK #file_num, file_pos ", "SE. #file_num, file_pos ",
+            "SOUND frequency, duration [, volume [, voice]] ", "SO. frequency, duration [, volume [, voice]] ",
+            "STEP ", "STRIG ", "SWAP ", "THEN ", "TH. ", "TIME$ ", "TIMER ", "USING ", "USI. ", "VIEW ",
+            "VIEW PRINT ", "WAIT frames ", "WA. frames ", "WEND ", "WE. ", "WHILE expr ", "W. expr ", "WIDTH ", "WINDOW ",
+            "WRITE ", "WRITE #"
         };
 
         readonly string[] Command =
         {
-            "AUTO ", "BLOAD ", "BL. ", "CHDIR ", "CH. ", "CLEAR ", "CLE. ", "CONT ", "DELETE ", "DE. ", "FILES ", "FI. ",
-            "KILL ", "K. ", "LIST ", "LI. ", "LOAD ", "LOCK ", "MERGE ", "ME.", "MKDIR ", "M. ", "NAME ", "NA. ", "NEW ",
-            "N. ", "OLD ", "PCOPY", "RENUM ", "REN. ", "RESET ", "RMDIR ", "RM. ", "RUN ", "SAVE ", "SA. ", "STOP ", "S. ",
-            "TERM ", "TRACE ", "T. ", "UNLOCK "
+            "AUTO ", "BLOAD file_spec, offset ", "BL. file_spec, offset ", "CHDIR dir_spec ", "CH. dir_spec ",
+            "CLEAR [mem_limit] ", "CLE. [mem_limit] ", "CONT ", "DELETE [line_number_0|.] [-[line_number_1|.]] ",
+            "DE. [line_number_0|.] [-[line_number_1|.]] ", "FILES [filter_spec] ", "FI. [filter_spec] ",
+            "KILL file_spec ", "K. file_spec ", "LIST [# file_num;] [line_num_0][, ][line_num_1] ",
+            "LI. [# file_num;] [line_num_0][, ][line_num_1] ", "LOAD file_spec [,{\"R\"|\"T\"}] ",
+            "LOCK ", "MERGE file_spec ", "ME. file_spec", "MKDIR dir_spec ", "M. dir_spec ", "NAME old_name TO new_name ",
+            "NA. old_name TO new_name ", "NEW ", "N. ", "OLD ", "OPEN # file_num, mode_char [,file_spec]",
+            "OP. # file_num, mode_char [,file_spec] ", "PCOPY ", "READ var_0 [, var_1] ... ", 
+            "RENUM [new|.] [, [old|.] [, increment]] ", "REN. [new|.] [, [old|.] [, increment]] ", "RESET ",
+            "RMDIR dir_spec ", "RM. dir_spec ", "RUN [line_num | app_name [, p0, p1, ...]] ", "SAVE file_spec [,\"T\"] ",
+            "SA. file_spec [,\"T\"] ", "STOP ", "S. ",
+            "TERM ", "TRACE {ON|OFF} ", "T. {ON|OFF} ", "UNLOCK "
         };
 
         readonly string[] Variable =
@@ -67,7 +166,7 @@ namespace SEBasicIV
 
         new readonly string[] Events =
         {
-            "ON TIMER ", "ON STRIG ", "ON PLAY ", "ON PEN ", "ON KEY ", "ON COM ", "ON ERROR "
+            "ON TIMER ", "ON STRIG ", "ON PLAY ", "ON PEN ", "ON KEY ", "ON COM ", "ON ERROR GOTO {line_num|0} "
         };
 
         public void BuildAutocompleteMenu(bool inBas)
@@ -132,8 +231,8 @@ namespace SEBasicIV
                             return
                                 // TODO: BEEP
                                 "To sound the speaker at 800 Hz(800 cycles per second) for one - quarter of a second.\n\nSyntax:\nBEEP";
-                        case "BSAVE":
-                        case "B.":
+                        case "BSAVE file_spec, offset, length":
+                        case "B. file_spec, offset, length":
                             return
                                 "Syntax:\n"
                                 + "\tBSAVE file_spec, offset, length\n\n"
@@ -148,8 +247,8 @@ namespace SEBasicIV
                                 + "\t'file_spec' contains disallowed characters: Bad file number (on CAS1:); Bad file name (on disk devices).\n"
                                 + "\t'offset' is not in the range [-32768 to 65535]: Overflow.\n"
                                 + "\t'length' is not in the range [-32768 to 65535]: Overflow.";
-                        case "CALL":
-                        case "CA.":
+                        case "CALL address_var [, p0, p1, ...]":
+                        case "CA. address_var [, p0, p1, ...]":
                             return
                                 "Syntax:\n"
                                 + "\tCALL address_var [, p0, p1, ...]\n\n"
@@ -168,9 +267,8 @@ namespace SEBasicIV
                             return
                                 // TODO: CIRCLE
                                 "To draw a circle, ellipse, and angles on the screen during use of the Graphics mode.\n\nSyntax:\nCIRCLE(xcenter, ycenter), radius[,[color][,[start],[end][,aspect]]]";
-                        case "CLOSE #":
-                        case "CLOSE":
-                        case "CLO.":
+                        case "CLOSE [[#] file_0 [, [#] file_1] ...]":
+                        case "CLO. [[#] file_0 [, [#] file_1] ...]":
                             return
                                 "Syntax:\n"
                                 + "\tCLOSE [[#] file_0 [, [#] file_1] ...]\n\n"
@@ -184,7 +282,7 @@ namespace SEBasicIV
                                 + "\t'file_1', 'file_2', ... have a string value: Type mismatch.\n"
                                 + "\tThe statement ends in a comma, Syntax error.\n"
                                 + "\tIf an error occurs, only the files before the erratic value are closed.";
-                        case "CLS":
+                        case "CLS [x]":
                             return
                                 "Syntax:\n"
                                 + "\tCLS [x]\n\n"
@@ -200,8 +298,8 @@ namespace SEBasicIV
                                 + "\t'x' is not in [-32768 to 32767]: Overflow.\n"
                                 + "\t'x' is not in [0, 1, 2]: Illegal function call.\n"
                                 + "\tIf an error occurs, the screen is not cleared.";
-                        case "COLOR":
-                        case "COL:":
+                        case "COLOR [foreground] [, [background] [, border]]":
+                        case "COL. [foreground] [, [background] [, border]]":
                             return
                                 "Syntax:\n"
                                 + "\tCOLOR [foreground] [, [background] [, border]]\n\n"
@@ -222,8 +320,8 @@ namespace SEBasicIV
                             return
                                 // TODO: COM
                                 "To enable or disable trapping of communications activity to the specified communications adapter.\n\nSyntax:\nCOM(n) ON\nCOM(n) OFF\nCOM(n)STOP";
-                        case "COPY":
-                        case "C.":
+                        case "COPY file_spec_1 TO file_spec_2":
+                        case "C. file_spec_1 TO file_spec_2":
                             return
                                 "Syntax:\n"
                                 + "\tCOPY file_spec_1 TO file_spec_2\n\n"
@@ -236,8 +334,8 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'file_spec_1' or 'file_spec_2' have number values: Type mismatch\n"
                                 + "\t'file_spec_1' does not exist: File not found.";
-                        case "DATA":
-                        case "DA.":
+                        case "DATA [const_0] [, [const_1]] ...":
+                        case "DA. [const_0] [, [const_1]] ...":
                             return
                                 "Syntax:\n"
                                 + "\tDATA [const_0] [, [const_1]] ...\n\n"
@@ -253,9 +351,8 @@ namespace SEBasicIV
                             return
                                 // TODO: DATE$
                                 "To set or retrieve the current date.\n\nSyntax:\nDATE$=variable$";
-                        case "DEF FN":
-                        case "DEF.":
-                        case "DEF":
+                        case "DEF FN[ ]name [( arg_0 [, arg_1] ...)] = expr":
+                        case "DEF.[ ]name [( arg_0 [, arg_1] ...)] = expr":
                         case "SEG":
                         case "FN":
                             // TODO: INCLUDE "FN" & "SEG" in here as well!
@@ -285,7 +382,7 @@ namespace SEBasicIV
                                 + "\tThe statement is executed directly instead of in a program line: Illegal direct.\n"
                                 + "\tIf the type of the return value is incompatible with the type of 'name', no error is raised at the DEF FN statement;\n"
                                 + "\t\thowever, a Type mismatch will be raised at the first call of 'FNname'.";
-                        case "DIM":
+                        case "DIM name {(|[} limit_0 [, limit_1] ... {)|]}":
                             return
                                 "Syntax:\n"
                                 + "\tDIM name {(|[} limit_0 [, limit_1] ... {)|]}\n\n"
@@ -310,8 +407,8 @@ namespace SEBasicIV
                                 + "\t'limit_0', 'limit_1', ... are not within [-32768 to 32767]: Overflow.\n"
                                 + "\t'limit_0', 'limit_1', ... are negative: Illegal function call.\n"
                                 + "\tThe array exceeds the size of available variable space: Out of memory.";
-                        case "DOKE":
-                        case "D.":
+                        case "DOKE addr, val":
+                        case "D. addr, val":
                             return
                                 "Syntax:\n"
                                 + "\tDOKE address, value\n\n"
@@ -331,8 +428,8 @@ namespace SEBasicIV
                             return
                                 // TODO: DRAW
                                 "To draw a figure.\n\nSyntax:\nDRAW string expression\n\nString commands are\nUp\tup\nDn\tdown\nLn\tleft\nRn\tright\nEn\tdiagonally up and right\nFn\tdiagonally down and right\nGn\tdiagonally down and left\nHn\tdiagonally up and left";
-                        case "EDIT":
-                        case "ED.":
+                        case "EDIT {line_number|.}":
+                        case "ED. {line_number|.}":
                             return
                                 "Syntax:\n"
                                 + "\tEDIT {line_number|.}\n\n"
@@ -353,8 +450,8 @@ namespace SEBasicIV
                             return
                                 // TODO: ERASE
                                 "To eliminate arrays from a program.\n\nSyntax:\nERASE list of array variables";
-                        case "ERROR":
-                        case "E.":
+                        case "ERROR error_number":
+                        case "E. error_number":
                             return
                                 "Syntax:\n"
                                 + "\tERROR error_number\n"
@@ -369,10 +466,8 @@ namespace SEBasicIV
                             return
                                 // TODO: FIELD
                                 "To allocate space for variables in a random file buffer.\n\nSyntax:\nFIELD [#] filenum, width AS stringvar [,width AS stringvar]...";
-                        case "FOR":
-                        case "F.":
-                        case "TO":
-                        case "STEP":
+                        case "FOR var = start TO stop [STEP step]":
+                        case "F. var = start TO stop [STEP step]":
                             return
                                 "Syntax:\n"
                                 + "\tFOR loop_var = start TO stop [STEP step]\n\n"
@@ -395,9 +490,8 @@ namespace SEBasicIV
                             return
                                 // TODO: GET
                                 "To transfer graphics images from the screen.\nOR\nTo read a record from a random disk file into a random buffer.\n\nSyntax:\nGET (x1,y1)-(x2,y2),array name\nOR\nGET [#]file number[,record number]";
-                        case "GO SUB":
-                        case "GOSUB":
-                        case "GOS.":
+                        case "GO[ ]SUB line_number [anything]":
+                        case "GOS. line_number [anything]":
                             return
                                 "Syntax:\n"
                                 + "\tGO[ ]SUB line_number [anything]\n\n"
@@ -413,8 +507,8 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\tIf 'line_number' does not exist: Undefined line number.\n"
                                 + "\tIf 'line_number' is greater than 65529, only the first 4 characters are read (for example, 6553)";
-                        case "GOTO":
-                        case "G":
+                        case "GOTO line_number [anything]":
+                        case "G. line_number [anything]":
                             return
                                 "Syntax:\n"
                                 + "\tGOTO line_number [anything]\n\n"
@@ -427,11 +521,11 @@ namespace SEBasicIV
                                 + "\tNo spaces are allowed between GO and TO.\n\n"
                                 + "Errors:\n"
                                 + "\t'line_number' does not exist: Undefined line number.";
-                        case "IF":
+                        case "IF truth_val {THEN|GOTO} [statement_true|line_num_true [anything]] [ELSE [statement_false|line_num_false [anything]]]":
                         case "THEN":
                         case "TH.":
-                        case "ELSE":
-                        case "EL.":
+                        case "ELSE [anything]":
+                        case "EL. [anything]":
                             return
                                 "Syntax:\n"
                                 + "\tIF truth_value {THEN|GOTO} [compound_statement_true|line_number_true [anything]] [ELSE [compound_statement_false|line_number_false [anything]]]\n\n"
@@ -455,8 +549,8 @@ namespace SEBasicIV
                                 + "\tIf 'truth_value' has a string value: Type mismatch.\n"
                                 + "\t'truth_value' equals 0 and 'line_number_false' is a non-existing line number,\n"
                                 + "\t\tor 'truth_value' is nonzero and 'line_number_true' is a non-existing line number: Undefined line number.";
-                        case "INPUT":
-                        case "I.":
+                        case "INPUT [;] [prompt {;|,}] var_0 [, var_1] ...":
+                        case "I. [;] [prompt {;|,}] var_0 [, var_1] ...":
                             return
                                 "Syntax:\n"
                                 + "\tINPUT [;] [prompt {;|,}] var_0 [, var_1] ...\n\n"
@@ -487,7 +581,9 @@ namespace SEBasicIV
                             return
                                 // TODO: INPUT #
                                 "To read data items from a sequential file and assign them to program variables.\n\nSyntax:\nINPUT# file number, variable list";
-                        case "KEY":
+                        case "KEY key_id":
+                        case "KEY LIST":
+                        case "KEY {ON|OFF}":
                             return
                                 "Syntax:\n"
                                 + "\t1) KEY key_id, string_value\n"
@@ -509,7 +605,7 @@ namespace SEBasicIV
                                 + "Most characters are represented by their symbol equivalent in the current codepage.\n"
                                 + "\tHowever, some characters get a different represenation, which is a symbolic representation of the effect as control characters on the screen.\n\n"
                                 + "3) Toggles function-key macros ON or OFF.";
-                        case "LET":
+                        case "[LET] name = expr":
                             return
                                 "Syntax:\n"
                                 + "\t[LET] name = expression\n\n"
@@ -532,8 +628,8 @@ namespace SEBasicIV
                             return
                                 // TODO: LINE INPUT #
                                 "NEEDS TO BE IN BOTH LINE & INPUT - To read an entire line (up to 255 characters), without delimiters, from a sequential disk file to a string variable.\n\nSyntax:\nLINE INPUT# file number, string variable";
-                        case "LOCATE":
-                        case "L.":
+                        case "LOCATE [row], [col]":
+                        case "L. [row], [col]":
                             return
                                 // TODO: LOCATE
                                 "To move the cursor to the specified position on the active screen.\n\nSyntax:\nLOCATE [row][,[col][,[cursor][,[start] [,stop]]]]";
@@ -545,7 +641,7 @@ namespace SEBasicIV
                             return
                                 // TODO: LSET
                                 "To move data from memory to a random-file buffer and left-justify it in preparation for a PUT statement.\n\nSyntax:\nLSET string variable=string expression";
-                        case "NEXT":
+                        case "NEXT [var_0 [, var_1] ...]":
                             return
                                 "Syntax:\n"
                                 + "\tNEXT [var_0 [, var_1] ...]\n\n"
@@ -564,7 +660,7 @@ namespace SEBasicIV
                             return
                                 // TODO: NOISE
                                 "Syntax:\n";
-                        case "ON":
+                        case "ON num {GOTO|GOSUB} line_num_0 [, line_num_1] ...":
                             return
                                 "Syntax:\n"
                                 + "\tON n {GOTO|GOSUB} line_number_0 [, line_number_1] ...\n\n"
@@ -579,56 +675,12 @@ namespace SEBasicIV
                                 + "\t'n' is not in [-32768 to 32767], Overflow.\n"
                                 + "\t'n' is not in [0 to 255]: Illegal function call.\n"
                                 + "\tThe line number jumped to does not exist: Undefined line number.";
-                        case "OPEN":
-                        case "OP.":
-                            return
-                                "Syntax:\n"
-                                + "\tOPEN # file_num, \"mode_char\" [,file_spec]\n\n"
-                                + "Opens a data file on a device.\n\n"
-                                + "Parameters:\n"
-                                + "\tThe string expression 'file_spec' is a valid file specification.\n"
-                                + "\t'file_num' is a valid stream [3 to 15].\n"
-                                + "\t'mode_char' is a string expression of which the first character is one of:\n"
-                                + "\t\t[\"K\", \"S\"] - system channel (keyboard or screen).\n"
-                                + "\t\t[\"I\", \"O\", \"A\", \"R\"] - access mode for a disk file.\n"
-                                + "\t\tother alpha character - a user defined channel.\n\n"
-                                + "Access modes:\n"
-                                + "\tThe 'mode_char' are as follows:\n"
-                                + "\t\tmode_char\tMeaning\tEffect\n"
-                                + "\t\t\"I\"\tINPUT\tOpens a text file for reading and positions the file pointer at the start.\n"
-                                + "\t\t\"O\"\tOUTPUT\tTruncates a text file at the start and opens it for writing.\n"
-                                + "\t\t\t\tAny data previously present in the file will be deleted.\n"
-                                + "\t\t\"A\"\tAPPEND\tOpens a text file for writing at the end of any existing data.\n"
-                                + "\t\t\"R\"\tRANDOM\tOpens a file for random access.\n\n"
-                                + "A single character can be read with c$=INKEY$ #file_num or written with PRINT #file_num;c$;.\n"
-                                + "Strings are terminated with a carriage return. A string can be read with INPUT #file_num;s$ or written with PRINT #file_num;s$.\n\n"
-                                + "File specification:\n"
-                                + "\t'file_spec' is a non-empty string expression of the form \"parameters\".\n"
-                                + "\t\t'parameters' must specify a valid file path of the form [/][dirname/] ... filename.\n"
-                                + "\tIn SE Basic IV, file support is provided using the OS kernel.\n"
-                                + "\t\tUnoDOS 3 follows MS-DOS file system conventions with the exception that folder names are separated with forward slashes (/).\n"
-                                + "\t\tSE Basic IV adds syntactic sugar to the short filename format. File names consist of an 8-character name and 3-character extension.\n"
-                                + "\t\tFolder names consist of an 11-character name. Permissible characters are the printable ASCII characters in the range [$20 to $7E]\n"
-                                + "\t\texcluding the characters \" * + . , / : ; < = > ? \\ [ ] |. Spaces are allowed but are converted to underscores.\n\n"
-                                + "A path starting with a forward slash is interpreted as an absolute path, starting at the root of the specified disk device.\n"
-                                + "Otherwise, the path is interpreted as relative to the current folder on the specified device.\n"
-                                + "The special folder name '..' refers to the parent folder of a preceding path, or the parent folder of the current folder if no path is given.\n"
-                                + "The special folder name '.' refers to the same folder as given by the preceding path, or the current folder if no preceding path is given.\n"
-                                + "The LOAD and SAVE statements do not currently implicitly add a default extension .BAS if no extension is specified.\n\n"
-                                + "Compatibility notes:\n"
-                                + "\tUnoDOS 3 allows certain characters in the range $7F to $FF. However, their permissibility and interpretation depends on the console code page,\n"
-                                + "\t\twhich may be different from the display code page currently in use. Therefore you should avoid using these characters.\n\n"
-                                + "Errors:\n"
-                                + "\t'file_num' is a non-existent stream: Undefined stream.\n"
-                                + "\t'file_num' is not in range [0 to 15]: Bad I/O device.\n"
-                                + "\t'mode_char' is a non-existent channel: Undefined channel.\n"
-                                + "\t'file_spec' is non-existent in input or append mode: File not found.";
                         case "OPTION BASE":
                             return
                                 // TODO: OPTION BASE
                                 "To declare the minimum value for array subscripts.\n\nSyntax:\nOPTION BASE n";
-                        case "OUT":
-                        case "O.":
+                        case "OUT port, val":
+                        case "O. port, val":
                             return
                                 "Syntax:\n"
                                 + "\tOUT port, value\n\n"
@@ -645,8 +697,8 @@ namespace SEBasicIV
                             return
                                 // TODO: PAINT
                                 "To fill in a graphics figure with the selected attribute.\n\nSyntax:\nPAINT (x start,y start)[,paint attribute[,border attribute][,bckgrnd attribute]]";
-                        case "PALETTE":
-                        case "PA.":
+                        case "PALETTE [attrib, color]":
+                        case "PA. [attrib, color]":
                             return
                                 "Syntax:\n"
                                 + "\tPALETTE [attrib, colour]\n\n"
@@ -675,8 +727,8 @@ namespace SEBasicIV
                             return
                                 // TODO: PLAY
                                 "To play music by embedding a music macro language into the string data type.\n\nSyntax:\nPLAY string expression";
-                        case "POKE":
-                        case "PO.":
+                        case "POKE addr, val":
+                        case "PO. addr, val":
                             return
                                 "Syntax:\n"
                                 + "\tPOKE address, value\n\n"
@@ -699,80 +751,8 @@ namespace SEBasicIV
                             return
                                 // TODO: PSET
                                 "To display a point at a specified place on the screen during use of the graphics mode.\n\nSyntax:\nPSET(x,y)[,color]";
-                        case "PRINT":
-                        case "PR.":
-                            return
-                                "Syntax:\n"
-                                + "\tPRINT [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]]\n\n"
-                                + "Writes expressions to the screen, a file or another device.\n"
-                                + "If stream is specified, output goes to the file or device open under that number.\n"
-                                + "'?' is a shorthand for PRINT.\n\n"
-                                + "When writing a string expression to the screen, the following control characters have special meaning.\n"
-                                + "Other characters are shown as their corresponding glyph in the current codepage:\n\n"
-                                + "Code point\tControl character\t\tEffect\n"
-                                + "$07\t\tBEL\t\t\tBeep the speaker.\n"
-                                + "$08\t\tBS\t\t\tErase the character in the previous column and move the cursor back.\n"
-                                + "$09\t\tHT\t\t\tJump to the next 8-cell tab stop.\n"
-                                + "$0A\t\tLF\t\t\tGo to the leftmost column in the next row; connect the rows to one logical line.\n"
-                                + "$0B\t\tVT\t\t\tMove the cursor to the top left of the screen.\n"
-                                + "$0C\t\tFF\t\t\tClear the screen.\n"
-                                + "$0D\t\tCR\t\t\tGo to the leftmost column in the next row.\n"
-                                + "$1C\t\tFS\t\t\tMove the cursor one column to the right.\n"
-                                + "$1D\t\tGS\t\t\tMove the cursor one column to the left.\n"
-                                + "$1E\t\tRS\t\t\tMove the cursor one row up.\n"
-                                + "$1F\t\tUS\t\t\tMove the cursor one row down.\n"
-                                + "Note: In SE Basic IV, anything after PRINT CHR$(12) is not printed.\n\n"
-                                + "Expressions can optionally be separated by one or more of the following keywords:\n\n"
-                                + "Keyword\t\tEffect\n"
-                                + ";\t\tAttaches two expressions tight together;\n"
-                                + "\t\t\tstrings will be printed without any space in between, numbers will have one space separating them,\n"
-                                + "\t\t\tin addition to the space or minus sign that indicate the sign of the number.\n"
-                                + ",\t\tThe expression after will be positioned at the next available tab stop.\n"
-                                + "'\t\tInserts a newline.\n"
-                                + "SPC(n)\t\tProduces 'n' spaces, where 'n' is a numeric expression. If 'n' is less than zero, it defaults to zero.\n"
-                                + "\t\t\tIf 'n' is greater than the file width, it is taken modulo the file width.\n"
-                                + "TAB(n)\t\tMoves to column 'n', where 'n' is a numeric expression. if 'n' is less than zero, it defaults to zero.\n"
-                                + "\t\t\tIf 'n' is greater than the file width, it is taken modulo the file width.\n"
-                                + "\t\t\tIf the current column is greater than 'n', TAB moves to column 'n' on the next line.\n\n"
-                                + "If the print statement does not end in one of these four separation tokens, a newline is printed after the last expression.\n"
-                                + "String expressions can be separated by one or more spaces, which has the same effect as separating by semicolons.";
-                        case "PRINT #":
-                            return
-                                "Syntax:\n"
-                                + "\tPRINT [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]]\n\n"
-                                + "Writes expressions to the screen, a file or another device.\n"
-                                + "If stream is specified, output goes to the file or device open under that number.\n"
-                                + "'?' is a shorthand for PRINT.\n\n"
-                                + "When writing a string expression to the screen, the following control characters have special meaning.\n"
-                                + "Other characters are shown as their corresponding glyph in the current codepage:\n\n"
-                                + "Code point\tControl character\t\tEffect\n"
-                                + "$07\t\tBEL\t\t\tBeep the speaker.\n"
-                                + "$08\t\tBS\t\t\tErase the character in the previous column and move the cursor back.\n"
-                                + "$09\t\tHT\t\t\tJump to the next 8-cell tab stop.\n"
-                                + "$0A\t\tLF\t\t\tGo to the leftmost column in the next row; connect the rows to one logical line.\n"
-                                + "$0B\t\tVT\t\t\tMove the cursor to the top left of the screen.\n"
-                                + "$0C\t\tFF\t\t\tClear the screen.\n"
-                                + "$0D\t\tCR\t\t\tGo to the leftmost column in the next row.\n"
-                                + "$1C\t\tFS\t\t\tMove the cursor one column to the right.\n"
-                                + "$1D\t\tGS\t\t\tMove the cursor one column to the left.\n"
-                                + "$1E\t\tRS\t\t\tMove the cursor one row up.\n"
-                                + "$1F\t\tUS\t\t\tMove the cursor one row down.\n"
-                                + "Note: In SE Basic IV, anything after PRINT CHR$(12) is not printed.\n\n"
-                                + "Expressions can optionally be separated by one or more of the following keywords:\n\n"
-                                + "Keyword\t\tEffect\n"
-                                + ";\t\tAttaches two expressions tight together;\n"
-                                + "\t\t\tstrings will be printed without any space in between, numbers will have one space separating them,\n"
-                                + "\t\t\tin addition to the space or minus sign that indicate the sign of the number.\n"
-                                + ",\t\tThe expression after will be positioned at the next available tab stop.\n"
-                                + "'\t\tInserts a newline.\n"
-                                + "SPC(n)\t\tProduces 'n' spaces, where 'n' is a numeric expression. If 'n' is less than zero, it defaults to zero.\n"
-                                + "\t\t\tIf 'n' is greater than the file width, it is taken modulo the file width.\n"
-                                + "TAB(n)\t\tMoves to column 'n', where 'n' is a numeric expression. if 'n' is less than zero, it defaults to zero.\n"
-                                + "\t\t\tIf 'n' is greater than the file width, it is taken modulo the file width.\n"
-                                + "\t\t\tIf the current column is greater than 'n', TAB moves to column 'n' on the next line.\n\n"
-                                + "If the print statement does not end in one of these four separation tokens, a newline is printed after the last expression.\n"
-                                + "String expressions can be separated by one or more spaces, which has the same effect as separating by semicolons.";
-                        case "PRINT USING":
+                        case "PRINT [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]]":
+                        case "PR. [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]]":
                             return
                                 "Syntax:\n"
                                 + "\tPRINT [# stream,] [expr_0|;|,|SPC( n)|TAB( n)] ... [USING format; uexpr_0 [{;|,} uexpr_1] ... [;|,]]\n\n"
@@ -812,8 +792,8 @@ namespace SEBasicIV
                             return
                                 // TODO: PUT
                                 "To write a record from a random buffer to a random disk file.\n\tOR\nTo transfer graphics images to the screen.\n\nSyntax:\nPUT[#]file number[,record number]\n\tOR\nPUT(x,y),array,[,action verb]";
-                        case "RANDOMIZE":
-                        case "RA.":
+                        case "RANDOMIZE [expr]":
+                        case "RA. [expr]":
                             return
                                 "Syntax:\n"
                                 + "\tRANDOMIZE [expr]\n\n"
@@ -829,28 +809,16 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'expr' has a string value: Illegal function call.\n"
                                 + "\tThe user provides a seed outside [-32768 to 32767] at the prompt: Overflow.";
-                        case "READ":
-                            return
-                                "Syntax:\n"
-                                + "\tREAD var_0 [, var_1] ...\n\n"
-                                + "Assigns data from a DATA statement to variables.\n"
-                                + "Reading starts at the current DATA position, which is the DATA entry immediately after the last one read by previous READ statements.\n"
-                                + "The DATA position is reset to the start by the RUN and RESTORE statements.\n\n"
-                                + "Parameters:\n"
-                                + "\t'var_0', 'var_1' are variables or array elements.\n\n"
-                                + "Errors:\n"
-                                + "\tNot enough data is present in DATA statements: Out of DATA.\n"
-                                + "\tThe type of the variable is not compatible with that of the data entry being read: a Syntax error occurs on the DATA line.";
-                        case "REM":
-                        case "R.":
+                        case "{REM|'} [anything]":
+                        case "R. [anything]":
                             return
                                 "Syntax:\n"
                                 + "\t{REM|'} [anything]\n\n"
                                 + "Ignores everything until the end of the line. The REM statement is intended for comments.\n"
                                 + "Everything after REM will be stored in the program unaltered and uninterpreted. Apostrophe (') is an alias for REM.\n\n"
                                 + "Note that a colon : does not terminate the REM statement; the colon and everything after it will be treated as part of the comment.";
-                        case "RESTORE":
-                        case "RES.":
+                        case "RESTORE [line]":
+                        case "RES. [line]":
                             return
                                 "Syntax:\n"
                                 + "\tRESTORE [line]\n\n"
@@ -865,8 +833,8 @@ namespace SEBasicIV
                             return
                                 // TODO: RESUME
                                 "To continue program execution after an error-recovery procedure has been  performed.\n\nSyntax:\nRESUME\nRESUME 0\nRESUME NEXT\nRESUME line number";
-                        case "RETURN":
-                        case "RET.":
+                        case "RETURN [line]":
+                        case "RET. [line]":
                             return
                                 "Syntax:\n"
                                 + "\tRETURN [line]\n\n"
@@ -878,8 +846,8 @@ namespace SEBasicIV
                                 + "When returning from an error trapping routine, RETURN re-enables the event trapping which was stopped on entering the trap routine.\n\n"
                                 + "Errors:\n"
                                 + "\t'line' is not an existing line number: Undefined line number.";
-                        case "SCREEN":
-                        case "SC.":
+                        case "SCREEN [mode] [, [colorburst] [, [apage] [, [vpage] [, erase]]]]":
+                        case "SC. [mode] [, [colorburst] [, [apage] [, [vpage] [, erase]]]]":
                             return
                                 "Syntax:\n"
                                 + "\tSCREEN [mode] [, [colorburst] [, [apage] [, [vpage] [, erase]]]]\n\n"
@@ -896,8 +864,8 @@ namespace SEBasicIV
                                 + "\tAny parameter has a string value: Type mismatch.\n"
                                 + "\tAny parameter is not in [-32768 to 32767]: Overflow.\n"
                                 + "\t'mode' is not an available video mode number for your video card setting: Illegal function call.";
-                        case "SEEK":
-                        case "SE.":
+                        case "SEEK #file_num, file_pos":
+                        case "SE. #file_num, file_pos":
                             return
                                 "Syntax:\n"
                                 + "\tSEEK #file_num, file_pos\n\n"
@@ -907,8 +875,8 @@ namespace SEBasicIV
                                 + "'file_pos' is a numeric expressions.\n\n"
                                 + "Notes:\n"
                                 + "\tNo error is raised if the specified file number is not open.";
-                        case "SOUND":
-                        case "SO.":
+                        case "SOUND frequency, duration [, volume [, voice]]":
+                        case "SO. frequency, duration [, volume [, voice]]":
                             return
                                 // TODO: SOUND
                                 "To generate sound through the speaker.\n\nSyntax:\nSOUND freq,duration";
@@ -938,8 +906,8 @@ namespace SEBasicIV
                             return
                                 // TODO: VIEW PRINT
                                 "To set the boundaries of the screen text window.\n\nSyntax:\nVIEW PRINT [topline TO bottomline]";
-                        case "WAIT":
-                        case "WA.":
+                        case "WAIT frames":
+                        case "WA. frames":
                             return
                                 "Syntax:\n"
                                 + "\tWAIT frames\n\n"
@@ -960,8 +928,8 @@ namespace SEBasicIV
                                 + "\tWHILE—WEND loops can be nested. WEND jumps to the most recent WHILE statement that has not been closed by another WEND.\n\n"
                                 + "Errors:\n"
                                 + "\tAll previous WHILE statements have been closed by another WEND or no WHILE statement has been executed before: WEND without WHILE.";
-                        case "WHILE":
-                        case "W.":
+                        case "WHILE expr":
+                        case "W. expr":
                             return
                                 "Syntax:\n"
                                 + "\tWHILE expr\n\n"
@@ -1028,15 +996,15 @@ namespace SEBasicIV
 
                     switch (Text.Substring(0, Text.Length - 1))
                     {
-                        case "ABS":
+                        case "y = ABS(x)":
                             return
                                 "Syntax:\n"
                                 + "\ty = ABS(x)\n\n"
                                 + "Returns the absolute value of 'x' if 'x' is a number and the value of 'x' if 'x' is a string.\n\n"
                                 + "Parameters:\n"
                                 + "\t'x' is an expression.";
-                        case "ACOS":
-                        case "AC.":
+                        case "y = ACOS(x)":
+                        case "y = A.(x)":
                             return
                                 "Syntax:\n"
                                 + "\ty = ACOS(x)\n\n"
@@ -1045,7 +1013,7 @@ namespace SEBasicIV
                                 + "\t'x' is a numeric expression that gives the angle in radians.\n\n"
                                 + "Errors:\n"
                                 + "'x' has a string value: Type mismatch.";
-                        case "ASC":
+                        case "val = ASC(char)":
                             return
                                 "Syntax:\n"
                                 + "\tval = ASC(char)\n\n"
@@ -1055,8 +1023,8 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'char' has a numeric value: Type mismatch.\n"
                                 + "\t'char' equals \"\": Illegal function call.";
-                        case "ASIN":
-                        case "AS.":
+                        case "y = ASIN(x)":
+                        case "y = AS.(x)":
                             return
                                 "Syntax:\n"
                                 + "\ty = ASIN(x)\n\n"
@@ -1065,8 +1033,8 @@ namespace SEBasicIV
                                 + "\t'x' is a numeric expression that gives the angle in radians.\n\n"
                                 + "Errors:\n"
                                 + "\t'x' has a string value: Type mismatch.";
-                        case "ATAN":
-                        case "AT.":
+                        case "y = ATAN(x)":
+                        case "y = AT.(x)":
                             return
                                 "Syntax:\n"
                                 + "\ty = ATAN(x)\n\n"
@@ -1075,8 +1043,7 @@ namespace SEBasicIV
                                 + "\t'x' is a numeric expression that gives the angle in radians.\n\n"
                                 + "Errors:\n"
                                 + "\t'x' has a string value: Type mismatch.";
-                        case "CHR$":
-                        case "CHR":
+                        case "char = CHR$(x)":
                             return
                                 "Syntax:\n"
                                 + "\tchar = CHR$(x)\n\n"
@@ -1087,7 +1054,7 @@ namespace SEBasicIV
                                 + "\t'x' has a string value: Type mismatch.\n"
                                 + "\t'x' is not in [-32768 to 32767]: Overflow.\n"
                                 + "\t'x' is not in 0 to 255: Illegal function call.";
-                        case "COS":
+                        case "y = COS(x)":
                             return
                                 "Syntax:\n"
                                 + "\tcosine = COS(angle)\n\n"
@@ -1096,10 +1063,10 @@ namespace SEBasicIV
                                 + "\t'angle' is a numeric expression that gives the angle in radians.\n\n"
                                 + "Errors:\n"
                                 + "\t'angle' has a string value: Type mismatch.";
-                        case "DEEK":
+                        case "val = DEEK(addr)":
                             return
                                 "Syntax:\n"
-                                + "\tvalue = DEEK(address)\n\n"
+                                + "\tval = DEEK(address)\n\n"
                                 + "Returns the 16-bit value of the memory at 'segment' * 16 + 'address' where 'segment' is the current segment set with DEF SEG.\n\n"
                                 + "Parameters:\n"
                                 + "\t'address' is a numeric expression in [-32768 to 65535]. Negative values are interpreted as their two's complement.";
@@ -1108,7 +1075,7 @@ namespace SEBasicIV
                             return
                                 // TODO: EOF
                                 "To return -1 (true) when the end of a sequential or a communications file has been reached, or to return 0 if end of file (EOF) has not been found.\n\nSyntax:\nEOF(file number)";
-                        case "EXP":
+                        case "y = EXP(x)":
                             return
                                 "Syntax:\n"
                                 + "\ty = EXP(x)\n\n"
@@ -1118,21 +1085,21 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'x' has a string value: Type mismatch.\n"
                                 + "\t'x' is larger than the natural logarithm of the maximum single-precision value: Overflow.";
-                        case "FIX":
+                        case "y = FIX(x)":
                             return
                                 "Syntax:\n"
-                                + "\twhole = FIX(number)\n\n"
+                                + "\ty = FIX(x)\n\n"
                                 + "Returns a number truncated towards zero.\n\n"
                                 + "Parameters:\n"
-                                + "\t'number' is a numeric expression.\n\n"
+                                + "\t'x' is a numeric expression.\n\n"
                                 + "Notes:\n"
                                 + "\tFIX truncates towards zero: it removes the fractional part. By contrast, INT truncates towards negative infinity.\n\n"
                                 + "Errors:\n"
-                                + "'number' is a string expression: Type mismatch.";
-                        case "FN":
+                                + "'x' is a string expression: Type mismatch.";
+                        case "res = FN[ ]name [(arg_0 [, arg_1 ...])]":
                             return
                                 "Syntax:\n"
-                                + "\tresult = FN[ ]name [(arg_0 [, arg_1] ...)\n\n"
+                                + "\tresult = FN[ ]name [(arg_0 [, arg_1 ...])]\n\n"
                                 + "Evaluates the user-defined function previously defined with DEF FN name. Spaces between FN and name are required.\n\n"
                                 + "Parameters:\n"
                                 + "\t'name' is the name of a previously defined function.\n"
@@ -1149,10 +1116,8 @@ namespace SEBasicIV
                             return
                                 // TODO: FRE
                                 "To return the number of available bytes in allocated string memory.\n\nSyntax:\nFRE(x$)\nFRE(x)";
-                        case "INKEY$ #":
-                        case "INKEY$":
-                        case "INKEY":
-                        case "INK.":
+                        case "key = INKEY$ [#file_num]":
+                        case "key = INK. [#file_num]":
                             return
                                 "Syntax:\n"
                                 + "\tkey = INKEY$ [ #file_num]\n\n"
@@ -1162,20 +1127,20 @@ namespace SEBasicIV
                                 + "Notes:\n"
                                 + "\tWhen a function key F1 to F15 is pressed, INKEY$ will return the letters of the associated macro unless it's been set to empty\n"
                                 + "\twith the KEY statement, in which case it returns the e-ASCII code for the function key.";
-                        case "INP":
+                        case "y = INP(x)":
                             return
                                 "Syntax:\n"
-                                + "\tcode = INP(port)\n\n"
+                                + "\ty = INP(x)\n\n"
                                 + "Returns the value of a machine port.\n\n"
                                 + "Parameters:\n"
-                                + "\t'port' is a numeric expression in [0 to 65535].";
+                                + "\t'x' is a numeric expression in [0 to 65535].";
                         case "INPUT$":
                         case "INPUT":
                             return
                                 // TODO: INPUT$
                                 "INP(n)\n\nSyntax:\nINPUT$(x[,[#]file number)]";
-                        case "INSTR":
-                        case "INS.":
+                        case "y = INSTR([start,] parent, child)":
+                        case "y = INS.([start,] parent, child)":
                             return
                                 "Syntax:\n"
                                 + "\tposition = INSTR([start,] parent, child)\n\n"
@@ -1192,20 +1157,19 @@ namespace SEBasicIV
                                 + "\t'start' has a string value or 'parent' or 'child' have numeric values: Type mismatch.\n"
                                 + "\t'start' is not in [-32768 to 32767]: Overflow.\n"
                                 + "\t'start' is not in [1 to 255]: Illegal function call.";
-                        case "INT":
+                        case "y = INT(x)":
                             return
                                 "Syntax:\n"
-                                + "\twhole = INT(number)\n\n"
+                                + "\ty = INT(x)\n\n"
                                 + "Returns 'number' truncated towards negative infinity.\n\n"
                                 + "Parameters:\n"
-                                + "\t'number' is a numeric expression.\n\n"
+                                + "\t'x' is a numeric expression.\n\n"
                                 + "Notes:\n"
                                 + "\tFIX truncates towards zero: it removes the fractional part. By contrast, INT truncates towards negative infinity.\n\n"
                                 + "Errors:\n"
-                                + "\t'number' is a string expression, Type mismatch.";
-                        case "LEFT$":
-                        case "LEF.":
-                        case "LEFT":
+                                + "\t'x' is a string expression, Type mismatch.";
+                        case "child = LEFT$(parent, num_chars)":
+                        case "child = LEF.(parent, num_chars)":
                             return
                                 "Syntax:\n"
                                 + "\tchild = LEFT$(parent, num_chars)"
@@ -1213,10 +1177,10 @@ namespace SEBasicIV
                                 + "Parameters:\n"
                                 + "\t'parent' is a string expression.\n"
                                 + "\t'num_chars' is a numeric expression.";
-                        case "LEN":
+                        case "y = LEN(str)":
                             return
                                 "Syntax:\n"
-                                + "\tlength = LEN(string)\n\n"
+                                + "\ty = LEN(string)\n\n"
                                 + "Returns the number of characters in 'string'.\n\n"
                                 + "Parameters:\n"
                                 + "\t'string' is a string expression.\n\n"
@@ -1230,7 +1194,7 @@ namespace SEBasicIV
                             return
                                 // TODO: LOF
                                 "To return the length (number of bytes) allocated to the file.\n\nSyntax:\nLOF(file number)";
-                        case "LOG":
+                        case "y = LOG(x)":
                             return
                                 "Syntax:\n"
                                 + "\ty = LOG(x)\n\n"
@@ -1240,15 +1204,14 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'x' has a string value: Type mismatch.\n"
                                 + "\t'x' is zero or negative: Illegal function call.";
-                        case "MID$":
-                        case "MI.":
-                        case "MID":
+                        case "child = MID$(parent, pos [, len])":
+                        case "child = MI.(parent, pos [, len])":
                             return
                                 "Syntax:\n"
-                                + "\tsubstring = MID$(string, position [, length])"
+                                + "\tchild = MID$(parent, position [, length])"
                                 + "Returns the middle 'length' characters starting at 'position' from the string 'parent'.\n\n"
                                 + "Parameters:\n"
-                                + "\t'string' is a string expression.\n"
+                                + "\t'parent' is a string expression.\n"
                                 + "\t'position' is a numeric expression.\n"
                                 + "\t'length' is a numeric expression.";
                         case "MOUSE":
@@ -1259,11 +1222,11 @@ namespace SEBasicIV
                             return
                                 // TODO: NMI
                                 "NMI function";
-                        case "PEEK":
-                        case "PE.":
+                        case "y = PEEK(addr)":
+                        case "y = PE.(addr)":
                             return
                                 "Syntax:\n"
-                                + "\tvalue = PEEK(address)\n\n"
+                                + "\ty = PEEK(address)\n\n"
                                 + "Returns the value of the memory at 'segment' * 16 + 'address' where 'segment' is the current segment set with DEF SEG.\n\n"
                                 + "Parameters:\n"
                                 + "\t'address' is a numeric expression in [-32768 to 65535]. Negative values are interpreted as their two's complement.\n\n"
@@ -1288,9 +1251,8 @@ namespace SEBasicIV
                             return
                                 // TODO: POS
                                 "To return the current cursor position.\n\nSyntax:\nPOS(c)";
-                        case "RIGHT$":
-                        case "RI.":
-                        case "RIGHT":
+                        case "child = RIGHT$(parent, num_chars)":
+                        case "child = RI.(parent, num_chars)":
                             return
                                 "Syntax:\n"
                                 + "\tchild = RIGHT$(parent, num_chars)"
@@ -1298,10 +1260,10 @@ namespace SEBasicIV
                                 + "Parameters:\n"
                                 + "\t'parent' is a string expression.\n"
                                 + "\t'num_chars' is a numeric expression.";
-                        case "RND":
+                        case "y = RND[(x)]":
                             return
                                 "Syntax:\n"
-                                + "\trandom = RND[(x)]\n\n"
+                                + "\ty = RND[(x)]\n\n"
                                 + "Returns a pseudorandom number in the interval 0 to 1.\n\n"
                                 + "Parameters:\n"
                                 + "\t'x' is a numeric expression.\n\n"
@@ -1316,7 +1278,7 @@ namespace SEBasicIV
                                 + "\tIt is a very poor random number generator. RND should not be used for cryptography, scientific simulations or anything else remotely serious.\n\n"
                                 + "Errors:\n"
                                 + "\t'x' has a string value: Type mismatch.";
-                        case "SGN":
+                        case "y = SGN(x)":
                             return
                                 "Syntax:\n"
                                 + "\tsign = SGN(number)\n\n"
@@ -1325,7 +1287,7 @@ namespace SEBasicIV
                                 + "\t'number' is a numeric expression.\n\n"
                                 + "Errors:\n"
                                 + "\t'number' has a string value: Type mismatch.";
-                        case "SIN":
+                        case "y = SIN(x)":
                             return
                                 "Syntax:\n"
                                 + "\tsine = SIN(angle)\n\n"
@@ -1343,7 +1305,7 @@ namespace SEBasicIV
                             return
                                 // TODO: SPC
                                 "To skip a specified number of spaces in a PRINT or an LPRINT statement.\n\nSyntax:\nSPC(n)";
-                        case "SQR":
+                        case "y = SQR(x)":
                             return
                                 "Syntax:\n"
                                 + "\troot = SQR(number)\n\n"
@@ -1360,9 +1322,8 @@ namespace SEBasicIV
                             return
                                 // TODO: STRIG
                                 "To return the status of the joystick triggers.\n\nSyntax:\nSTRIG ON\nSTRIG OFF";
-                        case "STRING$":
-                        case "STR.":
-                        case "STRING":
+                        case "str = STRING$(len, char)":
+                        case "str = STR.$(len, char)":
                             return
                                 "Syntax:\n"
                                 + "\tstring = STRING$(length, char)\n\n"
@@ -1375,8 +1336,7 @@ namespace SEBasicIV
                                 + "\t'char' is the empty string: Illegal function call.\n"
                                 + "\t'char' or 'length' is not in [-32768 to 32767]: Overflow.\n"
                                 + "\t'char' or 'length' is not in [0 to 255]: Illegal function call.";
-                        case "STR$":
-                        case "STR":
+                        case "str = STR$(x)":
                             return
                                 "Syntax:\n"
                                 + "\trepr = STR$(number)\n\n"
@@ -1389,7 +1349,7 @@ namespace SEBasicIV
                             return
                                 // TODO: TAB
                                 "Spaces to position n on the screen.\n\nSyntax:\nTAB(n)";
-                        case "TAN":
+                        case "y = TAN(x)":
                             return
                                 "Syntax:\n"
                                 + "\ttangent = TAN(angle)\n\n"
@@ -1402,8 +1362,8 @@ namespace SEBasicIV
                             return
                                 // TODO: TIMER
                                 "To return single-precision floating-point numbers representing the elapsed number of seconds since midnight or system reset.\n\nSyntax:\nTIMER";
-                        case "USR":
-                        case "U.":
+                        case "y = USR[x](expr)":
+                        case "y = U.[x](expr)":
                             return
                                 "Syntax:\n"
                                 + "\tvalue = USR[n](expr)\n\n"
@@ -1413,9 +1373,9 @@ namespace SEBasicIV
                                 + "\t'expr' is an expression.\n\n"
                                 + "Errors:\n"
                                 + "\t'n' is not a digit [0 to 9]: Syntax error.";
-                        case "VAL$":
-                        case "V.":
-                        case "VAL":
+                        case "y = VAL(str)":
+                        case "str = VAL$(str)":
+                        case "str = V.(str)":
                             return
                                 "Syntax:\n"
                                 + "\t1) value = VAL(string)\n"
@@ -1489,8 +1449,8 @@ namespace SEBasicIV
                             return
                                 // TODO: AUTO
                                 "To generate and increment line numbers automatically each time you press the RETURN key.\n\nSyntax:\nAUTO [line number][,[increment]]\nAUTO .[,[increment]]";
-                        case "BLOAD":
-                        case "BL.":
+                        case "BLOAD file_spec, offset":
+                        case "BL. file_spec, offset":
                             return
                                 "Syntax:\n"
                                 + "\tBLOAD file_spec , offset\n\n"
@@ -1504,8 +1464,8 @@ namespace SEBasicIV
                                 + "\t'file_spec' contains disallowed characters: Bad file number (on CAS1:); Bad file name (on disk devices).\n"
                                 + "\t'file_spec' has a numeric value: Type mismatch.\n"
                                 + "\t'offset' is not in the range [-32768 to 65535]: Overflow.";
-                        case "CHDIR":
-                        case "CH.":
+                        case "CHDIR dir_spec":
+                        case "CH. dir_spec":
                             return
                                 "Syntax:\n"
                                 + "\tCHDIR dir_spec\n\n"
@@ -1516,8 +1476,8 @@ namespace SEBasicIV
                                 + "\tNo matching path is found: Path not found.\n"
                                 + "\t'dir_spec' has a numeric value: Type mismatch.\n"
                                 + "\t'dir_spec' is empty: Bad file name.";
-                        case "CLEAR":
-                        case "CLE.":
+                        case "CLEAR [mem_limit]":
+                        case "CLE. [mem_limit]":
                             return
                                 "Syntax:\n"
                                 + "\tCLEAR [mem_limit]\n\n"
@@ -1547,8 +1507,8 @@ namespace SEBasicIV
                                 + "\tNo program is loaded, a program has not been run, after a program line has been modified or after CLEAR: Can't continue.\n"
                                 + "\tThe break occurred in a direct line: Can't continue.\n"
                                 + "\tCONT is used in a program: Can't continue.";
-                        case "DELETE":
-                        case "DE.":
+                        case "DELETE [line_number_0|.] [-[line_number_1|.]]":
+                        case "DE. [line_number_0|.] [-[line_number_1|.]]":
                             return
                                 "Syntax:\n"
                                 + "\tDELETE [line_number_0|.] [-[line_number_1|.]]\n\n"
@@ -1563,8 +1523,8 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'line_number_0' or 'line_number_1' is greater than 65529: Syntax error.\n"
                                 + "\tThe range specified does not include any program lines stored: Illegal function call.";
-                        case "FILES":
-                        case "FI.":
+                        case "FILES [filter_spec]":
+                        case "FI. [filter_spec]":
                             return
                                 "Syntax:\n"
                                 + "\tFILES [filter_spec]\n\n"
@@ -1578,8 +1538,8 @@ namespace SEBasicIV
                                 + "\t'filter_spec' has a numeric value: Type mismatch.\n"
                                 + "\t'filter_spec' is the empty string: Bad file name.\n"
                                 + "\tThe specified filter does not match any files: File not found.";
-                        case "KILL":
-                        case "K.":
+                        case "KILL file_spec":
+                        case "K. file_spec":
                             return
                                 "Syntax:\n"
                                 + "\tKILL file_spec\n\n"
@@ -1592,9 +1552,8 @@ namespace SEBasicIV
                                 + "\tThe file or path 'file_spec' does not exist: File not found\n"
                                 + "\tThe user has no write permission: Permission denied\n"
                                 + "\tIf a syntax error occurs after the closing quote, the file is removed anyway.";
-                        case "LIST #":
-                        case "LIST":
-                        case "LI.":
+                        case "LIST [# file_num;] [line_num_0][, ][line_num_1]":
+                        case "LI. [# file_num;] [line_num_0][, ][line_num_1]":
                             return
                                 "Syntax:\n"
                                 + "\tLIST [# file_num;] [line_number_0][, ][line_number_1]\n\n"
@@ -1613,7 +1572,7 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\tA line number is greater than 65529: Syntax error.\n"
                                 + "\t'file_num' has a string value: Type mismatch.";
-                        case "LOAD":
+                        case "file_spec [,{\"R\"|\"T\"}]":
                             return
                                 "Syntax:\n"
                                 + "\tLOAD file_spec [,{\"R\"|\"T\"}]\n\n"
@@ -1637,8 +1596,8 @@ namespace SEBasicIV
                             return
                                 // TODO: LOCK
                                 "\n\nSyntax:\nLOCK ???";
-                        case "MERGE":
-                        case "ME.":
+                        case "MERGE file_spec":
+                        case "ME. file_spec":
                             return
                                 "Syntax:\n"
                                 + "\tMERGE file_spec\n\n"
@@ -1654,8 +1613,8 @@ namespace SEBasicIV
                                 + "\tA loaded text file contains lines without line numbers: Direct statement in file.\n"
                                 + "\tA loaded text file contains lines longer than 255 characters: Line buffer overflow.\n"
                                 + "\t\tAttempting to load a text file that has LF rather than CR LF line endings may cause this error.";
-                        case "MKDIR":
-                        case "M.":
+                        case "MKDIR dir_spec":
+                        case "M. dir_spec":
                             return
                                 "Syntax:\n"
                                 + "\tMKDIR dir_spec\n\n"
@@ -1667,8 +1626,8 @@ namespace SEBasicIV
                                 + "\tThe parent folder does not exist: Path not found.\n"
                                 + "\tThe folder name already exists on that path: Path/File access error.\n"
                                 + "\tThe user has no write permission: Permission denied.";
-                        case "NAME":
-                        case "NA.":
+                        case "NAME old_name TO new_name":
+                        case "NA. old_name TO new_name":
                             return
                                 "Syntax:\n"
                                 + "\tNAME old_name TO new_name\n\n"
@@ -1695,12 +1654,68 @@ namespace SEBasicIV
                                 + "\tOLD\n\n"
                                 + "Loads a backup from disk of the program that was in memory the last time\n"
                                 + "a NEW command was issued and returns control to the user.";
+                        case "OPEN # file_num, mode_char [,file_spec]":
+                        case "OP. # file_num, mode_char [,file_spec]":
+                            return
+                                "Syntax:\n"
+                                + "\tOPEN # file_num, \"mode_char\" [,file_spec]\n\n"
+                                + "Opens a data file on a device.\n\n"
+                                + "Parameters:\n"
+                                + "\tThe string expression 'file_spec' is a valid file specification.\n"
+                                + "\t'file_num' is a valid stream [3 to 15].\n"
+                                + "\t'mode_char' is a string expression of which the first character is one of:\n"
+                                + "\t\t[\"K\", \"S\"] - system channel (keyboard or screen).\n"
+                                + "\t\t[\"I\", \"O\", \"A\", \"R\"] - access mode for a disk file.\n"
+                                + "\t\tother alpha character - a user defined channel.\n\n"
+                                + "Access modes:\n"
+                                + "\tThe 'mode_char' are as follows:\n"
+                                + "\t\tmode_char\tMeaning\tEffect\n"
+                                + "\t\t\"I\"\tINPUT\tOpens a text file for reading and positions the file pointer at the start.\n"
+                                + "\t\t\"O\"\tOUTPUT\tTruncates a text file at the start and opens it for writing.\n"
+                                + "\t\t\t\tAny data previously present in the file will be deleted.\n"
+                                + "\t\t\"A\"\tAPPEND\tOpens a text file for writing at the end of any existing data.\n"
+                                + "\t\t\"R\"\tRANDOM\tOpens a file for random access.\n\n"
+                                + "A single character can be read with c$=INKEY$ #file_num or written with PRINT #file_num;c$;.\n"
+                                + "Strings are terminated with a carriage return. A string can be read with INPUT #file_num;s$ or written with PRINT #file_num;s$.\n\n"
+                                + "File specification:\n"
+                                + "\t'file_spec' is a non-empty string expression of the form \"parameters\".\n"
+                                + "\t\t'parameters' must specify a valid file path of the form [/][dirname/] ... filename.\n"
+                                + "\tIn SE Basic IV, file support is provided using the OS kernel.\n"
+                                + "\t\tUnoDOS 3 follows MS-DOS file system conventions with the exception that folder names are separated with forward slashes (/).\n"
+                                + "\t\tSE Basic IV adds syntactic sugar to the short filename format. File names consist of an 8-character name and 3-character extension.\n"
+                                + "\t\tFolder names consist of an 11-character name. Permissible characters are the printable ASCII characters in the range [$20 to $7E]\n"
+                                + "\t\texcluding the characters \" * + . , / : ; < = > ? \\ [ ] |. Spaces are allowed but are converted to underscores.\n\n"
+                                + "A path starting with a forward slash is interpreted as an absolute path, starting at the root of the specified disk device.\n"
+                                + "Otherwise, the path is interpreted as relative to the current folder on the specified device.\n"
+                                + "The special folder name '..' refers to the parent folder of a preceding path, or the parent folder of the current folder if no path is given.\n"
+                                + "The special folder name '.' refers to the same folder as given by the preceding path, or the current folder if no preceding path is given.\n"
+                                + "The LOAD and SAVE statements do not currently implicitly add a default extension .BAS if no extension is specified.\n\n"
+                                + "Compatibility notes:\n"
+                                + "\tUnoDOS 3 allows certain characters in the range $7F to $FF. However, their permissibility and interpretation depends on the console code page,\n"
+                                + "\t\twhich may be different from the display code page currently in use. Therefore you should avoid using these characters.\n\n"
+                                + "Errors:\n"
+                                + "\t'file_num' is a non-existent stream: Undefined stream.\n"
+                                + "\t'file_num' is not in range [0 to 15]: Bad I/O device.\n"
+                                + "\t'mode_char' is a non-existent channel: Undefined channel.\n"
+                                + "\t'file_spec' is non-existent in input or append mode: File not found.";
                         case "PCOPY":
                             return
                                 // TODO: PCOPY
                                 "To copy one screen page to another in all screen modes.\n\nSyntax:\nPCOPY sourcepage, destinationpage";
-                        case "RENUM":
-                        case "REN.":
+                        case "READ var_0 [, var_1] ...":
+                            return
+                                "Syntax:\n"
+                                + "\tREAD var_0 [, var_1] ...\n\n"
+                                + "Assigns data from a DATA statement to variables.\n"
+                                + "Reading starts at the current DATA position, which is the DATA entry immediately after the last one read by previous READ statements.\n"
+                                + "The DATA position is reset to the start by the RUN and RESTORE statements.\n\n"
+                                + "Parameters:\n"
+                                + "\t'var_0', 'var_1' are variables or array elements.\n\n"
+                                + "Errors:\n"
+                                + "\tNot enough data is present in DATA statements: Out of DATA.\n"
+                                + "\tThe type of the variable is not compatible with that of the data entry being read: a Syntax error occurs on the DATA line.";
+                        case "RENUM [new|.] [, [old|.] [, increment]]":
+                        case "REN. [new|.] [, [old|.] [, increment]]":
                             return
                                 "Syntax:\n"
                                 + "\tRENUM [new|.] [, [old|.] [, increment]]\n\n"
@@ -1721,8 +1736,8 @@ namespace SEBasicIV
                             return
                                 // TODO: RESET
                                 "To close all disk files and write the directory information to a diskette before it is removed from a disk drive.\n\nSyntax:\nRESET";
-                        case "RMDIR":
-                        case "RM.":
+                        case "RMDIR dir_spec":
+                        case "RM. dir_spec":
                             return
                                 "Sytnax:\n"
                                 + "\tRMDIR dir_spec\n\n"
@@ -1733,7 +1748,7 @@ namespace SEBasicIV
                                 + "\t'dir_spec' has a numeric value: Type mismatch.\n"
                                 + "\t'dir_spec' is an empty string: Bad file name.\n"
                                 + "\tNo matching path is found: Path not found.";
-                        case "RUN":
+                        case "RUN [line_num | app_name [, p0, p1, ...]]":
                             return
                                 "Sytnax:\n"
                                 + "\tRUN [line_number | app_name [, p0, p1, ...]]\n\n"
@@ -1748,8 +1763,8 @@ namespace SEBasicIV
                                 + "Errors:\n"
                                 + "\t'line_number' is not a line number in the current program: Undefined line number.\n"
                                 + "\t'app_name' cannot be found: File not found.";
-                        case "SAVE":
-                        case "SA.":
+                        case "SAVE file_spec [,\"T\"]":
+                        case "SA. file_spec [,\"T\"]":
                             return
                                 "Syntax:\n"
                                 + "\tSAVE file_spec [,\"T\"]\n\n"
@@ -1775,8 +1790,8 @@ namespace SEBasicIV
                             return
                                 // TODO: TERM
                                 "";
-                        case "TRACE":
-                        case "T.":
+                        case "TRACE {ON|OFF}":
+                        case "T. {ON|OFF}":
                             return
                                 "Sytnax:\n"
                                 + "\tTRACE {ON|OFF}\n\n"
@@ -2016,12 +2031,12 @@ namespace SEBasicIV
             {
                 get
                 {
-                    switch (Text.Substring(0, Text.Length - 1).ToUpper())
+                    switch (Text.Substring(0, Text.Length - 1).ToLower())
                     {
-                        case "ORG":
+                        case "org addr":
                             return
                                 "Syntax:\n"
-                                + "\torg <val>\n\n"
+                                + "\torg addr\n\n"
                                 + "This sets the assembler's idea of the current address.\n"
                                 + "It takes one argument, which must evaluate to a value in the first pass (it may not use labels which are defined later).\n"
                                 + "At the start, the current address is set to 0. Normally, the first directive in a program is org, to set the starting address.\n"
@@ -2030,11 +2045,12 @@ namespace SEBasicIV
                                 + "The previously defined pages are not overwritten.\n"
                                 + "Example:\n"
                                 + "org 16384\n";
-                        case "MACRO":
-                        case "ENDM":
+                        case "macro name\ncode\n endm":
+                        case "endm":
                             return
                                 "Syntax:\n"
                                 + "\tmacro <name>\n"
+                                + "\t<code>\n"
                                 + "\tendm\n\n"
                                 + "With these directives it is possible to define new commands, which will output defined code.\n"
                                 + "arguments can be given as well.\n\n"
@@ -2046,8 +2062,8 @@ namespace SEBasicIV
                                 + "endm\n\n"
                                 + "After this definition, it is possible to use the macro, like this:\n"
                                 + "callf 0x8b, 0x4000";
-                        case "DEFB":
-                        case "DB":
+                        case "defb val [, val ...]":
+                        case "db val [, val ...]":
                             return
                                 "Syntax:\n"
                                 + "defb  <val> [,<val>...]\n"
@@ -2057,8 +2073,8 @@ namespace SEBasicIV
                                 + "All definitions should be separated by commas.\n\n"
                                 + "Example:\n"
                                 + "defb 1,2,3,4,5,6";
-                        case "DEFM":
-                        case "DM":
+                        case "defm text [, text ...]":
+                        case "dm text [, text ...]":
                             return
                                 "Syntax:\n"
                                 + "defm   <text> [,<text>...]\n"
@@ -2069,8 +2085,8 @@ namespace SEBasicIV
                                 + "Strings of bytes should be between double quotes.\n"
                                 + "Example:\n"
                                 + "defm \"This is text\", \"This is more text\"";
-                        case "DEFS":
-                        case "DS":
+                        case "defs num [, val]":
+                        case "ds num [, val]":
                             return
                                 "Syntax:\n"
                                 + "defs   <num> [,<val>]\n"
@@ -2082,8 +2098,8 @@ namespace SEBasicIV
                                 + "Example:\n"
                                 + "buffer: defs 20\n"
                                 + "sevens: defs 10, 7";
-                        case "DEFW":
-                        case "DW":
+                        case "defw arg [, arg ...]":
+                        case "dw arg [, arg ...]":
                             return
                                 "Syntax:\n"
                                 + "defw   <text> [,<text>...]\n"
@@ -2098,9 +2114,9 @@ namespace SEBasicIV
                                 + "ret nz\n"
                                 + "sub2: ld h,0\n"
                                 + "ret";
-                        case "ELSE":
-                        case "ENDIF":
-                        case "IF":
+                        case "else  [statement]]\n[<code>]\nendif":
+                        case "endif":
+                        case "if truth_value [statement]\n<code>\n[else [statement]]\n[<code>]\nendif":
                             return
                             "Syntax:\n"
                                 + "\tif truth_value [statement] [else [statement]] endif\n\n"
@@ -2126,10 +2142,10 @@ namespace SEBasicIV
                                 + "At the end of the program, it is allowed to use the 'end' directive.\n"
                                 + "There is no need to do this. Everything after this directive is ignored.\n"
                                 + "This can be useful to put comments at the end of the program.";
-                        case "INCLUDE":
+                        case "include file_name":
                             return
                                 "Syntax:\n"
-                                + "\tinclude <file>\n\n"
+                                + "\tinclude <file_name>\n\n"
                                 + "As in C (but without the #), this includes another source file.\n"
                                 + "No substitution at all is done on the filename, which means that ~ cannot be used to refer to the home directory.\n"
                                 + "Almost any name is possible without escape characters, because of the quote rules.\n"
@@ -2139,10 +2155,10 @@ namespace SEBasicIV
                                 + "include 'math.asm'\n"
                                 + "include -file'with\"quotes\".asm\n'"
                                 + "include zletter as quotes and spaces in name.asmz";
-                        case "INCBIN":
+                        case "incbin file_name":
                             return
                                 "Syntax:\n"
-                                + "\tincbin <file>\n\n"
+                                + "\tincbin <file_name>\n\n"
                                 + "'incbin' stands for \"include binary\".\n"
                                 + "It allows any binary data to be included verbatim into the output.\n"
                                 + "No substitution at all is done on the filename, which means that ~ cannot be used to refer to the home directory.\n"
@@ -2151,7 +2167,7 @@ namespace SEBasicIV
                                 + "The filename is then read, until the ending quote, which is the same as the starting quote.\n\n"
                                 + "Example:\n"
                                 + "incbin 'math.bin'";
-                        case "SEEK":
+                        case "seek offset":
                             return
                                 "Syntax:\n"
                                 + "\tseek <offset>\n\n"
@@ -2193,9 +2209,27 @@ namespace SEBasicIV
             {
                 get
                 {
-                    switch ((Text.Substring(0, Text.Length - 1).ToUpper()))
+                    switch ((Text.Substring(0, Text.Length - 1).ToLower()))
                     {
-                        case "ADC":
+                        case "adc a,a":
+                        case "adc a,b":
+                        case "adc a,c":
+                        case "adc a,d":
+                        case "adc a,e":
+                        case "adc a,h":
+                        case "adc a,l":
+                        case "adc a,ixh":
+                        case "adc a,ixl":
+                        case "adc a,iyh":
+                        case "adc a,iyl":
+                        case "adc a,(hl)":
+                        case "adc a,(ix+n)":
+                        case "adc a,(iy+n)":
+                        case "adc a,n":
+                        case "adc hl,bc":
+                        case "adc hl,de":
+                        case "adc hl,hl":
+                        case "adc hl,sp":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:adc\n"
                                 + "The sum of the two operands plus the carry flag (0 or 1) is calculated,\n"
@@ -2242,7 +2276,33 @@ namespace SEBasicIV
                                 + "a,(ix+X)\t19\n"
                                 + "a,(iy+X)\t19\n"
                                 + "hl,rr\t15\n";
-                        case "ADD":
+                        case "add a,a":
+                        case "add a,b":
+                        case "add a,c":
+                        case "add a,d":
+                        case "add a,e":
+                        case "add a,h":
+                        case "add a,l":
+                        case "add a,ixh":
+                        case "add a,ixl":
+                        case "add a,iyh":
+                        case "add a,iyl":
+                        case "add a,(hl)":
+                        case "add a,(ix+n)":
+                        case "add a,(iy+n)":
+                        case "add a,n":
+                        case "add hl,bc":
+                        case "add hl,de":
+                        case "add hl,hl":
+                        case "add hl,sp":
+                        case "add ix,bc":
+                        case "add ix,de":
+                        case "add ix,ix":
+                        case "add ix,sp":
+                        case "add iy,bc":
+                        case "add iy,de":
+                        case "add iy,iy":
+                        case "add iy,sp":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:add\n"
                                 + "The values of the two operands are added together, and\n"
@@ -2305,7 +2365,21 @@ namespace SEBasicIV
                                 + "hl, rr\t11\n"
                                 + "ix, rr\t15\n"
                                 + "iy, rr\t15\n";
-                        case "AND":
+                        case "and a,a":
+                        case "and a,b":
+                        case "and a,c":
+                        case "and a,d":
+                        case "and a,e":
+                        case "and a,h":
+                        case "and a,l":
+                        case "and a,ixh":
+                        case "and a,ixl":
+                        case "and a,iyh":
+                        case "and a,iyl":
+                        case "and a,(hl)":
+                        case "and a,(ix+n)":
+                        case "and a,(iy+n)":
+                        case "and a,n":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:and\n"
                                 + "AND is an instruction that takes an 8-bit input an compares it with the accumulator.\n"
@@ -2346,7 +2420,16 @@ namespace SEBasicIV
                                 + "(hl)\t7\n"
                                 + "(ix+X)\t19\n"
                                 + "(iy+X)\t19\n";
-                        case "BIT":
+                        case "bit n,a":
+                        case "bit n,b":
+                        case "bit n,c":
+                        case "bit n,d":
+                        case "bit n,e":
+                        case "bit n,h":
+                        case "bit n,l":
+                        case "bit n,(hl)":
+                        case "bit n,(ix+n)":
+                        case "bit n,(iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:bit\n"
                                 + "Tests if the specified bit is set.\n"
@@ -2378,15 +2461,15 @@ namespace SEBasicIV
                                 + "(hl)\t12\n"
                                 + "(ix+X)\t20\n"
                                 + "(iy+X)\t20\n";
-                        case "CALL":
-                        case "CALL C":
-                        case "CALL M":
-                        case "CALL NC":
-                        case "CALL NZ":
-                        case "CALL P":
-                        case "CALL PE":
-                        case "CALL PO":
-                        case "CALL Z":
+                        case "call label":
+                        case "call c label":
+                        case "call m label":
+                        case "call nc label":
+                        case "call nz label":
+                        case "call p label":
+                        case "call pe label":
+                        case "call po label":
+                        case "call z label":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:call\n"
                                 + "Pushes the address after the CALL instruction (PC+3) onto the stack and jumps to the label.\n"
@@ -2421,7 +2504,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "\tcondition true\tcondition false\n"
                                 + "cc,XX\t17\t\t\t10\n";
-                        case "CCF":
+                        case "ccf":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ccf\n"
                                 + "Inverts the carry flag.\n"
@@ -2437,7 +2520,21 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "CP":
+                        case "cp a":
+                        case "cp b":
+                        case "cp c":
+                        case "cp d":
+                        case "cp e":
+                        case "cp h":
+                        case "cp l":
+                        case "cp ixh":
+                        case "cp ixl":
+                        case "cp iyh":
+                        case "cp iyl":
+                        case "cp (hl)":
+                        case "cp (ix+n)":
+                        case "cp (iy+n)":
+                        case "cp n":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:cp\n"
                                 + "CP is a subtraction from A that doesn't update A, only the flags it would have\n"
@@ -2474,7 +2571,7 @@ namespace SEBasicIV
                                 + "(hl)\t7\n"
                                 + "(ix+X)\t19\n"
                                 + "(iy+X)\t19\n";
-                        case "CPD":
+                        case "cpd":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:cpd\n"
                                 + "Multiple instructions combined into one. CPD does these things in this order:\n"
@@ -2495,7 +2592,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "CPDR":
+                        case "cpdr":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:cpdr\n"
                                 + "Repeats CPD until either:\n"
@@ -2516,7 +2613,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "BC ≠ 0 and A ≠ (HL)\t21\n"
                                 + "BC = 0 or A = (HL)\t16\n";
-                        case "CPI":
+                        case "cpi":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:cpi\n"
                                 + "Multiple instructions combined into one. CPI does these things in this order:\n"
@@ -2537,7 +2634,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "CPIR":
+                        case "cpir":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:cpir\n"
                                 + "Repeats CPI until either:\n"
@@ -2558,7 +2655,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "BC != 0 and A != (HL)\t21\n"
                                 + "BC = 0 or A = (HL)\t16\n";
-                        case "CPL":
+                        case "cpl":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:cpl\n"
                                 + "CPL inverts all bits of A.\n"
@@ -2574,7 +2671,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "DAA":
+                        case "daa":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:daa\n"
                                 + "When this instruction is executed, the A register is BCD corrected using the contents of the flags.\n"
@@ -2596,7 +2693,26 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "DEC":
+                        case "dec a":
+                        case "dec b":
+                        case "dec c":
+                        case "dec d":
+                        case "dec e":
+                        case "dec h":
+                        case "dec l":
+                        case "dec ixh":
+                        case "dec ixl":
+                        case "dec iyh":
+                        case "dec iyl":
+                        case "dec (hl)":
+                        case "dec (ix+n)":
+                        case "dec (iy+n)":
+                        case "dec bc":
+                        case "dec de":
+                        case "dec hl":
+                        case "dec ix":
+                        case "dec iy":
+                        case "dec sp":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:dec\n"
                                 + "Decreases operand by one.\n"
@@ -2645,7 +2761,7 @@ namespace SEBasicIV
                                 + "rr\t6\n"
                                 + "ix\t10\n"
                                 + "iy\t10\n";
-                        case "DI":
+                        case "di":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:di\n"
                                 + "The DI Disables the Interrupts (both mode 1 and mode 2).\n"
@@ -2661,7 +2777,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "DJNZ":
+                        case "djnz label":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:djnz\n"
                                 + "Decreases B and jumps to a label if not zero.\n"
@@ -2679,7 +2795,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "\tB != 0\tB = 0\n"
                                 + "X\t13\t8\n";
-                        case "EI":
+                        case "ei":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ei\n"
                                 + "EI enables the interrupts.\n"
@@ -2695,7 +2811,11 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "EX":
+                        case "ex af,af'":
+                        case "ex de,hl":
+                        case "ex (sp),hl":
+                        case "ex (sp),ix":
+                        case "ex (sp),iy":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ex\n"
                                 + "Exchanges two 16-bit values.\n"
@@ -2719,7 +2839,7 @@ namespace SEBasicIV
                                 + "(sp),hl\t19\n"
                                 + "(sp),ix\t19\n"
                                 + "(sp),iy\t19\n";
-                        case "EXX":
+                        case "exx":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:exx\n"
                                 + "EXX exchanges BC, DE, and HL with shadow registers with BC', DE', and HL'.\n"
@@ -2735,7 +2855,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "HALT":
+                        case "halt":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:halt\n"
                                 + "Suspends all actions until the next interrupt.\n"
@@ -2754,10 +2874,9 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "IM":
-                        case "IM 0":
-                        case "IM 1":
-                        case "IM 2":
+                        case "im 0":
+                        case "im 1":
+                        case "im 2":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:im\n"
                                 + "Sets the interrupt mode.\n"
@@ -2785,7 +2904,15 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "8 t-states for each mode\n";
-                        case "IN":
+                        case "in a,(n)":
+                        case "in a,(c)":
+                        case "in b,(c)":
+                        case "in c,(c)":
+                        case "in d,(c)":
+                        case "in e,(c)":
+                        case "in h,(c)":
+                        case "in l,(c)":
+                        case "in (c)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:in\n"
                                 + "Reads a value from a hardware port.\n"
@@ -2815,7 +2942,26 @@ namespace SEBasicIV
                                 + "\n"
                                 + "A,X\t11\n"
                                 + "r,(C)\t12\n";
-                        case "INC":
+                        case "inc a":
+                        case "inc b":
+                        case "inc c":
+                        case "inc d":
+                        case "inc e":
+                        case "inc h":
+                        case "inc l":
+                        case "inc ixh":
+                        case "inc ixl":
+                        case "inc iyh":
+                        case "inc iyl":
+                        case "inc (hl)":
+                        case "inc (ix+n)":
+                        case "inc (iy+n)":
+                        case "inc bc":
+                        case "inc de":
+                        case "inc hl":
+                        case "inc ix":
+                        case "inc iy":
+                        case "inc sp":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:inc\n"
                                 + "Increases operand by 1.\n"
@@ -2865,7 +3011,7 @@ namespace SEBasicIV
                                 + "rr\t6\n"
                                 + "ix\t10\n"
                                 + "iy\t10\n";
-                        case "IND":
+                        case "ind":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ind\n"
                                 + "Reads the (C) port and writes the result to (HL), then decrements HL and decrements B.\n"
@@ -2882,7 +3028,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "INDR":
+                        case "indr":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:indr\n"
                                 + "Reads the (C) port and writes the result to (HL). HL and B are decremented. Repeats until B = 0.\n"
@@ -2899,7 +3045,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "B = 0\tB != 0\n"
                                 + "16\t21\n";
-                        case "INI":
+                        case "ini":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ini\n"
                                 + "Reads the (C) port and writes the result to (HL), then increments HL and decrements B.\n"
@@ -2916,7 +3062,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "INIR":
+                        case "inir":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:inir\n"
                                 + "Reads from the (C) port, then writes to (HL). HL is incremented and B is decremented.\n"
@@ -2934,15 +3080,18 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "B = 0\tB != 0\n"
                                 + "16\t21\n";
-                        case "JP":
-                        case "JP C":
-                        case "JP M":
-                        case "JP NC":
-                        case "JP NZ":
-                        case "JP P":
-                        case "JP PE":
-                        case "JP PO":
-                        case "JP Z":
+                        case "jp nn":
+                        case "jp c nn":
+                        case "jp m nn":
+                        case "jp nc nn":
+                        case "jp nz nn":
+                        case "jp p nn":
+                        case "jp pe nn":
+                        case "jp po nn":
+                        case "jp z nn":
+                        case "jp (hl)":
+                        case "jp (ix)":
+                        case "jp (iy)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:jp\n"
                                 + "Absolute jumps to the address. Can be conditional or unconditional.\n"
@@ -2988,11 +3137,11 @@ namespace SEBasicIV
                                 + "(hl)\t4\n"
                                 + "(ix)\t8\n"
                                 + "(iy)\t8\n";
-                        case "JR":
-                        case "JR C":
-                        case "JR NC":
-                        case "JR NZ":
-                        case "JR Z":
+                        case "jr n":
+                        case "jr c n":
+                        case "jr nc n":
+                        case "jr nz n":
+                        case "jr z n":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:jr\n"
                                 + "Relative jumps to the address. This means that it can only jump between 128 bytes ahead or behind.\n"
@@ -3020,7 +3169,190 @@ namespace SEBasicIV
                                 + "X\t12\n"
                                 + "\tcondition met\tcondition not met\n"
                                 + "cc,X\t12\t\t7\n";
-                        case "LD":
+                        case "ld a,a":
+                        case "ld a,b":
+                        case "ld a,c":
+                        case "ld a,d":
+                        case "ld a,e":
+                        case "ld a,h":
+                        case "ld a,l":
+                        case "ld a,i":
+                        case "ld a,r":
+                        case "ld a,ixh":
+                        case "ld a,ixl":
+                        case "ld a,iyh":
+                        case "ld a,iyl":
+                        case "ld a,(bc)":
+                        case "ld a,(de)":
+                        case "ld a,(hl)":
+                        case "ld a,(ix+n)":
+                        case "ld a,(iy+n)":
+                        case "ld a,n":
+                        case "ld a,(nn)":
+                        case "ld b,a":
+                        case "ld b,b":
+                        case "ld b,c":
+                        case "ld b,d":
+                        case "ld b,e":
+                        case "ld b,h":
+                        case "ld b,l":
+                        case "ld b,ixh":
+                        case "ld b,ixl":
+                        case "ld b,iyh":
+                        case "ld b,iyl":
+                        case "ld b,(hl)":
+                        case "ld b,(ix+n)":
+                        case "ld b,(iy+n)":
+                        case "ld b,n":
+                        case "ld c,a":
+                        case "ld c,b":
+                        case "ld c,c":
+                        case "ld c,d":
+                        case "ld c,e":
+                        case "ld c,h":
+                        case "ld c,l":
+                        case "ld c,ixh":
+                        case "ld c,ixl":
+                        case "ld c,iyh":
+                        case "ld c,iyl":
+                        case "ld c,(hl)":
+                        case "ld c,(ix+n)":
+                        case "ld c,(iy+n)":
+                        case "ld c,n":
+                        case "ld d,a":
+                        case "ld d,b":
+                        case "ld d,c":
+                        case "ld d,d":
+                        case "ld d,e":
+                        case "ld d,h":
+                        case "ld d,l":
+                        case "ld d,ixh":
+                        case "ld d,ixl":
+                        case "ld d,iyh":
+                        case "ld d,iyl":
+                        case "ld d,(hl)":
+                        case "ld d,(ix+n)":
+                        case "ld d,(iy+n)":
+                        case "ld d,n":
+                        case "ld e,a":
+                        case "ld e,b":
+                        case "ld e,c":
+                        case "ld e,d":
+                        case "ld e,e":
+                        case "ld e,h":
+                        case "ld e,l":
+                        case "ld e,ixh":
+                        case "ld e,ixl":
+                        case "ld e,iyh":
+                        case "ld e,iyl":
+                        case "ld e,(hl)":
+                        case "ld e,(ix+n)":
+                        case "ld e,(iy+n)":
+                        case "ld e,n":
+                        case "ld h,a":
+                        case "ld h,b":
+                        case "ld h,c":
+                        case "ld h,d":
+                        case "ld h,e":
+                        case "ld h,h":
+                        case "ld h,l":
+                        case "ld h,(hl)":
+                        case "ld h,(ix+n)":
+                        case "ld h,(iy+n)":
+                        case "ld h,n":
+                        case "ld l,a":
+                        case "ld l,b":
+                        case "ld l,c":
+                        case "ld l,d":
+                        case "ld l,e":
+                        case "ld l,h":
+                        case "ld l,l":
+                        case "ld l,(hl)":
+                        case "ld l,(ix+n)":
+                        case "ld l,(iy+n)":
+                        case "ld l,n":
+                        case "ld i,a":
+                        case "ld r,a":
+                        case "ld ixh,a":
+                        case "ld ixh,b":
+                        case "ld ixh, c":
+                        case "ld ixh,d":
+                        case "ld ixh,e":
+                        case "ld ixh,ixh":
+                        case "ld ixh,ixl":
+                        case "ld ixh,n":
+                        case "ld ixl,a":
+                        case "ld ixl,b":
+                        case "ld ixl, c":
+                        case "ld ixl,d":
+                        case "ld ixl,e":
+                        case "ld ixl,ixh":
+                        case "ld ixl,ixl":
+                        case "ld ixl,n":
+                        case "ld iyh,a":
+                        case "ld iyh,b":
+                        case "ld iyh, c":
+                        case "ld iyh,d":
+                        case "ld iyh,e":
+                        case "ld iyh,iyh":
+                        case "ld iyh,iyl":
+                        case "ld iyh,n":
+                        case "ld iyl,a":
+                        case "ld iyl,b":
+                        case "ld iyl, c":
+                        case "ld iyl,d":
+                        case "ld iyl,e":
+                        case "ld iyl,iyh":
+                        case "ld iyl,iyl":
+                        case "ld iyl,n":
+                        case "ld bc,nn":
+                        case "ld bc,(nn)":
+                        case "ld de,nn":
+                        case "ld de,(nn)":
+                        case "ld hl,nn":
+                        case "ld hl,(nn)":
+                        case "ld sp,hl":
+                        case "ld sp,ix":
+                        case "ld sp,iy":
+                        case "ld sp,nn":
+                        case "ld sp,(nn)":
+                        case "ld ix,nn":
+                        case "ld ix,(nn)":
+                        case "ld iy,nn":
+                        case "ld iy,(nn)":
+                        case "ld (bc),a":
+                        case "ld (de),a":
+                        case "ld (hl),a":
+                        case "ld (hl),b":
+                        case "ld (hl),c":
+                        case "ld (hl),d":
+                        case "ld (hl),e":
+                        case "ld (hl),h":
+                        case "ld (hl),l":
+                        case "ld (hl),n":
+                        case "ld (ix+n),a":
+                        case "ld (ix+n),b":
+                        case "ld (ix+n),c":
+                        case "ld (ix+n),d":
+                        case "ld (ix+n),e":
+                        case "ld (ix+n),h":
+                        case "ld (ix+n),l":
+                        case "ld (ix+n),n":
+                        case "ld (iy+n),a":
+                        case "ld (iy+n),b":
+                        case "ld (iy+n),c":
+                        case "ld (iy+n),d":
+                        case "ld (iy+n),e":
+                        case "ld (iy+n),h":
+                        case "ld (iy+n),l":
+                        case "ld (iy+n),n":
+                        case "ld (nn),a":
+                        case "ld (nn),bc":
+                        case "ld (nn),de":
+                        case "ld (nn),hl":
+                        case "ld (nn),sp":
+                        case "ld (nn),ix":
+                        case "ld (nn),iy":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ld\n"
                                 + "The LD instruction is used to put the value from one place into another place.\n"
@@ -3074,7 +3406,7 @@ namespace SEBasicIV
                                 + "ix,(XX)\t20\tiy,(XX)\t20\t(XX),hl\t20\n"
                                 + "(XX),rr\t20\t(XX),ix\t20\t(XX),iy\t20\n"
                                 + "sp,hl\t6\tsp,ix\t10\tsp,iy\t10\n";
-                        case "LDD":
+                        case "ldd":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ldd\n"
                                 + "Does a sort of \"LD(DE),(HL)\", then decrements DE, HL, and BC.\n"
@@ -3090,7 +3422,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "LDDR":
+                        case "lddr":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:lddr\n"
                                 + "Repeats the instruction LDD (Does a LD (DE),(HL) and decrements each of DE, HL, and BC) until BC=0.\n"
@@ -3108,7 +3440,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "BC is not 0\t21\n"
                                 + "BC equals 0\t16\n";
-                        case "LDI":
+                        case "ldi":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ldi\n"
                                 + "Performs a \"LD(DE),(HL)\", then increments DE and HL, and decrements BC.\n"
@@ -3124,7 +3456,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "LDIR":
+                        case "ldir":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ldir\n"
                                 + "Repeats LDI (LD (DE),(HL), then increments DE, HL, and decrements BC) until BC=0.\n"
@@ -3142,7 +3474,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "BC = 0\tBC != 0\n"
                                 + "16\t21\n";
-                        case "NEG":
+                        case "neg":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:neg\n"
                                 + "NEG negates the accumulator.\n"
@@ -3158,7 +3490,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "8 t-states\n";
-                        case "NOP":
+                        case "nop":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:nop\n"
                                 + "NOP does nothing for 4 clock cycles.\n"
@@ -3174,7 +3506,21 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "OR":
+                        case "or a":
+                        case "or b":
+                        case "or c":
+                        case "or d":
+                        case "or e":
+                        case "or h":
+                        case "or l":
+                        case "or ixh":
+                        case "or ixl":
+                        case "or iyh":
+                        case "or iyl":
+                        case "or (hl)":
+                        case "or (ix+n)":
+                        case "or (iy+n)":
+                        case "or n":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:or\n"
                                 + "OR is an instruction that takes an 8-bit input an compare sit with the accumulator.\n"
@@ -3215,7 +3561,7 @@ namespace SEBasicIV
                                 + "(hl)\t7\n"
                                 + "(ix+X)\t19\n"
                                 + "(iy+X)\t19\n";
-                        case "OTDR":
+                        case "otdr":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:otdr\n"
                                 + "Reads from (HL) and writes to the (C) port. HL and B are then decremented.\n"
@@ -3233,7 +3579,7 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "B = 0\tB != 0\n"
                                 + "16\t21\n";
-                        case "OTIR":
+                        case "otir":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:otir\n"
                                 + "Reads from (HL) and writes to the (C) port. HL is incremented and B is decremented.\n"
@@ -3251,7 +3597,15 @@ namespace SEBasicIV
                                 + "T-States:\n"
                                 + "B = 0\tB != 0\n"
                                 + "16\t21\n";
-                        case "OUT":
+                        case "out (imm8),a":
+                        case "out (c),a":
+                        case "out (c),b":
+                        case "out (c),c":
+                        case "out (c),d":
+                        case "out (c),e":
+                        case "out (c),h":
+                        case "out (c),l":
+                        case "out (c),0":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:out\n"
                                 + "Writes the value of the second operand into the port given by the first operand.\n"
@@ -3280,7 +3634,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "A,X\t11\n"
                                 + "r,(C)\t12\n";
-                        case "OUTD":
+                        case "outd":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:outd\n"
                                 + "Writes the value from (HL) to the (C) port, then decrements B and HL.\n"
@@ -3297,7 +3651,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "OUTI":
+                        case "outi":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:outi\n"
                                 + "Reads from (HL) and writes to the (C) port. HL is then incremented, and B is decremented.\n"
@@ -3314,7 +3668,12 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "16 t-states\n";
-                        case "POP":
+                        case "pop af":
+                        case "pop bc":
+                        case "pop de":
+                        case "pop hl":
+                        case "pop ix":
+                        case "pop iy":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:pop\n"
                                 + "Copies the two bytes from (SP) into the operand, then increases SP by 2.\n"
@@ -3339,7 +3698,12 @@ namespace SEBasicIV
                                 + "rr\t10\n"
                                 + "ix\t14\n"
                                 + "iy\t14\n";
-                        case "PUSH":
+                        case "push af":
+                        case "push bc":
+                        case "push de":
+                        case "push hl":
+                        case "push ix":
+                        case "push iy":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:push\n"
                                 + "Copies the operand into (SP), then increments SP by 2.\n"
@@ -3364,7 +3728,16 @@ namespace SEBasicIV
                                 + "rr\t11\n"
                                 + "ix\t15\n"
                                 + "iy\t15\n";
-                        case "RES":
+                        case "res n,a":
+                        case "res n,b":
+                        case "res n,c":
+                        case "res n,d":
+                        case "res n,e":
+                        case "res n,h":
+                        case "res n,l":
+                        case "res n,(hl)":
+                        case "res n,(ix+n)":
+                        case "res n,(iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:res\n"
                                 + "Resets the specified byte to zero.\n"
@@ -3394,15 +3767,15 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "RET":
-                        case "RET C":
-                        case "RET M":
-                        case "RET NC":
-                        case "RET NZ":
-                        case "RET P":
-                        case "RET PE":
-                        case "RET PO":
-                        case "RET Z":
+                        case "ret":
+                        case "ret c":
+                        case "ret m":
+                        case "ret nc":
+                        case "ret nz":
+                        case "ret p":
+                        case "ret pe":
+                        case "ret po":
+                        case "ret z":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:ret\n"
                                 + "Pops the top of the stack into the program counter.\n"
@@ -3431,7 +3804,7 @@ namespace SEBasicIV
                                 + "ret\t10\n"
                                 + "\tcondition true\tcondition false\n"
                                 + "ret cc\t11\t\t5\n";
-                        case "RETI":
+                        case "reti":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:reti\n"
                                 + "Returns from an interrupt routine. Note: RETI cannot use return conditions.\n"
@@ -3447,7 +3820,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "14 t-states\n";
-                        case "RETN":
+                        case "retn":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:retn\n"
                                 + "Returns from the non-maskable interrupt (NMI). Cannot take return conditions.\n"
@@ -3463,7 +3836,16 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "14 t-states\n";
-                        case "RL":
+                        case "rl a":
+                        case "rl b":
+                        case "rl c":
+                        case "rl d":
+                        case "rl e":
+                        case "rl h":
+                        case "rl l":
+                        case "rl (hl)":
+                        case "rl (ix+n)":
+                        case "rl (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rl\n"
                                 + "9-bit rotation to the left. The register's bits are shifted left.\n"
@@ -3494,7 +3876,7 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "RLA":
+                        case "rla":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rla\n"
                                 + "Performs an RL A, but is much faster and S, Z, and P/V flags are preserved.\n"
@@ -3510,7 +3892,16 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "RLC":
+                        case "rlc a":
+                        case "rlc b":
+                        case "rlc c":
+                        case "rlc d":
+                        case "rlc e":
+                        case "rlc h":
+                        case "rlc l":
+                        case "rlc (hl)":
+                        case "rlc (ix+n)":
+                        case "rlc (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rlc\n"
                                 + "8-bit rotation to the left.\n"
@@ -3541,7 +3932,7 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "RLCA":
+                        case "rlca":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rlca\n"
                                 + "Performs RLC A much quicker, and modifies the flags differently.\n"
@@ -3557,7 +3948,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states";
-                        case "RLD":
+                        case "rld":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rld\n"
                                 + "Performs a 4-bit leftward rotation of the 12-bit number\n"
@@ -3576,7 +3967,16 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "18 t-states\n";
-                        case "RR":
+                        case "rr a":
+                        case "rr b":
+                        case "rr c":
+                        case "rr d":
+                        case "rr e":
+                        case "rr h":
+                        case "rr l":
+                        case "rr (hl)":
+                        case "rr (ix+n)":
+                        case "rr (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rr\n"
                                 + "9-bit rotation to the right. The carry is copied into bit 7,\n"
@@ -3608,7 +4008,7 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "RRA":
+                        case "rra":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rra\n"
                                 + "Performs a RR A faster, and modifies the flags differently.\n"
@@ -3625,7 +4025,16 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "RRC":
+                        case "rrc a":
+                        case "rrc b":
+                        case "rrc c":
+                        case "rrc d":
+                        case "rrc e":
+                        case "rrc h":
+                        case "rrc l":
+                        case "rrc (hl)":
+                        case "rrc (ix+n)":
+                        case "rrc (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rrc\n"
                                 + "8-bit rotation to the right. the bit leaving on the right\n"
@@ -3657,7 +4066,7 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "RRCA":
+                        case "rrca":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rrca\n"
                                 + "Performs a RRC A faster and modifies the flags differently.\n"
@@ -3674,7 +4083,7 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "RRD":
+                        case "rrd":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rrd\n"
                                 + "Like rld, except rotation is rightward.\n"
@@ -3691,7 +4100,14 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "18 t-states\n";
-                        case "RST":
+                        case "rst $00":
+                        case "rst $08":
+                        case "rst $10":
+                        case "rst $18":
+                        case "rst $20":
+                        case "rst $28":
+                        case "rst $30":
+                        case "rst $38":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:rst\n"
                                 + "The current PC value plus three is pushed onto the stack.\n"
@@ -3715,7 +4131,25 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "11 t-states\n";
-                        case "SBC":
+                        case "sbc a,a":
+                        case "sbc a,b":
+                        case "sbc a,c":
+                        case "sbc a,d":
+                        case "sbc a,e":
+                        case "sbc a,h":
+                        case "sbc a,l":
+                        case "sbc a,ixh":
+                        case "sbc a,ixl":
+                        case "sbc a,iyh":
+                        case "sbc a,iyl":
+                        case "sbc a,(hl)":
+                        case "sbc a,(ix+n)":
+                        case "sbc a,(iy+n)":
+                        case "sbc a,n":
+                        case "sbc hl,bc":
+                        case "sbc hl,de":
+                        case "sbc hl,hl":
+                        case "sbc hl,sp":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:sbc\n"
                                 + "Sum of second operand and carry flag is subtracted from the first operand.\n"
@@ -3761,7 +4195,7 @@ namespace SEBasicIV
                                 + "(ix+X)\t19\n"
                                 + "(iy+X)\t19\n"
                                 + "hl,rr\t15\n";
-                        case "SCF":
+                        case "scf":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:scf\n"
                                 + "Set carry flag instruction.\n"
@@ -3777,7 +4211,16 @@ namespace SEBasicIV
                                 + "\n"
                                 + "T-States:\n"
                                 + "4 t-states\n";
-                        case "SET":
+                        case "set n,a":
+                        case "set n,b":
+                        case "set n,c":
+                        case "set n,d":
+                        case "set n,e":
+                        case "set n,h":
+                        case "set n,l":
+                        case "set n,(hl)":
+                        case "set n,(ix+n)":
+                        case "set n,(iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:set\n"
                                 + "Sets the specified bit.\n"
@@ -3807,7 +4250,16 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "SLA":
+                        case "sla a":
+                        case "sla b":
+                        case "sla c":
+                        case "sla d":
+                        case "sla e":
+                        case "sla h":
+                        case "sla l":
+                        case "sla (hl)":
+                        case "sla (ix+n)":
+                        case "sla (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:sla\n"
                                 + "Arithmetic shift left 1 bit, bit 7 goes to carry flag, bit 0 set to 0.\n"
@@ -3837,8 +4289,26 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "SLL":
-                        case "SL":
+                        case "sll a":
+                        case "sll b":
+                        case "sll c":
+                        case "sll d":
+                        case "sll e":
+                        case "sll h":
+                        case "sll l":
+                        case "sll (hl)":
+                        case "sll (ix+n)":
+                        case "sll (iy+n)":
+                        case "sl1 a":
+                        case "sl1 b":
+                        case "sl1 c":
+                        case "sl1 d":
+                        case "sl1 e":
+                        case "sl1 h":
+                        case "sl1 l":
+                        case "sl1 (hl)":
+                        case "sl1 (ix+n)":
+                        case "sl1 (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:sll\n"
                                 + "Arithmetic shift left 1 bit, bit 7 goes to carry flag, bit 0 set to 1.\n"
@@ -3879,7 +4349,16 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23?\n"
                                 + "(iy+X)\t23?\n";
-                        case "SRA":
+                        case "sra a":
+                        case "sra b":
+                        case "sra c":
+                        case "sra d":
+                        case "sra e":
+                        case "sra h":
+                        case "sra l":
+                        case "sra (hl)":
+                        case "sra (ix+n)":
+                        case "sra (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:sra\n"
                                 + "Arithmetic shift right 1 bit, bit 0 goes to carry flag, bit 7 remains unchanged.\n"
@@ -3909,7 +4388,16 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "SRL":
+                        case "srl a":
+                        case "srl b":
+                        case "srl c":
+                        case "srl d":
+                        case "srl e":
+                        case "srl h":
+                        case "srl l":
+                        case "srl (hl)":
+                        case "srl (ix+n)":
+                        case "srl (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:srl\n"
                                 + "Arithmetic shift right 1 bit, bit 0 goes to carry flag, bit 7 is set to 0.\n"
@@ -3939,7 +4427,17 @@ namespace SEBasicIV
                                 + "(hl)\t15\n"
                                 + "(ix+X)\t23\n"
                                 + "(iy+X)\t23\n";
-                        case "SUB":
+                        case "sub a":
+                        case "sub b":
+                        case "sub c":
+                        case "sub d":
+                        case "sub e":
+                        case "sub h":
+                        case "sub l":
+                        case "sub n":
+                        case "sub (hl)":
+                        case "sub (ix+n)":
+                        case "sub (iy+n)":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:sub\n"
                                 + "SUB stands for subtract but only takes one input.\n"
@@ -3973,7 +4471,21 @@ namespace SEBasicIV
                                 + "(hl)\t7\n"
                                 + "(ix+X)\t19\n"
                                 + "(iy+X)\t19\n";
-                        case "XOR":
+                        case "xor a":
+                        case "xor b":
+                        case "xor c":
+                        case "xor d":
+                        case "xor e":
+                        case "xor h":
+                        case "xor l":
+                        case "xor ixh":
+                        case "xor ixl":
+                        case "xor iyh":
+                        case "xor iyl":
+                        case "xor (hl)":
+                        case "xor (ix+n)":
+                        case "xor (iy+n)":
+                        case "xor n":
                             return
                                 "Source: http://z80-heaven.wikidot.com/instructions-set:xor\n"
                                 + "XOR is an instruction that takes one 8-bit input and compares it with the accumulator.\n"
